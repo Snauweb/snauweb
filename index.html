@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Snauweb</title>
+    <link rel='stylesheet' href='index.css'/>
+    <script src='index.js' type='text/javascript'></script>
+</head>
+
+<body>
+    
+    <div class='sidebar'>
+        <button class='tablink active' onclick='loadPage(event, "heim")'>Heim</a>
+        <button class='tablink' onclick='loadPage(event, "laater")'>Låter</a>
+        <button class='tablink' onclick='loadPage(event, "medlemmer")'>Medlemmar</a>
+        <button class='tablink' onclick='loadPage(event, "innlegg?type=nyhet")'>Nyheiter</a>
+        <button class='tablink' onclick='loadPage(event, "innlegg?type=referat")'>Referat</a>
+    </div>
+
+    <div class='content'>
+        <div id='heim' class='tabcontent active'>
+            <h1>Dette er Snau si heimeside</h1>
+            <p>Lorem Ipsum eller noe sånt...</p>
+        </div>
+
+        <div id='liste' class='tabcontent'>
+            <h1>Liste</h1>
+            <table class='list'>
+                <tr class='header'></tr>
+            </table>
+        </div>
+    </div>
+</body>

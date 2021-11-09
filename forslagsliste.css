@@ -1,5 +1,11 @@
+/* variabler */
+:root {
+    --medium-bg: #dddddd;
+    --light-bg: #eeeeee;
+}
 
 
+/* Hovedlayout */
 main{
     display: flex;
     width: 80vw;
@@ -11,14 +17,47 @@ main{
 .send-inn{
     width: 40%;
     margin-right: 20px;
+    height: 100%;
 }
 .innsendt{
-    width: calc(60% - 20px)
+    width: calc(60% - 20px);
+    height: 100%;
 }
 
+/* overskrift */
 .overskrift{
     height: 100px;
     margin-left: 9vw;
     font-size: 40px;
     margin-top: 2vh;
+}
+
+/* Innsendingsskjema */
+.innsendt {
+    
+}
+
+.innsendt h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+
+/* Innsendtliste */
+.light {
+    background-color: var(--light-bg);
+}
+
+.medium {
+    background-color: var(--medium-bg);
+}
+
+.forslag {
+    padding: 20px 20px 20px 20px;
+}
+
+.forslag h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }

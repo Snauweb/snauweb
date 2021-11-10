@@ -1,0 +1,108 @@
+/* variabler */
+:root {
+    --medium-bg: #dddddd;
+    --light-bg: #eeeeee;
+}
+
+
+/* Hovedlayout */
+main{
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;
+
+}
+.innsending-boks {
+    display: flex;
+}
+
+.send-inn{
+    width: 40%;
+    margin-right: 20px;
+    height: 100%;
+}
+.innsendt{
+    width: calc(60% - 20px);
+    height: 100%;
+}
+
+/* overskrift */
+.overskrift{
+    margin-left: 9vw;
+    font-size: 40px;
+    margin-top: 2vh;
+    margin-bottom: 40px;
+}
+
+/* forklaring */
+main p {
+    margin-bottom: 20px;
+}
+
+/* Innsendingsskjema */
+.send-inn h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.innspill-skjema .overskrift-boks {
+    margin-bottom: 10px;
+}
+
+.innspill-skjema .tekst-boks {
+    margin-bottom: 10px;
+}
+
+.innspill-skjema .overskrift-boks label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.innspill-skjema .tekst-boks label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.innspill-skjema .tekst-boks textarea{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    min-height: min(50vh, 300px);
+}
+
+
+.innspill-skjema .send-inn-knapp {
+    margin-top: 20px;
+    height: 40px;
+    min-width: 70px;
+}
+
+/* Innsendtliste */
+.innsendt {
+    
+}
+
+.innsendt h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.light {
+    background-color: var(--light-bg);
+}
+
+.medium {
+    background-color: var(--medium-bg);
+}
+
+.forslag {
+    padding: 20px 20px 20px 20px;
+}
+
+.forslag h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}

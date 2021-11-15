@@ -3,7 +3,8 @@
   <meta charset="utf8">
   <link rel="stylesheet" href="forslagsliste.css">
   <link rel="stylesheet" href="styles/meyer_reset.css">
-  <script type="text/javascript" src="forslagsliste.js"></script>
+  <script type="module" src="modules/fetchResource.js"></script>
+  <script type="module" src="forslagsliste.js"></script>
 </head>
 
 <body>
@@ -18,29 +19,29 @@
 	<h2> Skriv innspill her </h2>
 
 	
-	<form class="innspill-skjema"onsubmit="alert('forslag sendt!')">
+	<form class="innspill-skjema" onsubmit="return false;">
 	  <div class="overskrift-boks">
             <label for="inspill-overskrift">Overskrift:</label>
-            <input type="text" name="innspill-overskrift">
+            <input type="text"></input>
 	  </div>
 
 	  <div class="tekst-boks">
 	    <label for="innspill-tekst">Innspill:</label>
-            <textarea name="innspill-tekst"></textarea>
+            <textarea></textarea>
 	  </div>
-          <input class="send-inn-knapp" type="submit" value="Send inn innspill">
+          <button class="send-inn-knapp"> Send inn innspill </button>
 	</form>
 
       </div>
       
       <div class="innsendt">
 	<h2> Innsendte forslag </h2>
-	<ul class="forslag-liste">
-	<template class = 'forslagsmal'>
+	<ul class="forslagsliste">
+	<template class='forslagsmal'>
 	  <li class="forslag light">
-	    <h3> Sia treng mer farge! </h3>
+	    <h3> Overskrft </h3>
 	    <p>
-	      Stopp en hal kis no ska du hør på mæ. Sia her e itj no tess, det sir sæ jo sjøl. Først og fræmst treng ho litt farge, det e så møkkakjedelig med sånnher svart-og-kvit-greie. Det e itj "stilreint", det e tannlaust og uinspirert. Mal alt i intense farga! Rødt, blått, knæsj rosa! Æ vil at sia ska minn om duploklossan æ lekt med om unge!
+	      Brødtekst
 	    </p>
 	  </li>
 	</template>

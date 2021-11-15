@@ -1,27 +1,60 @@
+import { apiFetch } from './modules/fetchResource.js';
+export { sendInnForslag }
+
 let forslagsmal = undefined;
 let forslagsliste = undefined;
+let innspillsskjema = undefined; 
+
+
+function settOppInnspillsskjema() {
+  console.log("Setter opp!")
+}
+
+function sendInnForslag(data) {
+  console.log("sender inn forslag, zoom!")
+}
+
+function visForslag(data) {
+  // Iterate over all suggestions
+  for(let forslag of data) {
+    // Clone det faktiske innholdet i forslagsmalen
+    let nyttForslagListElem =
+      forslagsmal.content.querySelector('.forslag')
+	.cloneNode(true);
+
+    let tittelElem = nyttForslagListElem.querySelector('h3');
+    let forslagTekstElem = nyttForslagListElem.querySelector('p');
+
+    // Om forskjellen mellom textContent og innerText
+    // https://kellegous.com/j/2013/02/27/innertext-vs-textcontent/ (15.11.2021)
+    tittelElem.textContent       = forslag.tittel;
+    forslagTekstElem.textContent = forslag.forslag;
+
+    // Legg det nye listeelementet til i lista
+    forslagsliste.appendChild(nyttForslagListElem);
+  }
+}
+
+function hentOgVisForslag() {
+   // apiFetch kaller fetch med en api-URL definert i config/apiConfig.json
+  apiFetch('/forslag', {
+    credentials: 'include',
+    method: 'GET'
+  })
+    .then(response => response.json())
+    .then(visForslag)
+    .catch((error) => {
+      console.error('apiFetch error:', error);
+    });
+  
+}
 
 function init(){
-    forslagsmal = document.querySelector('.forslagmal');
-    forslagsliste = document.querySelector('forslags-liste');
-    console.log(forslagsmal);
-    const request = new Request('https://snaustrinda.samfundet.no/api/api.py/forslag');
-    const credentials = request.credentials;
-    console.log(credentials)
+  forslagsmal = document.querySelector('.forslagsmal');
+  forslagsliste = document.querySelector('.forslagsliste');
+  innspillsskjema = document.querySelector('.innspill-skjema');
 
-    fetch('https://snaustrinda.samfundet.no/api/api.py/forslag', {
-        method: 'GET', 
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'https://samfundet.no'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });;
+  settOppInnspillsskjema();
+  hentOgVisForslag();
 }
 window.addEventListener('load', init);

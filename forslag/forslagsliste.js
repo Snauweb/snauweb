@@ -1,4 +1,4 @@
-import { apiFetch } from './modules/fetchResource.js';
+import { apiFetch } from '../modules/fetchResource.js';
 export { sendInnForslag }
 
 let forslagsmal = undefined;
@@ -15,9 +15,9 @@ function sendInnForslag(data) {
 }
 
 function visForslag(data) {
-  // Iterate over all suggestions
+  // Iterer over alle innspill
   for(let forslag of data) {
-    // Clone det faktiske innholdet i forslagsmalen
+    // Klon det faktiske innholdet i forslagsmalen
     let nyttForslagListElem =
       forslagsmal.content.querySelector('.forslag')
 	.cloneNode(true);

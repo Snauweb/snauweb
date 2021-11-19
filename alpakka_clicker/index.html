@@ -4,12 +4,18 @@
     <link rel = "stylesheet" href = "alpakka_clicker.css">
 </head>
 <body>
-    <h1>Alpakka maddafakka</h1>
-    <script type="text/javascript" src="alpakka_clicker.js"></script>
-
-    <div class="alpakkaBoks">
-        <img 
-        src="http://snaustrinda.samfundet.no/alpakka/pictures/bugge_fra%CC%8A_insta_lowres.jpeg" 
-        alt="alpakka"/>
+    <script type="module" src="alpakka_clicker.js"></script>
+    <div id="game">
+        <div id="left-col" class="col">
+            <ul id="upgrades">
+                
+            </ul>
+        </div>
+        <div id="center-col" class="col">
+            <img class="button" src="http://snaustrinda.samfundet.no/alpakka/pictures/bugge_fra%CC%8A_insta_lowres.jpeg" alt="alpakka"/>
+            <button id="inc">Alpakka</button>
+            <div id="counter">0</div>
+        </div>
+        <div id="right-col" class="col"></div>
     </div>
 </body>

@@ -1,17 +1,110 @@
+'use strict';
+
 import { apiFetch } from '../modules/fetchResource.js';
-export { sendInnForslag }
 
 let forslagsmal = undefined;
 let forslagsliste = undefined;
 let innspillsskjema = undefined; 
-
+let innspillsskjemafelter = undefined;
 
 function settOppInnspillsskjema() {
-  console.log("Setter opp!")
+  console.log("Setter opp innspillskjema!");
+
+  let innspillsskjema = document.querySelector('.innspill-skjema');
+  let inputs = innspillsskjema.querySelectorAll('input');
+  let textareas = innspillsskjema.querySelectorAll('textarea');
+  let sendInnKnapp = innspillsskjema.querySelector('.send-inn-knapp');
+
+  innspillsskjemafelter = {sendInnKnapp: sendInnKnapp};
+  
+  // Setup field handle object
+  for (let input of inputs) {
+    innspillsskjemafelter[input.name] = {
+      handle: input,
+      type: "input"
+    };
+  }
+
+  for(let textarea of textareas) {
+    innspillsskjemafelter[textarea.name] = {
+      handle: textarea,
+      type: "input"
+    };
+  }
+
+  sendInnKnapp.addEventListener('click', sendInnForslag);
 }
 
-function sendInnForslag(data) {
-  console.log("sender inn forslag, zoom!")
+function validerFelter(felter) {
+  let erFelteneGyldige = true;
+  for(let felt in felter) {
+    let valgtFelt = felter[felt];
+    if('type' in valgtFelt && valgtFelt.type === "input") {
+      if(valgtFelt.handle.value === "") {
+	erFelteneGyldige = false;
+	valgtFelt.handle.style.borderColor = "red";
+	valgtFelt.handle.style.borderStyle = "solid";
+      }
+      else {
+	valgtFelt.handle.style.borderColor = "black";
+	valgtFelt.handle.style.borderStyle = "solid";
+      }
+    }
+  }
+
+  return erFelteneGyldige;
+}
+
+function fjernInnhold(felter) {
+  for(let felt in felter) {
+    let valgtFelt = felter[felt];
+    if('type' in valgtFelt && valgtFelt.type === "input") {
+      console.log("sletter", valgtFelt)
+      valgtFelt.handle.style.borderColor = "black";
+      valgtFelt.handle.style.borderStyle = "solid";
+      valgtFelt.handle.value = "";
+    }
+  }
+}
+
+function lagLast(felter) {
+  let last = {}
+  for(let felt in felter) {
+    let valgtFelt = felter[felt];
+    if('type' in valgtFelt && valgtFelt.type === "input") {
+      last[felt] = valgtFelt.handle.value;
+    }
+  }
+  
+  return last;
+}
+
+function sendInnForslag(event) {
+  console.log("sender inn forslag, zoom!");
+  
+  let erFelteneGyldige = validerFelter(innspillsskjemafelter);
+  if(erFelteneGyldige == true) {
+    let last = lagLast(innspillsskjemafelter);
+    console.log(JSON.stringify(last))
+    fjernInnhold(innspillsskjemafelter);
+    apiFetch('/forslag', {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+	'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(last)
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      hentOgVisForslag()
+    }).catch((error) => {
+      console.error('apiFetch error:', error);
+    });
+  }
+
+  // Last inn siden på nytt for å vise at innlegget blei sendt inn
+  //window.location.reload(false);
 }
 
 function visForslag(data) {
@@ -27,6 +120,7 @@ function visForslag(data) {
 
     // Om forskjellen mellom textContent og innerText
     // https://kellegous.com/j/2013/02/27/innertext-vs-textcontent/ (15.11.2021)
+    // IKKE BRUK .innerHTML, må du det så revurder
     tittelElem.textContent       = forslag.tittel;
     forslagTekstElem.textContent = forslag.forslag;
 

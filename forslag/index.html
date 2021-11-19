@@ -1,8 +1,8 @@
 <head>
   <title> Forslagsiste</title>
   <meta charset="utf8">
-  <link rel="stylesheet" href="forslagsliste.css">
   <link rel="stylesheet" href="../styles/meyer_reset.css">
+  <link rel="stylesheet" href="forslagsliste.css">
   <script type="module" src="../modules/fetchResource.js"></script>
   <script type="module" src="forslagsliste.js"></script>
 </head>
@@ -17,17 +17,16 @@
     <div class="innsending-boks">
       <div class="send-inn">
 	<h2> Skriv innspill her </h2>
-
 	
 	<form class="innspill-skjema" onsubmit="return false;">
 	  <div class="overskrift-boks">
             <label for="inspill-overskrift">Overskrift:</label>
-            <input type="text"></input>
+            <input type="text" name="tittel"></input>
 	  </div>
 
 	  <div class="tekst-boks">
 	    <label for="innspill-tekst">Innspill:</label>
-            <textarea></textarea>
+            <textarea name="forslag"></textarea>
 	  </div>
           <button class="send-inn-knapp"> Send inn innspill </button>
 	</form>
@@ -35,6 +34,7 @@
       </div>
       
       <div class="innsendt">
+	
 	<h2> Innsendte forslag </h2>
 	<ul class="forslagsliste">
 	<template class='forslagsmal'>
@@ -48,6 +48,5 @@
 	</ul>
       </div>
     </div>
-  </main>
-  
+  </main>  
 </body>

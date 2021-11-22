@@ -47,6 +47,11 @@ main p {
     margin-bottom: 30px;
 }
 
+/* Ikke lov å endre størrelsen på innspilltekstboks */
+.tekst-boks textarea {
+    resize: none;
+}
+
 .innspill-skjema .overskrift-boks {
     margin-bottom: 10px;
 }

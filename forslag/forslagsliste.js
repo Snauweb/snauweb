@@ -1,16 +1,13 @@
 'use strict';
 
-import { apiFetch } from '../modules/fetchResource.js';
+import { apiFetch } from '../modules/apiFetch.js';
 
-let forslagsmal = undefined;
 let forslagsliste = undefined;
-let forslagLastes = undefined;
 
 let innspillsskjema = undefined; 
 let innspillsskjemafelter = undefined;
 
 function settOppInnspillsskjema() {
-  console.log("Setter opp innspillskjema!");
 
   let innspillsskjema = document.querySelector('.innspill-skjema');
   let inputs = innspillsskjema.querySelectorAll('input');
@@ -61,7 +58,6 @@ function fjernInnhold(felter) {
   for(let felt in felter) {
     let valgtFelt = felter[felt];
     if('type' in valgtFelt && valgtFelt.type === "input") {
-      console.log("sletter", valgtFelt)
       valgtFelt.handle.style.borderColor = "black";
       valgtFelt.handle.style.borderStyle = "solid";
       valgtFelt.handle.value = "";
@@ -82,12 +78,10 @@ function lagLast(felter) {
 }
 
 function sendInnForslag(event) {
-  console.log("sender inn forslag, zoom!");
   
   let erFelteneGyldige = validerFelter(innspillsskjemafelter);
   if(erFelteneGyldige == true) {
     let last = lagLast(innspillsskjemafelter);
-    console.log(JSON.stringify(last))
     fjernInnhold(innspillsskjemafelter);
     apiFetch('/forslag', {
       credentials: 'include',
@@ -97,9 +91,9 @@ function sendInnForslag(event) {
       },
       body: JSON.stringify(last)
     }).then((response) => {
-      return response.json()
+      response.json()
     }).then((data) => {
-      hentOgVisForslag()
+      forslagsliste.loadData();
     }).catch((error) => {
       console.error('apiFetch error:', error);
     });
@@ -109,59 +103,8 @@ function sendInnForslag(event) {
   //window.location.reload(false);
 }
 
-function visForslag(data) {
-  // Slett gammelt innhold
-  let gamleForslag = forslagsliste.querySelectorAll('li')
-  for(let forslag of gamleForslag) {
-    forslagsliste.removeChild(forslag);
-  }
-
-  // Iterer over alle innspill
-  for(let forslag of data) {
-    // Klon det faktiske innholdet i forslagsmalen
-    let nyttForslagListElem =
-      forslagsmal.content.querySelector('.forslag-wrap')
-	.cloneNode(true);
-
-    let tittelElem = nyttForslagListElem.querySelector('h3');
-    let forslagTekstElem = nyttForslagListElem.querySelector('p');
-
-    // Om forskjellen mellom textContent og innerText
-    // https://kellegous.com/j/2013/02/27/innertext-vs-textcontent/ (15.11.2021)
-    // IKKE BRUK .innerHTML, må du det så revurder
-    tittelElem.textContent       = forslag.tittel;
-    forslagTekstElem.textContent = forslag.forslag;
-
-    // Legg det nye listeelementet til i lista
-    forslagsliste.appendChild(nyttForslagListElem);
-  }
-}
-
-function hentOgVisForslag() {
-  forslagLastes = true;
-   // apiFetch kaller fetch med en api-URL definert i config/apiConfig.json
-  apiFetch('/forslag', {
-    credentials: 'include',
-    method: 'GET'
-  })
-    .then(response => response.json())
-    .then(visForslag)
-    .catch((error) => {
-      console.error('apiFetch error:', error);
-    });
-  
-}
-
-function settOppForslagsliste() {
-  forslagsmal = document.querySelector('.forslagsmal');
-  forslagsliste = document.querySelector('.forslagsliste');
-  innspillsskjema = document.querySelector('.innspill-skjema');
-  forslagLastes = true;
-}
-
 function init(){
-  settOppForslagsliste();
+  forslagsliste = document.querySelector(".forslagsliste");
   settOppInnspillsskjema();
-  hentOgVisForslag();
 }
 window.addEventListener('load', init);

@@ -16,23 +16,7 @@
   <main>
     <p>
       Snauweb er under konstruksjon, og vi ønsker oss DINE innspill til hva siden kan inneholde!</p>
-    <h2> web component test her </h2>
-    <fetch-list>
-      <template class="list-item">
-	<li class="forslag-wrap">
-	  <h3 class="tittel"> Overskrft </h3>
-	  <p class="forslag">
-	    Brødtekst
-	  </p>
-	</li>
-      </template>
-      <template class="load-screen">
-	<div class="load-screen-wrap">
-	  <p> loading ... </p>
-	</div>
-      </template>
-    </fetch-list>
-
+    
     <div class="innsending-boks">
       <div class="send-inn">
 	<h2> Skriv innspill her </h2>
@@ -55,16 +39,22 @@
       <div class="innsendt">
 	
 	<h2> Innsendte forslag </h2>
-	<template class='forslagsmal'>
-	  <li class="forslag-wrap medium">
-	    <h3> Overskrft </h3>
-	    <p>
-	      Brødtekst
-	    </p>
-	  </li>
-	</template>
-	<ul class="forslagsliste">
-	</ul>
+
+	<fetch-list class="forslagsliste">
+	  <template class="list-item">
+	    <li class="forslag-wrap light">
+	      <h3 class="tittel"> Overskrft </h3>
+	      <p class="forslag">
+		Brødtekst
+	      </p>
+	    </li>
+	  </template>
+	  <template class="load-screen">
+	    <div class="load-screen-wrap">
+	      <p> Laster inn innsendte forslag... </p>
+	    </div>
+	  </template>
+	</fetch-list>
       </div>
     </div>
   </main>  

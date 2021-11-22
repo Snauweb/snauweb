@@ -12,7 +12,7 @@
  */
 
 export { FetchList }
-
+import { apiFetch } from "../modules/apiFetch.js"
 
 class FetchList extends HTMLElement {
 
@@ -22,8 +22,8 @@ class FetchList extends HTMLElement {
     this.setupDOM();
     this.render();
 
-    //this.loadData();
-    //this.render();
+    this.loadData();
+    this.render();
   }
 
   static get observedAttributes() {
@@ -32,15 +32,17 @@ class FetchList extends HTMLElement {
 
   setupDOM() {
     this.contentWrap = document.createElement('div');
+    this.contentWrap.setAttribute("class", "fetch-list-wrapper");
     this.appendChild(this.contentWrap);
     
     this.listWrap = document.createElement('ul');
 
-    this.loadScreen = this.loadScreenTemplate.content.cloneNode(true);
+    // Copy load screen template into object variable for reuse
+    this.loadScreen = document.createElement('div');
+    this.loadScreen.appendChild(this.loadScreenTemplate.content.cloneNode(true))
   }
 
   setupState() {
-    console.log(this);
     this.loading = true;
     this.loadScreenUp = false;
     this.listViewUp = false;
@@ -49,19 +51,22 @@ class FetchList extends HTMLElement {
   }
 
   // Reads the src attribute (can be set by js or directly in html),
-  // and uses apiFetch to try and get data from it
+  // and uses apiFetch to try and get data from it.
+  // Renders at the end to put up the load screen,
+  // the callback sets loading to false and rerenders to get rid of it
   loadData() {
-    this.data = [
-      {
-	tittel: "Et lite debugeksempel bare",
-	forslag: "Hva om dette ikke var hardkoda, men kom fra databasen"
-      },
-      {
-	tittel: "Mer debug",
-	forslag: "Rålækkert kis, herre blir en diger hit"
-      }
-    ]
-    this.loading=false;
+    this.loading = true;
+    apiFetch('/forslag')
+      .then(response => response.json())
+      .then((data) =>{
+	this.data = data;
+	this.loading = false;
+	this.render();
+      })
+      .catch((error) => {
+	console.error('apiFetch error in fetchList:', error);
+      });
+    this.render()
   }
   
   /* update state when observed attributes change */
@@ -74,15 +79,8 @@ class FetchList extends HTMLElement {
 
   /* Update visual state to match internal state */
   render() {
-    console.log("render called with state\n",
-		"loading:", this.loading, "\n",
-		"loadScreen:", this.loadScreenUp, "\n",
-		"listView:", this.listViewUp
-    )
-    
     if(this.loading === true) {
       if(this.loadScreenUp === false) {
-	console.log("set up load screen", this.loadScreen)
 	this.contentWrap.appendChild(this.loadScreen);
 	this.loadScreenUp = true;
       }
@@ -94,15 +92,17 @@ class FetchList extends HTMLElement {
       // If load screen is up, no more rendering needs to be performed
       return;
     }
+
+    // Fill a new list, replace the old one
+    let newListWrapper = document.createElement('ul');
     
     // iterate over all data, fill templates where class and key match
     for(let forslag of this.data) {
-
+      
       // Get a new copy of the template
       let curListItem = this.listItemTemplate.content.cloneNode(true);
 
       for(let key in forslag) {
-
 	// Add the text content of the key to a matching node, if found
 	let matchingNode = curListItem.querySelector("." + key);
 	if(matchingNode !== null) {
@@ -110,8 +110,11 @@ class FetchList extends HTMLElement {
 	}
       }
       
-      this.listWrap.appendChild(curListItem);
+      newListWrapper.appendChild(curListItem);
     }
+
+    // Replace old list with new
+    this.listWrap = newListWrapper;
 
     // Replace load screen with new list view, if needed
     if(this.loadScreenUp === true) {

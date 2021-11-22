@@ -1,2 +1,3 @@
 apiConfig.json
-ht*
+.htaccess
+.ht*

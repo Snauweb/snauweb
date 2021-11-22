@@ -4,6 +4,8 @@ import { apiFetch } from '../modules/fetchResource.js';
 
 let forslagsmal = undefined;
 let forslagsliste = undefined;
+let forslagLastes = undefined;
+
 let innspillsskjema = undefined; 
 let innspillsskjemafelter = undefined;
 
@@ -108,11 +110,17 @@ function sendInnForslag(event) {
 }
 
 function visForslag(data) {
+  // Slett gammelt innhold
+  let gamleForslag = forslagsliste.querySelectorAll('li')
+  for(let forslag of gamleForslag) {
+    forslagsliste.removeChild(forslag);
+  }
+
   // Iterer over alle innspill
   for(let forslag of data) {
     // Klon det faktiske innholdet i forslagsmalen
     let nyttForslagListElem =
-      forslagsmal.content.querySelector('.forslag')
+      forslagsmal.content.querySelector('.forslag-wrap')
 	.cloneNode(true);
 
     let tittelElem = nyttForslagListElem.querySelector('h3');
@@ -130,6 +138,7 @@ function visForslag(data) {
 }
 
 function hentOgVisForslag() {
+  forslagLastes = true;
    // apiFetch kaller fetch med en api-URL definert i config/apiConfig.json
   apiFetch('/forslag', {
     credentials: 'include',
@@ -143,11 +152,15 @@ function hentOgVisForslag() {
   
 }
 
-function init(){
+function settOppForslagsliste() {
   forslagsmal = document.querySelector('.forslagsmal');
   forslagsliste = document.querySelector('.forslagsliste');
   innspillsskjema = document.querySelector('.innspill-skjema');
+  forslagLastes = true;
+}
 
+function init(){
+  settOppForslagsliste();
   settOppInnspillsskjema();
   hentOgVisForslag();
 }

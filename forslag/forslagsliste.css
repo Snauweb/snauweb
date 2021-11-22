@@ -98,11 +98,11 @@ main p {
     background-color: var(--medium-bg);
 }
 
-.forslag {
+.forslag-wrap {
     padding: 20px 20px 20px 20px;
 }
 
-.forslag h3 {
+.forslag-wrap h3 {
     font-size: 20px;
     margin-bottom: 10px;
 }

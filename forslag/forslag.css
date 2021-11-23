@@ -1,0 +1,195 @@
+/* variabler */
+:root {
+    --medium-bg: #dddddd;
+    --light-bg: #eeeeee;
+}
+
+
+/* Hovedlayout */
+main{
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;
+
+}
+
+/* Bred skjerm */
+@media(min-width: 900px) {
+
+    .innsending-boks {
+	display: flex;
+    }
+    
+    .send-inn{
+	width: 40%;
+	margin-right: 20px;
+	height: 100%;
+    }
+    .innsendt{
+	width: calc(60% - 20px);
+	height: 100%;
+    }
+}
+
+/* Smal skjerm */
+@media(max-width: 899px) {
+    
+    .send-inn{
+	width: 100%;
+	margin-bottom: 40px;
+    }
+}
+
+/* Overskrift */
+/* Smal skjerm */
+@media(max-width: 899px) {
+    .overskrift {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 40px;
+	font-size: 40px;
+	margin-top: 40px;
+    }
+
+    .ingress {
+	text-align: center;
+	margin-bottom: 40px;
+    }
+}
+
+/* Bred skjerm */
+@media(min-width: 900px) {
+    .overskrift{
+	margin-left: 9vw;
+	font-size: 40px;
+	margin-top: 2vh;
+	margin-bottom: 40px;
+    }
+    
+    .ingress {
+	margin-bottom: 40px;
+    }
+}
+
+/* Innsendingsskjema */
+.send-inn h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+/* Ikke lov å endre størrelsen på innspilltekstboks */
+textarea {
+    resize: none;
+}
+
+/* Bred skjerm */
+@media(min-width: 900px) {
+
+    .innspill-skjema .overskrift-boks {
+	margin-bottom: 10px;
+    }
+
+    .innspill-skjema .tekst-boks {
+	margin-bottom: 10px;
+    }
+
+    .innspill-skjema .overskrift-boks label{
+	display: block;
+	margin-bottom: 10px;
+    }
+
+    .innspill-skjema .tekst-boks label{
+	display: block;
+	margin-bottom: 10px;
+    }
+
+    .innspill-skjema .tekst-boks textarea{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	min-height: min(50vh, 300px);
+    }
+
+
+    .innspill-skjema .send-inn-knapp {
+	margin-top: 20px;
+	height: 40px;
+	min-width: 70px;
+    }
+}
+
+
+/* smal skjerm */
+@media(max-width: 899px){
+    .innspill-skjema {
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+    }
+
+    .innspill-skjema .overskrift-boks {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    }
+
+    .innspill-skjema .tekst-boks {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
+    }
+    
+    .innspill-skjema label {
+	margin-bottom: 20px;
+    }
+
+    .innspill-skjema .overskrift-boks {
+	margin-bottom: 10px;
+    }
+
+    .innspill-skjema .send-inn-knapp {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 3em;
+    }
+
+    .tekst-boks textarea {
+	width: 80%;
+	min-height: 40vh;
+    }
+
+}
+
+/* Innsendtliste */
+.innsendt {
+    
+}
+
+.innsendt h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.light {
+    background-color: var(--light-bg);
+}
+
+.medium {
+    background-color: var(--medium-bg);
+}
+
+.forslag-wrap {
+    padding: 20px 20px 20px 20px;
+}
+
+.forslag-wrap h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}

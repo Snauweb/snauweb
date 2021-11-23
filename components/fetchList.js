@@ -30,6 +30,18 @@ class FetchList extends HTMLElement {
     return ["src"]
   }
 
+  setupState() {
+    this.loading = true;
+    this.loadScreenUp = false;
+    this.listViewUp = false;
+    this.listItemTemplate = this.querySelector('template.list-item');
+    this.loadScreenTemplate = this.querySelector('template.load-screen');
+    this.data = null; // Internal data
+    this.displayData = null; // Data to be displayed
+    this.src = null;
+  }
+ 
+  
   setupDOM() {
     this.contentWrap = document.createElement('div');
     this.contentWrap.setAttribute("class", "fetch-list-wrapper");
@@ -42,24 +54,17 @@ class FetchList extends HTMLElement {
     this.loadScreen.appendChild(this.loadScreenTemplate.content.cloneNode(true))
   }
 
-  setupState() {
-    this.loading = true;
-    this.loadScreenUp = false;
-    this.listViewUp = false;
-    this.listItemTemplate = this.querySelector('template.list-item');
-    this.loadScreenTemplate = this.querySelector('template.load-screen');
-  }
-
   // Reads the src attribute (can be set by js or directly in html),
   // and uses apiFetch to try and get data from it.
   // Renders at the end to put up the load screen,
   // the callback sets loading to false and rerenders to get rid of it
   loadData() {
     this.loading = true;
-    apiFetch('/forslag')
+    apiFetch(this.getAttribute('src'))
       .then(response => response.json())
       .then((data) =>{
 	this.data = data;
+	this.displayData = this.data;
 	this.loading = false;
 	this.render();
       })
@@ -73,7 +78,7 @@ class FetchList extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
   // Only update on actual change
     if(oldValue != newValue) {
-      loadData();
+      this.loadData();
     }
   }
 
@@ -97,7 +102,7 @@ class FetchList extends HTMLElement {
     let newListWrapper = document.createElement('ul');
     
     // iterate over all data, fill templates where class and key match
-    for(let forslag of this.data) {
+    for(let forslag of this.displayData) {
       
       // Get a new copy of the template
       let curListItem = this.listItemTemplate.content.cloneNode(true);

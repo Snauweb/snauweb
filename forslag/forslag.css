@@ -15,7 +15,7 @@ main{
 }
 
 /* Bred skjerm */
-@media(min-width: 900px) {
+@media(min-width: 1000px) {
 
     .innsending-boks {
 	display: flex;
@@ -33,7 +33,7 @@ main{
 }
 
 /* Smal skjerm */
-@media(max-width: 899px) {
+@media(max-width: 999px) {
     
     .send-inn{
 	width: 100%;
@@ -43,7 +43,7 @@ main{
 
 /* Overskrift */
 /* Smal skjerm */
-@media(max-width: 899px) {
+@media(max-width: 999px) {
     .overskrift {
 	text-align: center;
 	margin-left: auto;
@@ -60,7 +60,7 @@ main{
 }
 
 /* Bred skjerm */
-@media(min-width: 900px) {
+@media(min-width: 1000px) {
     .overskrift{
 	margin-left: 9vw;
 	font-size: 40px;
@@ -86,7 +86,7 @@ textarea {
 }
 
 /* Bred skjerm */
-@media(min-width: 900px) {
+@media(min-width: 1000px) {
 
     .innspill-skjema .overskrift-boks {
 	margin-bottom: 10px;
@@ -123,7 +123,7 @@ textarea {
 
 
 /* smal skjerm */
-@media(max-width: 899px){
+@media(max-width: 999px){
     .innspill-skjema {
 	display: flex;
 	align-items: stretch;

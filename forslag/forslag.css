@@ -2,7 +2,19 @@
 :root {
     --medium-bg: #dddddd;
     --light-bg: #eeeeee;
+    --small-font: 12pt;
+    --large-font: 14pt;
+    
+    font-size: 12pt;
 }
+
+/* Smal skjerm */
+@media(max-width: 999px) {
+    :root {
+	font-size: var(--large-font);
+    }
+}
+
 
 
 /* Hovedlayout */
@@ -11,8 +23,8 @@ main{
     margin-left: auto;
     margin-right: auto;
     height: 100vh;
-
 }
+
 
 /* Bred skjerm */
 @media(min-width: 1000px) {
@@ -32,6 +44,7 @@ main{
     }
 }
 
+
 /* Smal skjerm */
 @media(max-width: 999px) {
     
@@ -49,7 +62,7 @@ main{
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 40px;
-	font-size: 40px;
+	font-size: 3rem;
 	margin-top: 40px;
     }
 
@@ -63,7 +76,7 @@ main{
 @media(min-width: 1000px) {
     .overskrift{
 	margin-left: 9vw;
-	font-size: 40px;
+	font-size: 3rem;
 	margin-top: 2vh;
 	margin-bottom: 40px;
     }
@@ -76,7 +89,7 @@ main{
 /* Innsendingsskjema */
 .send-inn h2 {
     text-align: center;
-    font-size: 30px;
+    font-size: 2rem;
     margin-bottom: 30px;
 }
 
@@ -173,7 +186,7 @@ textarea {
 
 .innsendt h2 {
     text-align: center;
-    font-size: 30px;
+    font-size: 3rem;
     margin-bottom: 30px;
 }
 
@@ -190,6 +203,6 @@ textarea {
 }
 
 .forslag-wrap h3 {
-    font-size: 20px;
+    font-size: 1.5rem;
     margin-bottom: 10px;
 }

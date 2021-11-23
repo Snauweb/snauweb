@@ -40,7 +40,13 @@ main{
     }
     .innsendt{
 	width: calc(60% - 20px);
+	height: 60vh;
+    }
+
+    .forslagsliste {
 	height: 100%;
+	overflow: auto;
+	display: block;
     }
 }
 

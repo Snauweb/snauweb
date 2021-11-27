@@ -41,6 +41,7 @@ h3 {
 
     .innsending-boks {
 	display: flex;
+	height: 80vh;
     }
     
     .send-inn{
@@ -81,6 +82,10 @@ h3 {
 	margin-top: 40px;
     }
 
+    .send-inn h2 {
+	text-align: center;
+    }
+    
     .ingress {
 	text-align: center;
 	margin-bottom: 40px;
@@ -102,7 +107,6 @@ h3 {
 
 /* Innsendingsskjema */
 .send-inn h2 {
-    
     margin-bottom: 30px;
 }
 
@@ -113,11 +117,15 @@ textarea {
 
 /* Bred skjerm */
 @media(min-width: 1000px) {
-
+    
     .innspill-skjema .overskrift-boks {
 	margin-bottom: 10px;
     }
 
+    .innspill-skjema .overskrift-boks input {
+	width: 70%;
+    }
+    
     .innspill-skjema .tekst-boks {
 	margin-bottom: 10px;
     }
@@ -135,8 +143,8 @@ textarea {
     .innspill-skjema .tekst-boks textarea{
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%;
-	min-height: min(50vh, 300px);
+	width: 100%;
+	height: 30vh;
     }
 
 
@@ -144,6 +152,7 @@ textarea {
 	margin-top: 20px;
 	height: 40px;
 	min-width: 70px;
+	width: 100%;
     }
 }
 
@@ -187,15 +196,30 @@ textarea {
 
     .tekst-boks textarea {
 	width: 80%;
-	min-height: 40vh;
+	min-height: 30vh;
     }
-
 }
 
 /* Innsendtliste */
+/** Lasteskjerm **/
+.load-screen-wrap {
+    height: 100%;
+    display: block;
+    background-color: var(--light-bg) 
+}
+
+/** Liste **/
+/*** Bakgrunn ***/
+.list-background {
+    height: 100%;
+    display: block;
+}
+
+/*** Listeelementer ***/
 .innsendt h2{
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .forslag-wrap .info-linje {
@@ -218,6 +242,11 @@ textarea {
 
 .forslag-wrap {
     padding: 20px 20px 20px 20px;
+}
+
+/* siste elementet har litt ekstra bunnpadding */
+.forslag-wrap:last-of-type {
+    padding-bottom: 70px;
 }
 
 .forslag-wrap h3 {

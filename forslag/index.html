@@ -13,12 +13,12 @@
   <h1 class="overskrift">
     Forslag til snau-web
   </h1>
-  <main>
-    <p class="ingress">
-      Snauweb er under konstruksjon, og vi ønsker oss DINE innspill til hva siden kan inneholde!</p>
-    
+  <main>    
     <div class="innsending-boks">
       <div class="send-inn">
+	<p class="ingress">
+	  Snauweb er under konstruksjon, og vi ønsker oss DINE innspill til hva siden kan inneholde!</p>
+	      
 	<h2> Skriv innspill her </h2>
 	
 	<form class="innspill-skjema" onsubmit="return false;">
@@ -40,7 +40,7 @@
 	
 	<h2> Innsendte forslag </h2>
 
-	<fetch-list src="\forslag" class="forslagsliste">
+	<fetch-list src="/forslag" class="forslagsliste">
 	  <template class="list-item">
 	    <li class="forslag-wrap light">
 	      <div class="info-linje">
@@ -57,7 +57,45 @@
 	      <p> Laster inn innsendte forslag... </p>
 	    </div>
 	  </template>
+
+	  <template class="background">
+	    <div class="list-background medium">
+	      
+	    </div>
+	  </template>
 	</fetch-list>
+
+  <!--
+	<div class="forslagsliste">
+	  <div class="load-screen-wrap">
+	    <p> Laster inn innsendte forslag... </p>
+	  </div>
+
+	  <div class="list-background">
+	    <ol>
+	      <li class="forslag-wrap light">
+		<div class="info-linje">
+		  <h3 class="tittel"> Overskrft </h3>
+		  <span class="lagt_til"> dato </span>
+		</div>
+		<p class="forslag">
+		  Brødtekst
+		</p>
+	      </li>
+	      
+	      <li class="forslag-wrap light">
+		<div class="info-linje">
+		  <h3 class="tittel"> Overskrft </h3>
+		  <span class="lagt_til"> dato </span>
+		</div>
+		<p class="forslag">
+		  Brødtekst
+		</p>
+	      </li>
+	    </ol>
+	  </div>
+	</div>
+	  -->		
       </div>
     </div>
   </main>  

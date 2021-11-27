@@ -23,7 +23,7 @@ class FetchList extends HTMLElement {
     this.render();
 
     this.loadData();
-    this.render();
+    //this.render();
   }
 
   static get observedAttributes() {
@@ -33,25 +33,44 @@ class FetchList extends HTMLElement {
   setupState() {
     this.loading = true;
     this.loadScreenUp = false;
-    this.listViewUp = false;
+    this.contentViewUp = false;
     this.listItemTemplate = this.querySelector('template.list-item');
     this.loadScreenTemplate = this.querySelector('template.load-screen');
+    this.backgroundTemplate = this.querySelector('template.background');
     this.data = null; // Internal data
     this.displayData = null; // Data to be displayed
     this.src = null;
   }
  
-  
+  // Prepare the different DOM elements making up the list
+  // * fetchListWrap <div>: conatinins all content
+  // ** loadScreen <div>: when loading, this is the only child of fetchListWrap
+  // ** contentWrap <div>: when displaying data, this is the only child of fetchListWrap
+  // *** background <div>: the only child of contentWrap
+  // **** listWrap <ol>: The list of items
+  // ***** listItemElem <li>: The wrapper for a given item
   setupDOM() {
-    this.contentWrap = document.createElement('div');
-    this.contentWrap.setAttribute("class", "fetch-list-wrapper");
-    this.appendChild(this.contentWrap);
-    
-    this.listWrap = document.createElement('ul');
+    // Define base elements
+    this.fetchListWrap = document.createElement('div');
+    this.loadScreenWrap = document.createElement('div');
+    this.contentWrap = document.createElement('div'); 
+    this.listWrap = document.createElement('ol');
+    this.listItemElem = undefined;
 
-    // Copy load screen template into object variable for reuse
-    this.loadScreen = document.createElement('div');
-    this.loadScreen.appendChild(this.loadScreenTemplate.content.cloneNode(true))
+    // Transfer template content over to base elements
+    this.loadScreen = this.loadScreenTemplate.content.cloneNode(true)
+			  .querySelector('div');
+    this.contentWrap = this.backgroundTemplate.content.cloneNode(true)
+			   .querySelector('div');
+    this.listItemElem = this.listItemTemplate.content.cloneNode(true)
+			    .querySelector('li');
+    
+    // Glue elements together, start state is loading
+    this.fetchListWrap.appendChild(this.loadScreen);
+    this.contentWrap.appendChild(this.listWrap);
+
+    // Add to parent node
+    this.appendChild(this.fetchListWrap);
   }
 
   // Reads the src attribute (can be set by js or directly in html),
@@ -78,34 +97,35 @@ class FetchList extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
   // Only update on actual change
     if(oldValue != newValue) {
-      this.loadData();
+      //this.loadData();
     }
   }
 
   /* Update visual state to match internal state */
   render() {
+    
     if(this.loading === true) {
       if(this.loadScreenUp === false) {
-	this.contentWrap.appendChild(this.loadScreen);
+	this.fetchListWrap.appendChild(this.loadScreen);
 	this.loadScreenUp = true;
       }
 
-      if(this.listViewUp == true) {
-	this.contentWrap.removeChild(this.listWrap);
-	this.listViewUp = false;
+      if(this.contentViewUp === true) {
+	this.fetchListWrap.removeChild(this.contentWrap);
+	this.contentViewUp = false;
       }
       // If load screen is up, no more rendering needs to be performed
       return;
     }
 
-    // Fill a new list, replace the old one
-    let newListWrapper = document.createElement('ul');
+    // Copy old top level element (non-recursive, no children are included)
+    let newListWrapper = this.listWrap.cloneNode();
     
-    // iterate over all data, fill templates where class and key match
+    // iterate over all displayData, fill templates where class and key match
     for(let forslag of this.displayData) {
       
-      // Get a new copy of the template
-      let curListItem = this.listItemTemplate.content.cloneNode(true);
+      // Copy the list item template
+      let curListItem = this.listItemElem.cloneNode(true);
 
       for(let key in forslag) {
 	// Add the text content of the key to a matching node, if found
@@ -117,19 +137,20 @@ class FetchList extends HTMLElement {
       
       newListWrapper.appendChild(curListItem);
     }
-
+    
     // Replace old list with new
+    this.contentWrap.replaceChild(newListWrapper, this.listWrap);
     this.listWrap = newListWrapper;
 
     // Replace load screen with new list view, if needed
     if(this.loadScreenUp === true) {
-      this.contentWrap.removeChild(this.loadScreen);
+      this.fetchListWrap.removeChild(this.loadScreen);
       this.loadScreenUp = false;
     }
 
-    if(this.listViewUp === false) {
-      this.contentWrap.appendChild(this.listWrap);
-      this.listViewUp = true;
+    if(this.contentViewUp === false) {
+      this.fetchListWrap.appendChild(this.contentWrap);
+      this.contentViewUp = true;
     }
   }
   

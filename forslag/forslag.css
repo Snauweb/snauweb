@@ -228,6 +228,10 @@ textarea {
     margin-bottom: 10px;
 }
 
+.forslag-wrap .info-linje .tittel {
+    width: 60%;
+}
+
 .forslag-wrap .forslag {
     margin-left: 10px;
 }
@@ -241,8 +245,20 @@ textarea {
 }
 
 .forslag-wrap {
-    padding: 20px 20px 20px 20px;
+    padding: 20px 20px 40px 20px;
 }
+
+/* Anna hver med litt ulik farge */
+.forslag-wrap:nth-of-type(2n+1) {
+    background-color: var(--light-bg);
+}
+
+
+.forslag-wrap:nth-of-type(2n) {
+    background-color: var(--medium-bg);
+}
+
+
 
 /* siste elementet har litt ekstra bunnpadding */
 .forslag-wrap:last-of-type {

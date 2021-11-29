@@ -21,7 +21,7 @@ header {
 main {
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     padding-bottom: 100px;
-    width: max(700px, 80vw);
+    width: 80vw;
     margin: 0px auto 0px auto;
 }
 
@@ -51,6 +51,11 @@ p {
 
 ul {
     margin-left: 40px;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
 }
 
 strong {
@@ -84,10 +89,6 @@ header img {
     list-style: inside circle;
 }
 
-.index li {
-    margin-bottom: 0.5rem;
-}
-
 .index h3 {
     margin-left: 20px;
     margin-top: 20px;
@@ -113,8 +114,4 @@ header img {
 .participants ul {
     margin-top: 20px;
     list-style: inside circle;
-}
-
-.participants li {
-    margin-bottom: 0.5rem;
 }

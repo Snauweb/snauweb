@@ -1,6 +1,6 @@
 "use strict";
 
-import { Upgrade } from "../upgrade.js";
+import { Upgrade } from "../modules/upgrade.js";
 
 let alpakkaElements = {
 

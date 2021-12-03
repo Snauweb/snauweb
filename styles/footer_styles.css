@@ -9,4 +9,5 @@ footer {
     height: var(--footer-height);
     background-color: var(--snau-dark-gray);
     color: white;
+    width: 100%;
 }

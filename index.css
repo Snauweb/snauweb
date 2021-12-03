@@ -1,9 +1,11 @@
 :root {
     --snau-dark-gray: #373538;
     --snau-bright-red: #E77171;
+    --snau-bright-red-hover: #FF7C7C ;
     --footer-height: 100px;
-    --header-height: 100px;
-
+    --overskrift-height: 75px;
+    --header-height: 70px;
+    
     font-size: 14pt;
 }
 
@@ -14,8 +16,9 @@ body {
     flex-direction: column;
 }
 
-header {
-    height: var(--header-height);
+
+.overskrift {
+    height: var(--overskrift-height);
 }
 
 main {
@@ -63,18 +66,22 @@ strong {
 }
 
 /* header */
-header {
+
+
+/* overskrift */
+.overskrift {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 40px;
+    margin-top: 40px;
 }
 
-header h1 {
+.overskrift h1 {
     margin: 0px 20px 0px 20px;
 }
 
-header img {
+.overskrift img {
     width: 50px;
 }
 

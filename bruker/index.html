@@ -1,0 +1,45 @@
+<head>
+  <title>Bruker</title>
+  <meta charset="utf-8"></meta>
+  <link rel="stylesheet" href="../styles/meyer_reset.css">
+  <link rel="stylesheet" href="bruker.css">
+  <link rel="stylesheet" href="../styles/header_styles.css">
+  <link rel="stylesheet" href="../styles/footer_styles.css">
+
+  <script type="module" src="../components/fetchList.js"></script>
+
+</head>
+
+<body>
+  <header class="snauweb-header">
+    <a class="home-page-link" href="../">
+      <img src="../assets/snaustrinda_logo.png"></img>
+    </a>
+  </header>
+
+  <main>
+    <h1>Brukerinfo for<span></span></h1>
+    <fetch-list src="/bruker">
+      <template class="list-item">
+	<li>
+	  <span>Brukernavn:</span> <span class="brukernavn"></span>
+	  <br/>
+	  <span>Fornavn:</span> <span class="fornavn"></span>
+	</li>
+      </template>
+      <template class="load-screen">
+	<div>
+	  <p> Laster inn brukerdata... </p>
+	</div>
+      </template>
+      
+      <template class="background">
+	<div>
+	  
+	</div>
+      </template>
+	  
+    </fetch-list>
+  </main>
+  <footer></footer>
+</body>

@@ -1,0 +1,19 @@
+:root {
+    font-size: 12pt;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+    width: 80vw;
+    margin: 20px auto 20px auto;
+}
+
+h1 {
+    font-size: 3rem;
+}

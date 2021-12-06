@@ -146,9 +146,8 @@ class FetchList extends HTMLElement {
     this.loading = true;
     apiFetch(this.getAttribute('src'))
       .then(response => {
-	let status = response.headers.get('Status');
-	// 
-	if(parseInt(status) >= 300) { 
+        let status = response.status;
+        if(parseInt(status) >= 400) {
 	  this.error = true;
 	}
 	else {

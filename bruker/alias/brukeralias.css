@@ -1,0 +1,49 @@
+main {
+    width: 80vw;
+    margin: 0px auto 0px auto;
+    padding-top: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+p {
+    margin: 20px 0 20px 20px;
+    line-height: 1.5;
+}
+
+.alias-list {
+    min-width: 200px;
+    width: 60%;
+    margin: 20px auto 20px auto;
+    display: block;
+}
+
+.alias-list .column-labels {
+    display: flex;
+    border-bottom: solid;
+    margin-bottom: 20px;
+}
+
+.alias-list .column-labels * {
+    width: 50%;
+}
+
+/* Bred skjerm*/
+@media(min-width: 1000px) {
+    .alias-list {
+	overflow-y: hidden;
+    }
+}
+
+.alias-li {
+    display: flex;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.alias-li > div {
+    width: 50%;
+}
+

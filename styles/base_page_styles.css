@@ -1,0 +1,63 @@
+
+/* HEADER */
+:root {
+    --snau-dark-gray: #373538;
+    --snau-bright-red: #E77171;
+    --snau-bright-red-hover: #FF7C7C ;
+    --footer-height: 100px;
+    --header-height: 70px;
+}
+
+
+/* BODY */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* HEADER */
+.snauweb-header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    background-color: var(--snau-bright-red);
+}
+
+.snauweb-header .home-page-link {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.snauweb-header .home-page-link img {
+    height: 50px;
+}
+
+/* MAIN */
+main {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+/* FOOTER */
+footer {
+    height: var(--footer-height);
+    background-color: var(--snau-dark-gray);
+    color: white;
+    width: 100%;
+}
+
+
+/* HEADINGS */
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}

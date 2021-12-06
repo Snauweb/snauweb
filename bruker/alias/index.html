@@ -1,0 +1,44 @@
+<head>
+  <title>Bruker</title>
+  <meta charset="utf-8"></meta>
+  <link rel="stylesheet" href="../../styles/meyer_reset.css">
+  <link rel="stylesheet" href="../../styles/base_page_styles.css">
+  <link rel="stylesheet" href="brukeralias.css">
+  
+  <script type="module" src="../../components/fetchList.js"></script>
+
+</head>
+
+<body>
+  <header class="snauweb-header">
+    <a class="home-page-link" href="../../">
+      <img src="../../assets/snaustrinda_logo.png"></img>
+    </a>
+  </header>
+
+  <main>
+    <h1>Gyldige aktive alias</h1>
+    <p>
+      For å kunne få tilgang på innholdet på snauweb må itk-brukernavnet ditt være kobla opp mot en gyldig internbruker. Denne lista inneholder alle gyldige alias. Om ikke itk-brukernavnet ditt ("alias") ligger i denne lista, så funker ikke sia for deg. Snakk med en av oss i Snauweb om du trenger å bli satt opp
+    </p>
+    <div class="alias-list">
+      <div class="column-labels">
+	<h2>Brukernavn</h2>
+	<h2>Brukeralias</h2>
+      </div>
+      <fetch-list src="/bruker/alias">
+	<template class="list-item">
+	  <li class="alias-li">
+	    <div>
+	      <span class="brukernavn"></span>
+	    </div>
+	    <div>
+	      <span class="brukeralias"></span>
+	    </div>
+	  </li>
+	</template>
+      </fetch-list>
+    </div>
+  </main>
+  <footer></footer>
+</body>

@@ -51,7 +51,6 @@ h3 {
 
     .innsending-boks {
 	display: flex;
-	height: 100%;
     }
     
     .send-inn{
@@ -62,7 +61,7 @@ h3 {
     }
     .innsendt{
 	width: calc(60% - 20px);
-	height: 60vh;
+	
     }
 
 }
@@ -219,16 +218,22 @@ textarea {
     text-align: center;
     padding-bottom: 30px;
     padding-top: 30px;
+    max-height: 20%;
 }
 
 
-.forslagsliste {
-    display: inline;
-    height: 100%;
+.innsendt .forslagsliste {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
 }
 
 .forslagsliste filter-control {
-    display:block;
+    display:inline;
+}
+
+.innlegg-reaksjoner {
+    background-color: red;
 }
 
 /* Smal skjerm */

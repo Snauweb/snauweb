@@ -52,9 +52,9 @@
 	<filter-list class="forslagsliste">
 	  
 	  <filter-control>
-	    <div>
+	    <div class="filter-row-top">
 	      <text-search class="søkefelt">
-		<input type="text"></input>
+		<span>Søk i lista: </span><input type="text"></input>
 	      </text-search>
 	      <drop-down-select>
 		<span>Sorter etter</span>
@@ -63,7 +63,8 @@
 		  <option value="stemmer">stemmer</option>
 		</select>
 		<toggle-button>
-		  &#129045
+		  <span toggle-state="down" class="toggle-button-down">&#129047</span>
+		  <span toggle-state="up"   class="toggle-button-up">&#129045</span>
 		</toggle-button>
 	      </drop-down-select>
 	    </div>
@@ -93,6 +94,9 @@
 	      </ul>
 	    </div>
 	  </filter-control>
+
+	  <hr/>
+
 	  <edit-list class="forslagsliste-innhold">
 	    <ol>
 	      <li>

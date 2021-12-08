@@ -232,13 +232,53 @@ textarea {
     height: 80%;
 }
 
-/*** Filtreringspanel ***/
-.forslagsliste filter-control {
-    display:inline;
+.innsendt hr {
+    width: calc(100% - 40px - 4px);
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-width: 2px;
+    height: 0px;
 }
+
+/*** Filtreringspanel ***/
+.forslagsliste {
+    background-color: var(--medium-bg);
+}
+
+.forslagsliste filter-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--medium-bg);
+    padding: 0px 20px 20px 20px;
+}
+
+.forslagsliste .filter-row-top {
+    display:flex;
+    justify-content: space-between;
+    padding: 20px 0px 20px 0px;
+    height: calc(50% - 400px);
+}
+
+
+.filter-row-top toggle-button > * {
+    display: none;
+    width: 1em;
+    height: 1em;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+}
+
+.filter-row-top toggle-button > *:first-child {
+    display: inline-block;
+}
+
 
 .status-filter-button-row {
     display:flex;
+    height: 50%;
 }
 
 .status-filter-button-row li {
@@ -277,7 +317,11 @@ textarea {
 }
 
 /*** Innlegsvisning ***/
-
+.forslagsliste-innhold {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 /* Smal skjerm */

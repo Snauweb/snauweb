@@ -4,6 +4,10 @@
     --light-bg: #eeeeee;
     --small-font: 12pt;
     --large-font: 14pt;
+
+    --new-color: #FF8989;
+    --working-color: #707EEA;
+    --finished-color: #aacc70;
     
     font-size: 12pt;
 }
@@ -228,13 +232,53 @@ textarea {
     height: 80%;
 }
 
+/*** Filtreringspanel ***/
 .forslagsliste filter-control {
     display:inline;
 }
 
-.innlegg-reaksjoner {
-    background-color: red;
+.status-filter-button-row {
+    display:flex;
 }
+
+.status-filter-button-row li {
+    flex-grow: 1;
+}
+
+.status-filter-button-row toggle-button > *{
+   width: calc(100% - 40px);
+   text-align: center;
+   padding: 10px 20px 10px 20px;
+
+   color: white;
+   font-size: 1.2em;
+
+   display: flex;
+   justify-content: space-between;
+}
+
+.status-filter-button-row toggle-button .new-toggle {
+    background-color: var(--new-color);
+}
+.status-filter-button-row toggle-button .working-toggle {
+    background-color: var(--working-color);
+}
+.status-filter-button-row toggle-button .finished-toggle {
+    background-color: var(--finished-color);
+}
+
+.status-filter-button-row span.checkbox {
+    border-style: solid;
+    border-width: 2px;
+    font-weight: bold;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+}
+
+/*** Innlegsvisning ***/
+
+
 
 /* Smal skjerm */
 @media(min-width: 1000px) {

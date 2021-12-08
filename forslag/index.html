@@ -68,10 +68,28 @@
 	      </drop-down-select>
 	    </div>
 	    <div>
-	      <ul>
-		<li><toggle-button>Ny &#10003</toggle-button></li>
-		<li><toggle-button>Jobbes med &#10003</toggle-button></li>
-		<li><toggle-button>Ferdig &#10003</toggle-button></li>
+	      <ul class="status-filter-button-row">
+		<li>
+		  <toggle-button>
+		    <div class="new-toggle">
+		      <span>Ny</span><span class="checkbox">&#10003</span>
+		    </div>
+		  </toggle-button>
+		</li>
+		<li>
+		  <toggle-button>
+		    <div class="working-toggle">
+		      <span >Jobbes med</span><span class="checkbox">&#10003</span>
+		    </div>
+		  </toggle-button>
+		</li>
+		<li>
+		  <toggle-button>
+		    <div class="finished-toggle">
+		      <span>Ferdig</span> <span class="checkbox">&#10003</span>
+		    </div>
+		  </toggle-button>
+		</li>
 	      </ul>
 	    </div>
 	  </filter-control>

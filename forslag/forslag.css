@@ -23,6 +23,8 @@ main{
     margin-left: auto;
     margin-right: auto;
     flex-grow: 1;
+
+    padding-bottom: 30px;
 }
 
 body {
@@ -49,24 +51,20 @@ h3 {
 
     .innsending-boks {
 	display: flex;
-	height: 80vh;
+	height: 100%;
     }
     
     .send-inn{
 	width: 40%;
 	margin-right: 20px;
 	height: 100%;
+	padding-bottom: 20px;
     }
     .innsendt{
 	width: calc(60% - 20px);
 	height: 60vh;
     }
 
-    .forslagsliste {
-	height: 100%;
-	overflow: auto;
-	display: block;
-    }
 }
 
 
@@ -76,6 +74,10 @@ h3 {
     .send-inn{
 	width: 100%;
 	margin-bottom: 40px;
+    }
+
+    .innsendt {
+	margin-bottom: 30px;
     }
 }
 
@@ -113,7 +115,7 @@ h3 {
     }
 }
 
-/* Innsendingsskjema */
+/*** Innsendingsskjema ***/
 .send-inn h2 {
     margin-bottom: 30px;
 }
@@ -179,6 +181,10 @@ textarea {
 	align-items: center;
     }
 
+     .innspill-skjema .overskrift-boks input {
+	 width: 70%;
+     }
+
     .innspill-skjema .tekst-boks {
 	display: flex;
 	justify-content: center;
@@ -208,70 +214,29 @@ textarea {
     }
 }
 
-/* Innsendtliste */
-/** Lasteskjerm **/
-.load-screen-wrap {
-/*    height: 100%;*/
-    display: block;
-    background-color: var(--light-bg) 
-}
-
-/** Liste **/
-/*** Bakgrunn ***/
-.list-background {
-    display: block;
-}
-
-/*** Listeelementer ***/
-.innsendt h2{
+/*** NY FORSLAGSLISTE (gå i git for gammel versjon)***/
+.innsendt h2 {
     text-align: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-
-.forslag-wrap .info-linje {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.forslag-wrap .info-linje .tittel {
-    width: 60%;
-}
-
-.forslag-wrap .forslag {
-    margin-left: 10px;
-}
-
-.light {
-    background-color: var(--light-bg);
-}
-
-.medium {
-    background-color: var(--medium-bg);
-}
-
-.forslag-wrap {
-    padding: 20px 20px 40px 20px;
-}
-
-/* Anna hver med litt ulik farge */
-.forslag-wrap:nth-of-type(2n+1) {
-    background-color: var(--light-bg);
+    padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 
-.forslag-wrap:nth-of-type(2n) {
-    background-color: var(--medium-bg);
+.forslagsliste {
+    display: inline;
+    height: 100%;
 }
 
-
-
-/* siste elementet har litt ekstra bunnpadding */
-.forslag-wrap:last-of-type {
-    padding-bottom: 70px;
+.forslagsliste filter-control {
+    display:block;
 }
 
-.forslag-wrap h3 {
-    margin-bottom: 10px;
+/* Smal skjerm */
+@media(min-width: 1000px) {
+    .forslagsliste-innhold {
+	height: 100%;
+	overflow: auto;
+	display: block;
+    }
 }
+

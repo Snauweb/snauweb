@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../styles/footer_styles.css">
   
   <script type="module" src="../components/fetchList.js"></script>
+  <script type="module" src="../components/toggleButton.js"></script>
   <script type="module" src="forslag.js"></script>
 </head>
 
@@ -47,7 +48,7 @@
       <div class="innsendt">
 	
 	<h2> Innsendte forslag </h2>
-
+	
 	<!-- Custom elements her bare mockup, ikke implementert ennå-->
 	<filter-list class="forslagsliste">
 	  
@@ -63,8 +64,10 @@
 		  <option value="stemmer">stemmer</option>
 		</select>
 		<toggle-button>
-		  <span toggle-state="down" class="toggle-button-down">&#129047</span>
-		  <span toggle-state="up"   class="toggle-button-up">&#129045</span>
+		  <template>
+		    <span stateName="up"   class="toggle button-up">&#129045</span>
+		    <span stateName="down" class="toggle button-down">&#129047</span>
+		  </template>
 		</toggle-button>
 	      </drop-down-select>
 	    </div>
@@ -72,23 +75,38 @@
 	      <ul class="status-filter-button-row">
 		<li>
 		  <toggle-button>
-		    <div class="new-toggle">
-		      <span>Ny</span><span class="checkbox">&#10003</span>
-		    </div>
+		    <template>
+		      <div stateName="checked" class="toggle new">
+			<span>Ny</span><span class="checkbox">&#10003</span>
+		      </div>
+		      <div stateName="unchecked" class="toggle new">
+			<span>Ny</span><span class="checkbox"></span>
+		      </div>	      
+		    </template>
 		  </toggle-button>
 		</li>
 		<li>
 		  <toggle-button>
-		    <div class="working-toggle">
-		      <span >Jobbes med</span><span class="checkbox">&#10003</span>
-		    </div>
+		    <template>
+		      <div stateName="checked" class="toggle working">
+			<span>Jobbes med</span><span class="checkbox">&#10003</span>
+		      </div>
+		      <div stateName="unchecked" class="toggle working">
+			<span>Jobbes med</span><span class="checkbox"></span>
+		      </div>	      
+		    </template>
 		  </toggle-button>
 		</li>
 		<li>
 		  <toggle-button>
-		    <div class="finished-toggle">
-		      <span>Ferdig</span> <span class="checkbox">&#10003</span>
-		    </div>
+		    <template>
+		      <div stateName="checked" class="toggle finished">
+			<span>Ferdig</span><span class="checkbox">&#10003</span>
+		      </div>
+		      <div stateName="unchecked" class="toggle finished">
+			<span>Ferdig</span><span class="checkbox"></span>
+		      </div>	      
+		    </template>
 		  </toggle-button>
 		</li>
 	      </ul>
@@ -97,15 +115,15 @@
 
 	  <edit-list class="forslagsliste-innhold">
 	    <ol>
-	      <li class="innlegg-wrap status-new">
+	      <li class="innlegg-wrap status-finished">
 		<div class="side-bar"></div>
 		<div class="innlegg-content">
 		  <div class="innlegg-info">
 		    <div class="innlegg-overskrift">
-		      <h3>Klarinett</h3>
-		      <span class="innlegg-kategori">(Ny)</span>
+		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
+		      <span class="innlegg-kategori">(Ferdig)</span>
 		    </div>
-		    <span>2021-01-10 13:13:02</span>
+		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
 		  </div>
 		  <div class="innlegg-tekst">
 		    <p>
@@ -125,13 +143,43 @@
 		</div>
 	      </li>
 
-	      	      <li class="innlegg-wrap status-new">
+	      <li class="innlegg-wrap status-new">
 		<div class="side-bar"></div>
 		<div class="innlegg-content">
 		  <div class="innlegg-info">
-		    <h3>Klarinett</h3>
-		    <span class="innlegg-kategori">Ny</span>
-		    <span>2021-01-10 13:13:02</span>
+		    <div class="innlegg-overskrift">
+		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
+		      <span class="innlegg-kategori">(Ny)</span>
+		    </div>
+		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
+		  </div>
+		  <div class="innlegg-tekst">
+		    <p>
+		      Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
+		    </p>
+		  </div>
+		  <div class="innlegg-footer">
+		    <ul class="reaksjon-liste">
+		      <li>
+			<toggle-button>
+			  <img src="../assets/reaksjon/bra_umarkert.png"></img>
+			</toggle-button>
+			<span>9</span>
+		      <li>
+		    </ul>
+		  </div>
+		</div>
+	      </li>
+
+	      <li class="innlegg-wrap status-working">
+		<div class="side-bar"></div>
+		<div class="innlegg-content">
+		  <div class="innlegg-info">
+		    <div class="innlegg-overskrift">
+		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
+		      <span class="innlegg-kategori">(Jobbes med)</span>
+		    </div>
+		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
 		  </div>
 		  <div class="innlegg-tekst">
 		    <p>
@@ -150,11 +198,39 @@
 		  </div>
 		</div>
 	      </li>
+
+	      <li class="innlegg-wrap status-finished">
+		<div class="side-bar"></div>
+		<div class="innlegg-content">
+		  <div class="innlegg-info">
+		    <div class="innlegg-overskrift">
+		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
+		      <span class="innlegg-kategori">(Ferdig)</span>
+		    </div>
+		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
+		  </div>
+		  <div class="innlegg-tekst">
+		    <p>
+		      Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
+		    </p>
+		  </div>
+		  <div class="innlegg-footer">
+		    <ul class="reaksjon-liste">
+		      <li>
+			<toggle-button>
+			  <img src="../assets/reaksjon/bra_markert.png"></img>
+			</toggle-button>
+			<span>10</span>
+		      <li>
+		    </ul>
+		  </div>
+		</div>
+	      </li>
+	      
 	    </ol>
 	  </edit-list>
-	  
 	</filter-list>
-	
+
 	<!--<fetch-list src="/forslag" class="forslagsliste">
 	  <template class="list-item">
 	    <li class="forslag-wrap">

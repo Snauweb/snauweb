@@ -221,7 +221,6 @@ textarea {
 .innsendt h2 {
     text-align: center;
     padding-bottom: 30px;
-    padding-top: 30px;
     max-height: 20%;
 }
 
@@ -268,8 +267,7 @@ textarea {
 }
 
 
-.filter-row-top toggle-button > * {
-    display: none;
+.filter-row-top toggle-button .checkbox {
     width: 1em;
     height: 1em;
     border-style: solid;
@@ -277,8 +275,18 @@ textarea {
     text-align: center;
 }
 
-.filter-row-top toggle-button > *:first-child {
+.filter-row-top toggle-button {
     display: inline-block;
+}
+
+.filter-row-top toggle-button .toggle {
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px;
+    height: 1em;
+    width: 1em;
+    text-align: center;
+    cursor: pointer;
 }
 
 
@@ -291,7 +299,7 @@ textarea {
     flex-grow: 1;
 }
 
-.status-filter-button-row toggle-button > *{
+.status-filter-button-row toggle-button .toggle{
    width: calc(100% - 40px);
    text-align: center;
    padding: 10px 20px 10px 20px;
@@ -301,15 +309,17 @@ textarea {
 
    display: flex;
    justify-content: space-between;
+
+   cursor: pointer;
 }
 
-.status-filter-button-row toggle-button .new-toggle {
+.status-filter-button-row toggle-button .toggle.new {
     background-color: var(--new-color);
 }
-.status-filter-button-row toggle-button .working-toggle {
+.status-filter-button-row toggle-button .toggle.working {
     background-color: var(--working-color);
 }
-.status-filter-button-row toggle-button .finished-toggle {
+.status-filter-button-row toggle-button .toggle.finished {
     background-color: var(--finished-color);
 }
 
@@ -341,15 +351,13 @@ textarea {
 
 
 .innlegg-wrap {
-    padding: 0px 20px 0px 0px;
     margin-bottom: 30px;
     display: flex;
 }
 
 .innlegg-wrap .side-bar {
-    width: 3em;
-    position: relative;
-    left: -20px;
+    width: 50px;
+    margin-right: 20px;
 }
 
 /* info */
@@ -357,15 +365,20 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    padding-bottom: 20px;
 }
 
 .innlegg-wrap .innlegg-info .innlegg-overskrift h3{
     display: inline;
 }
 
-.innlegg-wrap .innlegg-info span {
-    margin-right: 20px;
+.innlegg-wrap .innlegg-info .innlegg-kategori {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.innlegg-wrap .innlegg-info .innlegg-timestamp {
+    min-width: 10em;
 }
 
 /* tekst */
@@ -379,9 +392,6 @@ textarea {
     height: 20px;
 }
 
-
-.innlegg-wrap .innlegg-footer .innlegg-kategori {
-}
 
 .innlegg-wrap .innlegg-footer .reaksjon-liste {
     flex-grow: 1;
@@ -398,9 +408,22 @@ textarea {
     height: 20px;
 }
 
+.innlegg-wrap .innlegg-footer .reaksjon-liste reaksjon.reaksjon-bra {
+
+}
+
 
 /* sidebar-farger */
 .innlegg-wrap.status-new .side-bar {
     background-color: var(--new-color);
-    color: white;
 }
+
+.innlegg-wrap.status-working .side-bar {
+    background-color: var(--working-color);
+}
+
+.innlegg-wrap.status-finished .side-bar {
+    background-color: var(--finished-color);
+}
+
+

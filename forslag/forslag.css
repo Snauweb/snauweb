@@ -63,9 +63,10 @@ h3 {
 	height: 100%;
 	padding-bottom: 20px;
     }
+
     .innsendt{
 	width: calc(60% - 20px);
-	
+	height: 65vh;
     }
 
 }
@@ -108,7 +109,6 @@ h3 {
 /* Bred skjerm */
 @media(min-width: 1000px) {
     .overskrift{
-	margin-left: 9vw;
 	margin-top: 2vh;
 	margin-bottom: 40px;
     }
@@ -229,7 +229,13 @@ textarea {
 .innsendt .forslagsliste {
     display: flex;
     flex-direction: column;
-    height: 80%;
+}
+
+/* smal skjerm */
+@media (min-width: 999px) {
+    .innsendt .forslagsliste {
+	height: 100%;
+    }
 }
 
 .innsendt hr {
@@ -243,7 +249,7 @@ textarea {
 
 /*** Filtreringspanel ***/
 .forslagsliste {
-    background-color: var(--medium-bg);
+    background-color: var(--light-bg);
 }
 
 .forslagsliste filter-control {
@@ -316,11 +322,11 @@ textarea {
     display: inline-block;
 }
 
-/*** Innlegsvisning ***/
+/*** Innleggsliste ***/
 .forslagsliste-innhold {
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px 10px 0px auto;
+    padding: 0px 30px 50px 0px;
 }
 
 
@@ -333,3 +339,68 @@ textarea {
     }
 }
 
+
+.innlegg-wrap {
+    padding: 0px 20px 0px 0px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.innlegg-wrap .side-bar {
+    width: 3em;
+    position: relative;
+    left: -20px;
+}
+
+/* info */
+.innlegg-wrap .innlegg-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.innlegg-wrap .innlegg-info .innlegg-overskrift h3{
+    display: inline;
+}
+
+.innlegg-wrap .innlegg-info span {
+    margin-right: 20px;
+}
+
+/* tekst */
+.innlegg-wrap .innlegg-tekst p {
+    margin-left: 20px;
+}
+
+/* innlegg-footer */
+.innlegg-wrap .innlegg-footer {
+    display: flex;
+    height: 20px;
+}
+
+
+.innlegg-wrap .innlegg-footer .innlegg-kategori {
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste li{
+    display: flex;
+    align-items: center;
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste img{
+    height: 20px;
+}
+
+
+/* sidebar-farger */
+.innlegg-wrap.status-new .side-bar {
+    background-color: var(--new-color);
+    color: white;
+}

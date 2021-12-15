@@ -93,7 +93,7 @@ function sendInnForslag(event) {
     }).then((response) => {
       response.json()
     }).then((data) => {
-      forslagsliste.loadData();
+      forslagsliste.update(); // not implemented, will make the page bug out
     }).catch((error) => {
       console.error('apiFetch error:', error);
     });
@@ -105,6 +105,7 @@ function sendInnForslag(event) {
 
 function init(){
   forslagsliste = document.querySelector(".forslagsliste");
+  
   settOppInnspillsskjema();
 }
 window.addEventListener('load', init);

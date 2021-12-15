@@ -311,6 +311,7 @@ textarea {
    justify-content: space-between;
 
    cursor: pointer;
+   user-select: none;
 }
 
 .status-filter-button-row toggle-button .toggle.new {
@@ -399,7 +400,7 @@ textarea {
     justify-content: flex-end;
 }
 
-.innlegg-wrap .innlegg-footer .reaksjon-liste li{
+.innlegg-wrap .innlegg-footer .reaksjon-liste li reaction-elem {
     display: flex;
     align-items: center;
 }

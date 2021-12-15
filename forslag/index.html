@@ -9,6 +9,7 @@
   
   <script type="module" src="../components/fetchList.js"></script>
   <script type="module" src="../components/toggleButton.js"></script>
+  <script type="module" src="../components/filterControl.js"></script>
   <script type="module" src="forslag.js"></script>
 </head>
 
@@ -49,21 +50,24 @@
 	
 	<h2> Innsendte forslag </h2>
 	
-	<!-- Custom elements her bare mockup, ikke implementert ennå-->
+	<!-- <toggle-button> er implementert i denne omgang -->
+	<!-- <filter-control> jobbes med-->
 	<filter-list class="forslagsliste">
 	  
-	  <filter-control>
+	  <filter-control class="filter-list-controll">
 	    <div class="filter-row-top">
-	      <text-search class="søkefelt">
-		<span>Søk i lista: </span><input type="text"></input>
+	      <text-search class="søkefelt filter-elem">
+		<span>Søk i lista: </span>
+		<input type="text"></input>
+		<input type="button" value="søk"></input>
 	      </text-search>
-	      <drop-down-select>
+	      <drop-down-select class="filter-elem" filterName="sorterEtter">
 		<span>Sorter etter</span>
 		<select>
 		  <option value="dato">sendt inn</option>
 		  <option value="stemmer">stemmer</option>
 		</select>
-		<toggle-button>
+		<toggle-button state="0">
 		  <template>
 		    <span stateName="up"   class="toggle button-up">&#129045</span>
 		    <span stateName="down" class="toggle button-down">&#129047</span>
@@ -74,7 +78,7 @@
 	    <div>
 	      <ul class="status-filter-button-row">
 		<li>
-		  <toggle-button>
+		  <toggle-button class="filter-elem" filterName="toggleNew">
 		    <template>
 		      <div stateName="checked" class="toggle new">
 			<span>Ny</span><span class="checkbox">&#10003</span>
@@ -86,7 +90,7 @@
 		  </toggle-button>
 		</li>
 		<li>
-		  <toggle-button>
+		  <toggle-button class="filter-elem" filterName="toggleWorking">
 		    <template>
 		      <div stateName="checked" class="toggle working">
 			<span>Jobbes med</span><span class="checkbox">&#10003</span>
@@ -98,7 +102,7 @@
 		  </toggle-button>
 		</li>
 		<li>
-		  <toggle-button>
+		  <toggle-button class="filter-elem" filterName="toggleFinished">
 		    <template>
 		      <div stateName="checked" class="toggle finished">
 			<span>Ferdig</span><span class="checkbox">&#10003</span>
@@ -113,7 +117,9 @@
 	    </div>
 	  </filter-control>
 
-	  <edit-list class="forslagsliste-innhold">
+	  <edit-list
+	    src="/forslag"
+	    class="forslagsliste-innhold filter-list-content">
 	    <ol>
 	      <li class="innlegg-wrap status-finished">
 		<div class="side-bar"></div>
@@ -133,10 +139,17 @@
 		  <div class="innlegg-footer">
 		    <ul class="reaksjon-liste">
 		      <li>
-			<toggle-button>
-			  <img src="../assets/reaksjon/bra_markert.png"></img>
-			</toggle-button>
-			<span>10</span>
+			<reaction-elem reactionName="bra">
+			  <toggle-button>
+			    <template>
+			      <img stateName="selected"
+				   src="../assets/reaksjon/bra_markert.png"></img>
+			      <img stateName="unselected"
+				   src="../assets/reaksjon/bra_umarkert.png"></img>
+			    </template>
+			  </toggle-button>
+			  <span class="reactionCounter">10</span>
+			</reaction-elem>
 		      <li>
 		    </ul>
 		  </div>
@@ -161,10 +174,18 @@
 		  <div class="innlegg-footer">
 		    <ul class="reaksjon-liste">
 		      <li>
-			<toggle-button>
-			  <img src="../assets/reaksjon/bra_umarkert.png"></img>
-			</toggle-button>
-			<span>9</span>
+			<li>
+			<reaction-elem>
+			  <toggle-button>
+			    <template>
+			      <img stateName="selected"
+				   src="../assets/reaksjon/bra_markert.png"></img>
+			      <img stateName="unselected"
+				   src="../assets/reaksjon/bra_umarkert.png"></img>
+			    </template>
+			  </toggle-button>
+			  <span class="reactionCounter">10</span>
+			</reaction-elem>
 		      <li>
 		    </ul>
 		  </div>
@@ -189,10 +210,17 @@
 		  <div class="innlegg-footer">
 		    <ul class="reaksjon-liste">
 		      <li>
-			<toggle-button>
-			  <img src="../assets/reaksjon/bra_markert.png"></img>
-			</toggle-button>
-			<span>10</span>
+			<reaction-elem>
+			  <toggle-button>
+			    <template>
+			      <img stateName="selected"
+				   src="../assets/reaksjon/bra_markert.png"></img>
+			      <img stateName="unselected"
+				   src="../assets/reaksjon/bra_umarkert.png"></img>
+			    </template>
+			  </toggle-button>
+			  <span class="reactionCounter">10</span>
+			</reaction-elem>
 		      <li>
 		    </ul>
 		  </div>
@@ -217,10 +245,17 @@
 		  <div class="innlegg-footer">
 		    <ul class="reaksjon-liste">
 		      <li>
-			<toggle-button>
-			  <img src="../assets/reaksjon/bra_markert.png"></img>
-			</toggle-button>
-			<span>10</span>
+			<reaction-elem>
+			  <toggle-button>
+			    <template>
+			      <img stateName="selected"
+				   src="../assets/reaksjon/bra_markert.png"></img>
+			      <img stateName="unselected"
+				   src="../assets/reaksjon/bra_umarkert.png"></img>
+			    </template>
+			  </toggle-button>
+			  <span class="reactionCounter">10</span>
+			</reaction-elem>
 		      <li>
 		    </ul>
 		  </div>

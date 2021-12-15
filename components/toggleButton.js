@@ -34,7 +34,22 @@ class ToggleButton extends HTMLElement {
   }
 
   // Common patterns
+  setupState() {
+    // Read content template, count number of requested states
+    this.statesTemplate = this.querySelector("template");    
+    this.numStates = this.statesTemplate.content.children.length;
 
+    // Validate inital state. isStateValid handles undefined state
+    // Guarantees legal state after init
+    let curState = this.getAttribute("state");    
+    if(this.isStateValid(curState) === false) {
+      this.setAttribute('state', '0');
+    }
+
+    this.prevState = null;
+      
+  }
+  
   // Initialise DOM elements needed for rendering
   setupDOM(){
 
@@ -52,30 +67,26 @@ class ToggleButton extends HTMLElement {
 	this.DOMstateNames[i] = curStateName;
       }
     }
-    this.wrapperDiv = document.createElement('div');
-    this.appendChild(this.wrapperDiv);
-  } 
+    this.wrapperElem = document.createElement('button');
 
-  setupState() {
-    // Read content template, count number of requested states
-    this.statesTemplate = this.querySelector("template");    
-    this.numStates = this.statesTemplate.content.children.length;
-
-    // Validate inital state
-    let curState = this.getAttribute("state");
-    if(this.isStateValid(curState) === false) {
-      this.setAttribute('state', '0');
-    }
-
-    this.prevState = null;
+    // Remove button styling, and make wrapper
+    // button element styles behave like the div
+    this.wrapperElem.style.background = "none";
+    this.wrapperElem.style.color = "inherit";
+    this.wrapperElem.style.border = "none";
+    this.wrapperElem.style.padding = "0";
+    this.wrapperElem.style.cursor = "pointer";
+    this.wrapperElem.style.outline = "inherit";
+    this.wrapperElem.style.display = "inline-block";
+    this.wrapperElem.style.font = "inherit";
+    this.wrapperElem.style.width = "100%";
     
+    
+    this.appendChild(this.wrapperElem);
   }
-
+  
   setupEventHandling() {
     this.addEventListener('click', this.handleClick);
-    this.addEventListener('stateChange', (e) => {
-      console.log("The state changed! Here is some info:", e.detail);
-    })
   }
 
   // Create DOM representation based on internal state
@@ -84,10 +95,10 @@ class ToggleButton extends HTMLElement {
     let curState = Number.parseInt(this.getAttribute('state'));
     // If a DOM state is allready rendered, it must be removed
     if(this.prevState !== null) {
-      this.wrapperDiv.removeChild(this.DOMstates[this.prevState]);
+      this.wrapperElem.removeChild(this.DOMstates[this.prevState]);
     }
     
-    this.wrapperDiv.appendChild(this.DOMstates[curState]);
+    this.wrapperElem.appendChild(this.DOMstates[curState]);
   } 
 
 
@@ -105,6 +116,7 @@ class ToggleButton extends HTMLElement {
 
     const toggleEvent = new CustomEvent("stateChange", {
       detail: {
+	element: this,
 	newState: {
 	  index: newState,
 	  name: this.DOMstateNames[newState]
@@ -117,7 +129,6 @@ class ToggleButton extends HTMLElement {
     });
     
     this.dispatchEvent(toggleEvent);    
-    this.render();
   }
 
   // Utils
@@ -140,12 +151,13 @@ class ToggleButton extends HTMLElement {
   // Built-ins
   // Returns a list of names of attributes
   // that trigger attributeChangedCallback on change
-  static get observedAttributes() { return ['state']; }
+  static get observedAttributes() { return ToggleButton.attributeNames; }
 
   // Lifecycle
   connectedCallback() {}
   disconnectedCallback() {}
   adoptedCallback() {}
+  // This calls render, so that any attribute change is imidiatly reflected in DOM
   attributeChangedCallback(name, oldValue, newValue) {
     if(oldValue !== newValue) {
       if(name === 'state') {
@@ -156,6 +168,7 @@ class ToggleButton extends HTMLElement {
 	  this.setAttribute('state', newValue);
 	}
       }
+      this.render();
     }
   }
   

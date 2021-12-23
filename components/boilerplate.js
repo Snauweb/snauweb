@@ -18,7 +18,7 @@ class CustomComponent extends HTMLElement {
 
   // Returns a list of names of attributes
   // that trigger attributeChangedCallback on change
-  static get observedAttributes() { return attributeNames; }
+  static get observedAttributes() { return CustomComponent.attributeNames; }
   
   // Lifecycle
   connectedCallback() {}

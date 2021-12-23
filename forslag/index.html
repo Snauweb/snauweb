@@ -10,6 +10,10 @@
   <script type="module" src="../components/fetchList.js"></script>
   <script type="module" src="../components/toggleButton.js"></script>
   <script type="module" src="../components/filterControl.js"></script>
+  <script type="module" src="../components/forslagFilterList.js"></script>
+  <script type="module" src="../components/textSearch.js"></script>
+  <script type="module" src="../components/fetchElem.js"></script>
+
   <script type="module" src="forslag.js"></script>
 </head>
 
@@ -51,9 +55,10 @@
 	<h2> Innsendte forslag </h2>
 	
 	<!-- <toggle-button> er implementert i denne omgang -->
+	<!-- <text-search> under arbeid -->
 	<!-- <filter-control> jobbes med-->
-	<filter-list class="forslagsliste">
-	  
+	<forslag-filter-list class="forslagsliste">
+	  <fetch-elem src="/forslag"></fetch-elem>
 	  <filter-control class="filter-list-controll">
 	    <div class="filter-row-top">
 	      <text-search class="søkefelt filter-elem">
@@ -264,7 +269,7 @@
 	      
 	    </ol>
 	  </edit-list>
-	</filter-list>
+	</forslag-filter-list>
 
 	<!--<fetch-list src="/forslag" class="forslagsliste">
 	  <template class="list-item">

@@ -22,7 +22,7 @@
 export { ToggleButton }
 
 class ToggleButton extends HTMLElement {
-  static attributeNames = ['state'];
+  static attributeNames = ['state', 'debounce'];
   
   constructor() {
     super();
@@ -46,6 +46,13 @@ class ToggleButton extends HTMLElement {
       this.setAttribute('state', '0');
     }
 
+    // Set debounce to 0 if not specified
+    if(!this.hasAttribute("debounce")) {
+	this.setAttribute("debounce", "0");
+      }
+  
+    
+    this.debounceActive = false; // No debounce activation before click
     this.prevState = null;
       
   }
@@ -104,6 +111,16 @@ class ToggleButton extends HTMLElement {
 
   // handlers
   handleClick() {
+    // Disregard clics during debounce period
+    if(this.debounceActive)
+      return;
+
+    this.debounceActive = true;
+    setTimeout(
+      ()=>{this.debounceActive = false;},
+      this.getAttribute("debounce")
+    );
+    
     let curState = parseInt(this.getAttribute('state'));
     this.prevState = curState;
     let newState = curState + 1;

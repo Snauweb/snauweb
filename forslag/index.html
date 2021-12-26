@@ -13,6 +13,7 @@
   <script type="module" src="../components/forslagFilterList.js"></script>
   <script type="module" src="../components/textSearch.js"></script>
   <script type="module" src="../components/fetchElem.js"></script>
+  <script type="module" src="../components/forslagList.js"></script>
 
   <script type="module" src="forslag.js"></script>
 </head>
@@ -121,30 +122,34 @@
 	    </div>
 	  </filter-control>
 	  
-	  <data-list
+	  <forslag-list
 	    class="forslagsliste-innhold filter-list-content"
+	    data='[{
+"tittel": "En ny tittel!", 
+"kategori": "(jobbes med)", 
+"kategoriID" : 2,
+"forslag" : "Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver \"klarinett\" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike"
+}]'
 	    >
 	      <template class="dataListElem">
-		<li class="innlegg-wrap status-finished">
-		  <div class="side-bar"></div>
-		  <div class="innlegg-content">
+		<li class="innlegg-wrap status-new">
+		  <aside class="side-bar"></aside>
+		  <div class="innlegg-forslag">
 		    <div class="innlegg-info">
 		      <div class="innlegg-overskrift">
-			<h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
-			<span class="innlegg-kategori">(Ferdig)</span>
+			<h3 class="tittel"></h3>
+			<span class="innlegg-kategori kategori"></span>
 		      </div>
-		      <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
+		      <span class="innlegg-timestamp lagt_til"></span>
 		    </div>
 		    <div class="innlegg-tekst">
-		      <p>
-			Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
-		      </p>
+		      <p class="forslag"></p>
 		    </div>
 		    <div class="innlegg-footer">
 		      <ul class="reaksjon-liste">
 			<li>
-			  <reaction-elem reactionName="bra">
-			    <toggle-button>
+			  <reaction-elem elementID="0" reactionName="bra">
+			    <toggle-button debounce="2000">
 			      <template>
 				<img stateName="selected"
 				     src="../assets/reaksjon/bra_markert.png"></img>
@@ -159,7 +164,8 @@
 		    </div>
 		  </div>
 		</li>
-	      <template class="listElemTemplate">
+	      </template>
+	  </forslag-list>
 <!--
 	      <li class="innlegg-wrap status-new">
 		<div class="side-bar"></div>

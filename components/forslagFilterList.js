@@ -18,14 +18,10 @@ class ForslagFilterList extends FetchElem {
   // **** SETUP ****
   // Initialise DOM elements needed for rendering
   setupDOM(){
-    let listItemTemplate = this.querySelector('template.dataListElem');
-    this.dataListElem = this.querySelector('data-list')
+    this.dataListElem = this.querySelector('data-list');
+    this.filterControlElem = this.querySelector('filter-control');
     this.listWrapperElem = document.createElement('ol');
 
-    this.listWrapperElem.appendChild(listItemTemplate.content);
-    this.dataListElem.appendChild(this.listWrapperElem);
-    
-    this.appendChild(this.dataListElem);
   }
   
   // Setup correct inital state (can also be used for reset)

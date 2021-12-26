@@ -23,6 +23,5 @@ async function apiFetch(path, params={method: 'GET', credentials: 'include'}) {
   }
   // Construct full path, using base URI from config
   let fullPath = apiURI + path;
-  console.log("Fetching from", fullPath);
   return fetch(fullPath, params);
 }

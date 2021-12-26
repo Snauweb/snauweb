@@ -7,10 +7,12 @@ export { FetchElem }
  * Be used as base class for other data driven components 
  * Only performs data load, no visuals.
  * Object properties:
- * state = loading | loaded | error
+ * state = init | loading | loaded | error
  * data = null | {...}
  *
  * src is relative to api base address defined for apiFetch
+ * state and data is accessed by getter functions
+ * fetchState() returns state, fetchData returns data
  */
 class FetchElem extends HTMLElement {
 
@@ -18,28 +20,32 @@ class FetchElem extends HTMLElement {
   
   constructor() {
     super();
+    this.setupState();
   }
 
   // Common patterns
   setupState() {
     this.data = null;
-    this.state = "loading";
+    this.status = "init";
   }
 
-  // Get data from endpoint specified in attribute
+  // Get fetchData from endpoint specified in attribute
   loadData() {
+    this.status = "loading"
     let src = this.getAttribute("src");
     if(src === null) {
       src = ""; // null is interpreted as ""
       this.setAttribute("src", "");
     }
 
-    console.log("fetching from", src)
     apiFetch(src)
       .then(response => {
 	let status = response.status;
 	if(parseInt(status) >= 400) {
 	  this.status = "error";
+	}
+	else {
+	  this.status = "loaded";
 	}
 	return response.json();
       })
@@ -47,17 +53,15 @@ class FetchElem extends HTMLElement {
 	this.data = data;
 	// Emit a stateChange event. Listening objects now know
 	// that the data loading is complete
-	const dataLoadedEvent = new CustomEvent("stateChange", {
+	const fetchDataLoadedEvent = new CustomEvent("stateChange", {
 	  detail: {
-	    state: this.state
+	    fetchStatus: this.status
 	  }
 	});
-	this.dispatchEvent(dataLoadedEvent);
-	console.log("The data loaded in fetchElem:", this.data);
+	this.dispatchEvent(fetchDataLoadedEvent);
       });
   }
   
-
   // Built-ins
 
   // Returns a list of names of attributes

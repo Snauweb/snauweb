@@ -1,18 +1,55 @@
 export { ForslagFilterList }
+import { FetchElem } from "./fetchElem.js"
 
-class ForslagFilterList extends HTMLElement {
+/*
+* Wrapper component for full forslag filter list.
+* Handles data relating to the forslag list.
+* Extends fetchElem for basic fetching capabilities
+*/
+class ForslagFilterList extends FetchElem {
 
   static attributeNames = [];
   
   constructor() {
     super();
+    this.setupDOM();
   }
 
-  // Common patterns
-  setupDOM(){} // Initialise DOM elements needed for rendering
-  setupState() {} // Setup correct inital state (can also be used for reset) 
+  // **** SETUP ****
+  // Initialise DOM elements needed for rendering
+  setupDOM(){
+    let listItemTemplate = this.querySelector('template.dataListElem');
+    this.dataListElem = this.querySelector('data-list')
+    this.listWrapperElem = document.createElement('ol');
+
+    this.listWrapperElem.appendChild(listItemTemplate.content);
+    this.dataListElem.appendChild(this.listWrapperElem);
+    
+    this.appendChild(this.dataListElem);
+  }
+  
+  // Setup correct inital state (can also be used for reset)
+  // remember to call method of superclass first, if this is a function overwrite
+  setupState() {
+    super.setupState();
+    this.fetchParams = ""; // The parameters passed to the get-request
+  }
+  
   render(){} // Create DOM representation based on internal state
-  update(){} // State update
+
+
+  // **** FILTER AND DATA FETCH ****
+  // Read state of the filter controller.
+  // Use it to construct a new parameter string
+  updateFetchParams() {
+    // TODO
+  }
+
+  // Use the src attribute + this.fetchParams to fetch new data
+  // using the superclass method loadData()
+  fetchNewData() {
+    // TODO
+  }
 
   // Built-ins
 

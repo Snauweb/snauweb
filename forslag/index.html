@@ -57,8 +57,7 @@
 	<!-- <toggle-button> er implementert i denne omgang -->
 	<!-- <text-search> under arbeid -->
 	<!-- <filter-control> jobbes med-->
-	<forslag-filter-list class="forslagsliste">
-	  <fetch-elem src="/forslag"></fetch-elem>
+	<forslag-filter-list src="/forslag" class="forslagsliste">
 	  <filter-control class="filter-list-controll">
 	    <div class="filter-row-top">
 	      <text-search class="søkefelt filter-elem">
@@ -121,46 +120,47 @@
 	      </ul>
 	    </div>
 	  </filter-control>
-
-	  <edit-list
-	    src="/forslag"
-	    class="forslagsliste-innhold filter-list-content">
-	    <ol>
-	      <li class="innlegg-wrap status-finished">
-		<div class="side-bar"></div>
-		<div class="innlegg-content">
-		  <div class="innlegg-info">
-		    <div class="innlegg-overskrift">
-		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
-		      <span class="innlegg-kategori">(Ferdig)</span>
+	  
+	  <data-list
+	    class="forslagsliste-innhold filter-list-content"
+	    >
+	      <template class="dataListElem">
+		<li class="innlegg-wrap status-finished">
+		  <div class="side-bar"></div>
+		  <div class="innlegg-content">
+		    <div class="innlegg-info">
+		      <div class="innlegg-overskrift">
+			<h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
+			<span class="innlegg-kategori">(Ferdig)</span>
+		      </div>
+		      <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
 		    </div>
-		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
+		    <div class="innlegg-tekst">
+		      <p>
+			Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
+		      </p>
+		    </div>
+		    <div class="innlegg-footer">
+		      <ul class="reaksjon-liste">
+			<li>
+			  <reaction-elem reactionName="bra">
+			    <toggle-button>
+			      <template>
+				<img stateName="selected"
+				     src="../assets/reaksjon/bra_markert.png"></img>
+				<img stateName="unselected"
+				     src="../assets/reaksjon/bra_umarkert.png"></img>
+			      </template>
+			    </toggle-button>
+			    <span class="reactionCounter">10</span>
+			  </reaction-elem>
+			<li>
+		      </ul>
+		    </div>
 		  </div>
-		  <div class="innlegg-tekst">
-		    <p>
-		      Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
-		    </p>
-		  </div>
-		  <div class="innlegg-footer">
-		    <ul class="reaksjon-liste">
-		      <li>
-			<reaction-elem reactionName="bra">
-			  <toggle-button>
-			    <template>
-			      <img stateName="selected"
-				   src="../assets/reaksjon/bra_markert.png"></img>
-			      <img stateName="unselected"
-				   src="../assets/reaksjon/bra_umarkert.png"></img>
-			    </template>
-			  </toggle-button>
-			  <span class="reactionCounter">10</span>
-			</reaction-elem>
-		      <li>
-		    </ul>
-		  </div>
-		</div>
-	      </li>
-
+		</li>
+	      <template class="listElemTemplate">
+<!--
 	      <li class="innlegg-wrap status-new">
 		<div class="side-bar"></div>
 		<div class="innlegg-content">
@@ -270,7 +270,7 @@
 	    </ol>
 	  </edit-list>
 	</forslag-filter-list>
-
+-->
 	<!--<fetch-list src="/forslag" class="forslagsliste">
 	  <template class="list-item">
 	    <li class="forslag-wrap">

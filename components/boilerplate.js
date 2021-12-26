@@ -1,6 +1,15 @@
 export { CustomComponent }
 
-class CustomComponent extends HTMLElement {
+/*
+ * Template for a new custom component. Contains all lifecylce methods,
+ * declaration of attributes, and some placeholder methods for common use patterns.
+ * To use, copy this file, replace all occurences of CustomComponent with your own 
+ * (capitalised) name, and "custom-component" with a lower case, hyphen separated
+ * name. This is the name used for the HTML tag.
+ * More documentation at: https://developer.mozilla.org/en-US/docs/Web/Web_Components
+ */
+
+class CustomComponent extends HTMLElement { // Might extend other components as well
 
   static attributeNames = ['attribute1', 'attribute2'];
   
@@ -29,5 +38,5 @@ class CustomComponent extends HTMLElement {
 }
 
 
-customElements.define('custom-element', CustomElement);
+customElements.define('custom-component', CustomComponent);
 

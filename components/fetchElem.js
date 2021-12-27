@@ -16,15 +16,15 @@ export { FetchElem }
  */
 class FetchElem extends HTMLElement {
 
-  static attributeNames = ['src'];
+  static attributeNames = ['src', 'params', 'method'];
   
   constructor() {
     super();
-    this.setupState();
+    this.setupFetchElemState();
   }
 
   // Common patterns
-  setupState() {
+  setupFetchElemState() {
     this.data = null;
     this.status = "init";
   }
@@ -38,7 +38,21 @@ class FetchElem extends HTMLElement {
       this.setAttribute("src", "");
     }
 
-    apiFetch(src)
+    let params = this.getAttribute("params");
+    if(params === null) {
+      params = ""; // null is interpreted as ""
+      this.setAttribute("params", "");
+    }
+
+    let method = this.getAttribute("method");
+    if(method === null) {
+      method = "GET"; // null is interpreted as ""
+      this.setAttribute("method", "GET");
+    }
+
+    let apiFetchParams = {method: method, credentials: 'include'}
+    
+    apiFetch(src+"?"+params, apiFetchParams)
       .then(response => {
 	let status = response.status;
 	if(parseInt(status) >= 400) {

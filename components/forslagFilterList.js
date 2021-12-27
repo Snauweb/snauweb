@@ -4,39 +4,49 @@ import { FetchElem } from "./fetchElem.js"
 /*
 * Wrapper component for full forslag filter list.
 * Handles data relating to the forslag list.
-* Extends fetchElem for basic fetching capabilities
+* Extends fetchElem for basic apiFetch wrapped fetch API use
 */
 class ForslagFilterList extends FetchElem {
-
-  static attributeNames = [];
   
   constructor() {
     super();
     this.setupDOM();
+    this.setupListeners();
+    this.setupState();
   }
 
   // **** SETUP ****
   // Initialise DOM elements needed for rendering
   setupDOM(){
-    this.dataListElem = this.querySelector('data-list');
+    this.forslagListElem = this.querySelector('forslag-list');
     this.filterControlElem = this.querySelector('filter-control');
-    this.listWrapperElem = document.createElement('ol');
-
   }
   
   // Setup correct inital state (can also be used for reset)
-  // remember to call method of superclass first, if this is a function overwrite
   setupState() {
-    super.setupState();
     this.fetchParams = ""; // The parameters passed to the get-request
+    this.filterData = null; // The data for the list
+    this.fetchNewData();
+  }
+
+  // We must listen for when data is loaded
+  setupListeners() {
+    this.addEventListener('stateChange', (e) => {
+      this.filterData = this.data; // Might need to do something more here
+      this.render() //When data has arrived, render it
+    })
   }
   
-  render(){} // Create DOM representation based on internal state
+  // Main job is to pass new data to forslag-list
+  render(){
+    // Remember that the data object must be stringified
+    this.forslagListElem.setAttribute("data", JSON.stringify(this.filterData));
+  } 
 
-
+  
   // **** FILTER AND DATA FETCH ****
-  // Read state of the filter controller.
-  // Use it to construct a new parameter string
+  // Read state of the filter controller. Use it to construct new search params
+
   updateFetchParams() {
     // TODO
   }
@@ -44,20 +54,19 @@ class ForslagFilterList extends FetchElem {
   // Use the src attribute + this.fetchParams to fetch new data
   // using the superclass method loadData()
   fetchNewData() {
-    // TODO
+    this.loadData() // loads into data based on src, params and method
   }
 
   // Built-ins
 
-  // Returns a list of names of attributes
-  // that trigger attributeChangedCallback on change
-  static get observedAttributes() { return ForslagFilterList.attributeNames; }
   
   // Lifecycle
   connectedCallback() {}
   disconnectedCallback() {}
   adoptedCallback() {}
-  attributeChangedCallback(name, oldValue, newValue) {}
+  attributeChangedCallback(name, oldValue, newValue) {
+    super.attributeChangedCallback(name, oldValue, newValue);
+  }
   
 }
 

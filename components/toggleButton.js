@@ -115,12 +115,25 @@ class ToggleButton extends HTMLElement {
     if(this.debounceActive)
       return;
 
-    this.debounceActive = true;
-    setTimeout(
-      ()=>{this.debounceActive = false;},
-      this.getAttribute("debounce")
-    );
-    
+    // Debounce handling, if enabled
+    if(this.hasAttribute("debounce") &&
+       parseInt(this.getAttribute("debounce")) > 0) {
+      this.debounceActive = true;
+      this.wrapperElem.setAttribute("disabled", "");
+      this.wrapperElem.style.cursor = "wait";
+      this.wrapperElem.style.opacity = "0.4";
+
+      // Callback to release debounce lock
+      setTimeout(
+	()=>{
+	  this.debounceActive = false;
+	  this.wrapperElem.removeAttribute("disabled");
+	  this.wrapperElem.style.cursor = "pointer";
+	  this.wrapperElem.style.opacity = "1";
+	},
+	this.getAttribute("debounce")
+      );
+    }
     let curState = parseInt(this.getAttribute('state'));
     this.prevState = curState;
     let newState = curState + 1;

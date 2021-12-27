@@ -72,7 +72,7 @@
 		  <option value="dato">sendt inn</option>
 		  <option value="stemmer">stemmer</option>
 		</select>
-		<toggle-button state="0">
+		<toggle-button state="0" debounce="250">
 		  <template>
 		    <span stateName="up"   class="toggle button-up">&#129045</span>
 		    <span stateName="down" class="toggle button-down">&#129047</span>
@@ -83,7 +83,10 @@
 	    <div>
 	      <ul class="status-filter-button-row">
 		<li>
-		  <toggle-button class="filter-elem" filterName="toggleNew">
+		  <toggle-button
+		    debounce="250"
+		    class="filter-elem"
+		    filterName="toggleNew">
 		    <template>
 		      <div stateName="checked" class="toggle new">
 			<span>Ny</span><span class="checkbox">&#10003</span>
@@ -95,7 +98,9 @@
 		  </toggle-button>
 		</li>
 		<li>
-		  <toggle-button class="filter-elem" filterName="toggleWorking">
+		  <toggle-button debounce="250"
+				 class="filter-elem"
+				 filterName="toggleWorking">
 		    <template>
 		      <div stateName="checked" class="toggle working">
 			<span>Jobbes med</span><span class="checkbox">&#10003</span>
@@ -107,7 +112,9 @@
 		  </toggle-button>
 		</li>
 		<li>
-		  <toggle-button class="filter-elem" filterName="toggleFinished">
+		  <toggle-button debounce="250"
+				 class="filter-elem"
+				 filterName="toggleFinished">
 		    <template>
 		      <div stateName="checked" class="toggle finished">
 			<span>Ferdig</span><span class="checkbox">&#10003</span>
@@ -149,7 +156,7 @@
 		      <ul class="reaksjon-liste">
 			<li>
 			  <reaction-elem elementID="0" reactionName="bra">
-			    <toggle-button debounce="2000">
+			    <toggle-button debounce="500">
 			      <template>
 				<img stateName="selected"
 				     src="../assets/reaksjon/bra_markert.png"></img>

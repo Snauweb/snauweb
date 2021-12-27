@@ -30,7 +30,7 @@ class ForslagList extends DataList {
 	}
 
 	// Set status styling if it is specified
-	if(key === "kategoriID") {
+	if(key === "statusid") {
 	  let forslagStatus = forslag[key];
 	  if(forslagStatus === 1) {
 	    curListItem.classList.add('status-new');

@@ -120,7 +120,6 @@ class ToggleButton extends HTMLElement {
        parseInt(this.getAttribute("debounce")) > 0) {
       this.debounceActive = true;
       this.wrapperElem.setAttribute("disabled", "");
-      this.wrapperElem.style.cursor = "wait";
       this.wrapperElem.style.opacity = "0.4";
 
       // Callback to release debounce lock
@@ -128,7 +127,6 @@ class ToggleButton extends HTMLElement {
 	()=>{
 	  this.debounceActive = false;
 	  this.wrapperElem.removeAttribute("disabled");
-	  this.wrapperElem.style.cursor = "pointer";
 	  this.wrapperElem.style.opacity = "1";
 	},
 	this.getAttribute("debounce")

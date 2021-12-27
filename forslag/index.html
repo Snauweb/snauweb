@@ -55,9 +55,6 @@
 	
 	<h2> Innsendte forslag </h2>
 	
-	<!-- <toggle-button> er implementert i denne omgang -->
-	<!-- <text-search> under arbeid -->
-	<!-- <filter-control> jobbes med-->
 	<forslag-filter-list src="/forslag" class="forslagsliste">
 	  <filter-control class="filter-list-controll">
 	    <div class="filter-row-top">
@@ -71,6 +68,7 @@
 		<select>
 		  <option value="dato">sendt inn</option>
 		  <option value="stemmer">stemmer</option>
+		  <option value="kategori">kategori</option>
 		</select>
 		<toggle-button state="0" debounce="250">
 		  <template>
@@ -132,182 +130,46 @@
 	  <forslag-list
 	    class="forslagsliste-innhold filter-list-content"
 	    data='[{
-"tittel": "En ny tittel!", 
-"kategori": "(jobbes med)", 
-"kategoriID" : 2,
-"forslag" : "Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver \"klarinett\" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike"
-}]'
+		  "tittel": "Laster inn innlegg...", 
+		  "forslag" : "laster..."
+		  }]'
 	    >
-	      <template class="dataListElem">
-		<li class="innlegg-wrap status-new">
-		  <aside class="side-bar"></aside>
-		  <div class="innlegg-forslag">
-		    <div class="innlegg-info">
-		      <div class="innlegg-overskrift">
-			<h3 class="tittel"></h3>
-			<span class="innlegg-kategori kategori"></span>
-		      </div>
-		      <span class="innlegg-timestamp lagt_til"></span>
+	    <template class="dataListElem">
+	      <li class="innlegg-wrap">
+		<aside class=""></aside>
+		<aside class="side-bar"></aside>
+		<div class="innlegg-forslag">
+		  <div class="innlegg-info">
+		    <div class="innlegg-overskrift">
+		      <h3 class="tittel"></h3>
+		      <span class="innlegg-kategori statusbeskrivelse"></span>
 		    </div>
-		    <div class="innlegg-tekst">
-		      <p class="forslag"></p>
-		    </div>
-		    <div class="innlegg-footer">
-		      <ul class="reaksjon-liste">
-			<li>
-			  <reaction-elem elementID="0" reactionName="bra">
-			    <toggle-button debounce="500">
-			      <template>
-				<img stateName="selected"
-				     src="../assets/reaksjon/bra_markert.png"></img>
-				<img stateName="unselected"
-				     src="../assets/reaksjon/bra_umarkert.png"></img>
-			      </template>
-			    </toggle-button>
-			    <span class="reactionCounter">10</span>
-			  </reaction-elem>
-			<li>
-		      </ul>
-		    </div>
+		    <span class="innlegg-timestamp lagt_til"></span>
 		  </div>
-		</li>
-	      </template>
+		  <div class="innlegg-tekst">
+		    <p class="forslag"></p>
+		  </div>
+		  <div class="innlegg-footer">
+		    <ul class="reaksjon-liste">
+		      <li>
+			<reaction-elem elementID="0" reactionName="bra">
+			  <toggle-button debounce="500">
+			    <template>
+			      <img stateName="selected"
+				   src="../assets/reaksjon/bra_markert.png"></img>
+			      <img stateName="unselected"
+				   src="../assets/reaksjon/bra_umarkert.png"></img>
+			    </template>
+			  </toggle-button>
+			  <span class="reactionCounter"></span>
+			</reaction-elem>
+		      <li>
+		    </ul>
+		  </div>
+		</div>
+	      </li>
+	    </template>
 	  </forslag-list>
-<!--
-	      <li class="innlegg-wrap status-new">
-		<div class="side-bar"></div>
-		<div class="innlegg-content">
-		  <div class="innlegg-info">
-		    <div class="innlegg-overskrift">
-		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
-		      <span class="innlegg-kategori">(Ny)</span>
-		    </div>
-		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
-		  </div>
-		  <div class="innlegg-tekst">
-		    <p>
-		      Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
-		    </p>
-		  </div>
-		  <div class="innlegg-footer">
-		    <ul class="reaksjon-liste">
-		      <li>
-			<li>
-			<reaction-elem>
-			  <toggle-button>
-			    <template>
-			      <img stateName="selected"
-				   src="../assets/reaksjon/bra_markert.png"></img>
-			      <img stateName="unselected"
-				   src="../assets/reaksjon/bra_umarkert.png"></img>
-			    </template>
-			  </toggle-button>
-			  <span class="reactionCounter">10</span>
-			</reaction-elem>
-		      <li>
-		    </ul>
-		  </div>
-		</div>
-	      </li>
-
-	      <li class="innlegg-wrap status-working">
-		<div class="side-bar"></div>
-		<div class="innlegg-content">
-		  <div class="innlegg-info">
-		    <div class="innlegg-overskrift">
-		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
-		      <span class="innlegg-kategori">(Jobbes med)</span>
-		    </div>
-		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
-		  </div>
-		  <div class="innlegg-tekst">
-		    <p>
-		      Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
-		    </p>
-		  </div>
-		  <div class="innlegg-footer">
-		    <ul class="reaksjon-liste">
-		      <li>
-			<reaction-elem>
-			  <toggle-button>
-			    <template>
-			      <img stateName="selected"
-				   src="../assets/reaksjon/bra_markert.png"></img>
-			      <img stateName="unselected"
-				   src="../assets/reaksjon/bra_umarkert.png"></img>
-			    </template>
-			  </toggle-button>
-			  <span class="reactionCounter">10</span>
-			</reaction-elem>
-		      <li>
-		    </ul>
-		  </div>
-		</div>
-	      </li>
-
-	      <li class="innlegg-wrap status-finished">
-		<div class="side-bar"></div>
-		<div class="innlegg-content">
-		  <div class="innlegg-info">
-		    <div class="innlegg-overskrift">
-		      <h3>Klarinett klarinett dette er en lang overskrift rett og slett</h3>
-		      <span class="innlegg-kategori">(Ferdig)</span>
-		    </div>
-		    <span class="innlegg-timestamp">2021-01-10 13:13:02</span>
-		  </div>
-		  <div class="innlegg-tekst">
-		    <p>
-		      Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike
-		    </p>
-		  </div>
-		  <div class="innlegg-footer">
-		    <ul class="reaksjon-liste">
-		      <li>
-			<reaction-elem>
-			  <toggle-button>
-			    <template>
-			      <img stateName="selected"
-				   src="../assets/reaksjon/bra_markert.png"></img>
-			      <img stateName="unselected"
-				   src="../assets/reaksjon/bra_umarkert.png"></img>
-			    </template>
-			  </toggle-button>
-			  <span class="reactionCounter">10</span>
-			</reaction-elem>
-		      <li>
-		    </ul>
-		  </div>
-		</div>
-	      </li>
-	      
-	    </ol>
-	  </edit-list>
-	</forslag-filter-list>
--->
-	<!--<fetch-list src="/forslag" class="forslagsliste">
-	  <template class="list-item">
-	    <li class="forslag-wrap">
-	      <div class="info-linje">
-		<h3 class="tittel"> Overskrft </h3>
-		<span class="lagt_til"> dato </span>
-	      </div>
-	      <p class="forslag">
-		Brødtekst
-	      </p>
-	    </li>
-	  </template>
-	  <template class="load-screen">
-	    <div class="load-screen-wrap">
-	      <p> Laster inn innsendte forslag... </p>
-	    </div>
-	  </template>
-
-	  <template class="background">
-	    <div class="list-background">
-	      
-	    </div>
-	  </template>
-	</fetch-list>-->
       </div>
     </div>
   </main>

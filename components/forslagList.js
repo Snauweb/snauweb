@@ -21,12 +21,20 @@ class ForslagList extends DataList {
       
       // Copy the list item template
       let curListItem = this.listElemWrap.cloneNode(true);
-
       for(let key in forslag) {
 	// Add the text content of the key to a matching node, if found
 	let matchingNode = curListItem.querySelector("." + key);
 	if(matchingNode !== null) {
-	  matchingNode.textContent = forslag[key];
+	  // Some string handeling when inserting statusbeskrivelse
+	  if(key === "statusbeskrivelse") {
+	    let firstLetter = forslag[key].charAt(0);
+	    let restLetters = forslag[key].slice(1);
+	    let newText = firstLetter.toUpperCase() + restLetters + ":";
+	    matchingNode.textContent = newText;
+	  }
+	  else {
+	    matchingNode.textContent = forslag[key];
+	  }
 	}
 
 	// Set status styling if it is specified

@@ -12,11 +12,11 @@ export { FetchElem }
  *
  * src is relative to api base address defined for apiFetch
  * state and data is accessed by getter functions
- * fetchState() returns state, fetchData returns data
+ * fetchState() returns state (loading, error etc), fetchData returns data
  */
 class FetchElem extends HTMLElement {
 
-  static attributeNames = ['src', 'params', 'method'];
+  static attributeNames = ['src', 'params', 'method', 'payload'];
   
   constructor() {
     super();
@@ -27,8 +27,8 @@ class FetchElem extends HTMLElement {
   setupFetchElemState() {
     this.data = null;
     this.status = "init";
-  }
-
+  } 
+  
   // Get fetchData from endpoint specified in attribute
   loadData() {
     this.status = "loading"
@@ -50,7 +50,23 @@ class FetchElem extends HTMLElement {
       this.setAttribute("method", "GET");
     }
 
-    let apiFetchParams = {method: method, credentials: 'include'}
+    let payload = this.getAttribute("payload");
+    if(payload === null) {
+      payload = "{}"; // null is interpreted as {} for the payload
+      this.setAttribute("payload", "{}");
+    }
+
+    let apiFetchParams = {};
+    if(method === "GET") {
+      apiFetchParams = {method: "GET", credentials: 'include'}
+    }
+    else if(method === "POST") {
+      apiFetchParams = {
+	method: "POST",
+	credentials: 'include',
+	body: payload
+      }
+    }
     
     apiFetch(src+"?"+params, apiFetchParams)
       .then(response => {
@@ -69,11 +85,27 @@ class FetchElem extends HTMLElement {
 	// that the data loading is complete
 	const fetchDataLoadedEvent = new CustomEvent("stateChange", {
 	  detail: {
-	    fetchStatus: this.status
+	    fetchStatus: this.status,
+	    method: this.getAttribute('method')
 	  }
 	});
 	this.dispatchEvent(fetchDataLoadedEvent);
-      });
+      })
+      .catch(error => {
+	if(error.name === "SyntaxError") {
+	  // If endpoint does not return data, set it to null
+	  this.data = null;
+	}
+	// Emit a stateChange event. Listening objects now know
+	// that the data loading is complete
+	const fetchDataLoadedEvent = new CustomEvent("stateChange", {
+	  detail: {
+	    fetchStatus: this.status,
+	    method: this.getAttribute('method')
+	  }
+	});
+	this.dispatchEvent(fetchDataLoadedEvent);
+      })
   }
   
   // Built-ins
@@ -88,7 +120,7 @@ class FetchElem extends HTMLElement {
   adoptedCallback() {}
 
   // No automatic data reload for change in src, use explict call to loadData
-  attributeChangedCallback(name, oldValue, newValue) {}
+    attributeChangedCallback(name, oldValue, newValue) {}
   
 }
 

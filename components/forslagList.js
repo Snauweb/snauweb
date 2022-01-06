@@ -3,6 +3,7 @@ import { DataList } from "./dataList.js"
 
 /*
  * Special version of data list for the forslag view
+ * Overwrites render()
  */
 
 class ForslagList extends DataList {
@@ -11,7 +12,9 @@ class ForslagList extends DataList {
     super();
   }
 
-  // Overwrite normal rendering to be able to set css class corresponding to status
+  // Overwrite normal rendering logic of DataList
+  // This is needed for custom styles and such based on data.
+  // Base DataList does only provide text content
   render(){
      // Copy old top level element (non-recursive, no children are included)
     let newListWrapper = this.listWrapperElem.cloneNode();
@@ -49,6 +52,24 @@ class ForslagList extends DataList {
 	  else if(forslagStatus === 3) {
 	    curListItem.classList.add('status-finished');
 	  }
+	}
+
+	// Initialise reaction counter by passing forslagid
+	if(key === "forslagid") {
+	  let curReactionElemHandle = curListItem.querySelector('reaction-elem');
+	  curReactionElemHandle.setAttribute('forslagid', forslag[key]);
+	}
+
+	// Set visual state of reaction counter
+	if(key === "num_reaksjoner") {
+	  console.log("Num reaksjoner!")
+	  let curReactionElemHandle = curListItem.querySelector('reaction-elem');
+	  curReactionElemHandle.setCount(forslag[key]);
+	}
+
+	if(key === "cur_user_reacted") {
+	  let curReactionElemHandle = curListItem.querySelector('reaction-elem');
+	  curReactionElemHandle.setToggle(Boolean(forslag[key]))
 	}
       }
       

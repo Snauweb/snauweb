@@ -98,7 +98,6 @@ class ToggleButton extends HTMLElement {
 
   // Create DOM representation based on internal state
   render(){
-
     let curState = Number.parseInt(this.getAttribute('state'));
     // If a DOM state is allready rendered, it must be removed
     if(this.prevState !== null) {
@@ -155,8 +154,7 @@ class ToggleButton extends HTMLElement {
 	}
       }
     });
-    
-    this.dispatchEvent(toggleEvent);    
+    this.dispatchEvent(toggleEvent);
   }
 
   // Utils
@@ -194,6 +192,7 @@ class ToggleButton extends HTMLElement {
 	}
 	else {
 	  this.setAttribute('state', newValue);
+	  this.prevState = oldValue;
 	}
       }
       this.render();

@@ -8,12 +8,15 @@ export { CustomComponent }
  * (capitalised) name, and "custom-component" with a lower case, hyphen separated
  * name. This is the name used for the HTML tag.
  * 
+ * Finally, include the file as a script in the HTML-document you
+ * want to use the component in.
+ *
  * More documentation at: https://developer.mozilla.org/en-US/docs/Web/Web_Components
  */
 
 class CustomComponent extends HTMLElement { // Might extend other components as well
 
-  // Replace these with the attributes you wish to give the element
+  // Replace these with the attributes you wish to listen to changes for
   static attributeNames = ['attribute1', 'attribute2'];
 
   // The constructor runs before the element is created and inserted into the DOM

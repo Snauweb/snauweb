@@ -9,13 +9,13 @@
   
   <script type="module" src="../components/fetchList.js"></script>
   <script type="module" src="../components/toggleButton.js"></script>
-  <script type="module" src="../components/filterControl.js"></script>
   <script type="module" src="../components/forslagFilterList.js"></script>
   <script type="module" src="../components/textSearch.js"></script>
   <script type="module" src="../components/fetchElem.js"></script>
   <script type="module" src="../components/forslagList.js"></script>
   <script type="module" src="../components/reactionElem.js"></script>
   <script type="module" src="../components/dropDownSelect.js"></script>
+  <script type="module" src="../components/filterControl.js"></script>
 
   <script type="module" src="forslag.js"></script>
 </head>
@@ -60,7 +60,7 @@
 	<forslag-filter-list src="/forslag" class="forslagsliste">
 	  <filter-control class="filter-list-controll">
 	    <div class="filter-row-top">
-	      <text-search class="søkefelt filter-elem" eager="false">
+	      <text-search class="søkefelt filter-elem" eager="false" filtername="tekstsøk">
 		<span>Søk i lista: </span>
 		<input type="text" class="search-field"></input>
 		<input type="button" class="search-submit" value="søk"></input>
@@ -68,7 +68,7 @@
 	      <div>
 		<drop-down-select
 		  class="filter-elem" filterName="sorterEtter"
-		  optionindex="0">
+		  state="1">
 		  <span>Sorter etter</span>
 		  <select>
 		    <option value="dato">sendt inn</option>

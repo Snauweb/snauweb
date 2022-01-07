@@ -38,6 +38,9 @@ class ForslagFilterList extends FetchElem {
 
     this.filterControlElem.addEventListener('stateChange', (e) => {
       console.log("new filter state", e.detail.newState)
+      // Update query url
+      // run new fetch
+      // call render with results
     })
   }
   

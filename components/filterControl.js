@@ -7,6 +7,10 @@ export { FilterControl }
  * in this.controlElems 
  * Listens to state change. On change, update own state and notify
  * any listeners to 'stateChange' events.
+ *
+ * For the inital configuration, all filter-elems MUST provide default state names
+ * in form of the "statevalue" attribute. These values need not be writable,
+ * but must be readable
  */
 
 class FilterControl extends HTMLElement {
@@ -22,10 +26,13 @@ class FilterControl extends HTMLElement {
   // Common patterns
   setupState() {
     this.controlElems = this.querySelectorAll('.filter-elem');
-    this.filterState = {};
+    this.filterState = [];
 
+    // Initalise filter state objects
     for(let i = 0; i < this.controlElems.length; i++) {
       let curElem = this.controlElems[i];
+      let curElemName = curElem.tagName.toLowerCase();
+      console.log(curElemName)
 
       let filterName = this.controlElems[i].getAttribute('filterName');
       if(filterName === null || filterName === "") {
@@ -40,15 +47,20 @@ class FilterControl extends HTMLElement {
       }
       catch (error) {} // We don't care about the error
 
+      if(curElemName === "drop-down-select") {
+	elemStateName = curElem.getAttribute('elemvalue')
+      }
+      
       this.filterState[i] = {
 	elemHandle: curElem,
 	filterName: filterName,
 	elemState: elemState,
 	elemStateName: elemStateName
-      };
+      }
     }
 
     console.log("Initial filter state after setup", this.filterState)
+    
   }
 
   // Listen to state change of all .filter-elem children
@@ -69,7 +81,8 @@ class FilterControl extends HTMLElement {
 	}
 
 	else if(elementName === "drop-down-select") {
-	  this.filterState[elemIndex].elemState = e.detail.newState;
+	  this.filterState[elemIndex].elemState = e.detail.index;
+	  this.filterState[elemIndex].elemStateName = e.detail.value;
 	}
 	
 	this.broadcastStateUpdate();

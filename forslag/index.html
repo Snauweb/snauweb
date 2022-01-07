@@ -59,10 +59,10 @@
 	<forslag-filter-list src="/forslag" class="forslagsliste">
 	  <filter-control class="filter-list-controll">
 	    <div class="filter-row-top">
-	      <text-search class="søkefelt filter-elem">
+	      <text-search class="søkefelt filter-elem" eager="false">
 		<span>Søk i lista: </span>
-		<input type="text"></input>
-		<input type="button" value="søk"></input>
+		<input type="text" class="search-field"></input>
+		<input type="button" class="search-submit" value="søk"></input>
 	      </text-search>
 	      <drop-down-select class="filter-elem" filterName="sorterEtter">
 		<span>Sorter etter</span>

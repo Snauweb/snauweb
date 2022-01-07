@@ -35,6 +35,10 @@ class ForslagFilterList extends FetchElem {
       this.filterData = this.data; // Might need to do something more here
       this.render() //When data has arrived, render it
     })
+
+    this.filterControlElem.addEventListener('stateChange', (e) => {
+      console.log("new filter state", e.detail.newState)
+    })
   }
   
   // Main job is to pass new data to forslag-list

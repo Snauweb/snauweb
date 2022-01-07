@@ -16,6 +16,8 @@ class TextSearch extends HTMLElement {
   constructor() {
     super();
     this.setupState();
+    this.setupDOM();
+    this.setupListeners();
   }
 
   // Common patterns
@@ -30,10 +32,42 @@ class TextSearch extends HTMLElement {
     else if (isEager === 'false') { // Just to be extra explicit about it 
       this.setAttribute('eager', 'false');
     }
-
-    // Look for the search field
   } 
-  setupDOM(){} // Initialise DOM elements needed for rendering
+
+  setupDOM(){
+    this.searchField = this.querySelector('.search-field');
+    this.searchSubmit = this.querySelector('.search-submit');
+  }
+
+  // Listen both to input and submit, use this.isEager to determine response
+  // We use () => () syntax for the listener functions, they "this" they capture
+  // is the objcet this.
+  setupListeners() {
+    // Search field brodcasts on any input event if the attribute "eager" is set to true
+    this.searchField.addEventListener('input', (e) => {
+      if(this.getAttribute('eager') === "true") {
+	this.broadcastStateChange()
+      }
+    });
+
+    // The submit button allways broadcasts an event
+    this.searchSubmit.addEventListener('click', (e) => {
+	this.broadcastStateChange()
+    });
+  }
+
+  broadcastStateChange() {
+    // First, the custom event
+    const stateChangeEvent = new CustomEvent("stateChange", {
+      detail: {
+	element: this,
+	newState: this.searchField.value
+      }
+    });
+
+    this.dispatchEvent(stateChangeEvent);
+  }
+  
   render(){} // Create DOM representation based on internal state
   update(){} // State update
 
@@ -53,7 +87,7 @@ class TextSearch extends HTMLElement {
     }
 
     if(name === 'eager') {
-
+      
     }
   }
   

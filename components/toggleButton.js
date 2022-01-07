@@ -191,7 +191,7 @@ class ToggleButton extends HTMLElement {
 	  this.setAttribute('state', '0');
 	}
 	else {
-	  this.setAttribute('state', newValue);
+	  this.setAttribute('state', newValue); // Hang on does this line make sense?
 	  this.prevState = oldValue;
 	}
       }

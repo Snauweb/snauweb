@@ -1,4 +1,12 @@
-export { isValidID }
+export { isValidID, hasClass }
+
+
+/* Check if a node has a class */
+function hasClass(node, className) {
+  let classList = node.classList
+  return classList.reduce((soFar, nextVal) => (soFar || nextVal === className), false);
+}
+
 
 /* 
  * An id must be an integer strictly greater than 0 

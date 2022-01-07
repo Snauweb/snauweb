@@ -54,8 +54,17 @@ class FilterControl extends HTMLElement {
     for(let elemIndex = 0; elemIndex < this.controlElems.length; elemIndex++) {
       let elem = this.controlElems[elemIndex];
       elem.addEventListener('stateChange', (e)=> {
-	this.filterState[elemIndex].elemState = e.detail.index;
-	this.filterState[elemIndex].elemStateName = e.detail.name;
+	let elementName = e.detail.element.tagName.toLowerCase();
+	
+	if(elementName === "toggle-button") {
+	  this.filterState[elemIndex].elemState = e.detail.index;
+	  this.filterState[elemIndex].elemStateName = e.detail.name;
+	}
+
+	else if(elementName === "text-search") {
+	  this.filterState[elemIndex].elemState = e.detail.newState;
+	}
+	
 	this.broadcastStateUpdate();
       });
     }
@@ -63,6 +72,7 @@ class FilterControl extends HTMLElement {
   setupDOM(){} // Initialise DOM elements needed for rendering
   render(){} // Create DOM representation based on internal state
 
+  
   // Notify any stateChange listeners
   broadcastStateUpdate() {
     const updateEvent = new CustomEvent("stateChange", {

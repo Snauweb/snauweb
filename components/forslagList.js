@@ -62,7 +62,6 @@ class ForslagList extends DataList {
 
 	// Set visual state of reaction counter
 	if(key === "num_reaksjoner") {
-	  console.log("Num reaksjoner!")
 	  let curReactionElemHandle = curListItem.querySelector('reaction-elem');
 	  curReactionElemHandle.setCount(forslag[key]);
 	}

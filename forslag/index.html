@@ -15,6 +15,7 @@
   <script type="module" src="../components/fetchElem.js"></script>
   <script type="module" src="../components/forslagList.js"></script>
   <script type="module" src="../components/reactionElem.js"></script>
+  <script type="module" src="../components/dropDownSelect.js"></script>
 
   <script type="module" src="forslag.js"></script>
 </head>
@@ -64,20 +65,27 @@
 		<input type="text" class="search-field"></input>
 		<input type="button" class="search-submit" value="søk"></input>
 	      </text-search>
-	      <drop-down-select class="filter-elem" filterName="sorterEtter">
-		<span>Sorter etter</span>
-		<select>
-		  <option value="dato">sendt inn</option>
-		  <option value="stemmer">stemmer</option>
-		  <option value="kategori">kategori</option>
-		</select>
-		<toggle-button state="0" debounce="250">
+	      <div>
+		<drop-down-select
+		  class="filter-elem" filterName="sorterEtter"
+		  optionindex="0">
+		  <span>Sorter etter</span>
+		  <select>
+		    <option value="dato">sendt inn</option>
+		    <option value="stemmer">stemmer</option>
+		    <option value="kategori">kategori</option>
+		  </select>
+		</drop-down-select>
+		<toggle-button
+		  state="1" debounce="250"
+		  class="filter-elem" filterName="sortOrder"
+		  >
 		  <template>
-		    <span stateName="up"   class="toggle button-up">&#129045</span>
-		    <span stateName="down" class="toggle button-down">&#129047</span>
+		    <span stateName="asc"   class="toggle button-up">&#129045</span>
+		    <span stateName="desc" class="toggle button-down">&#129047</span>
 		  </template>
 		</toggle-button>
-	      </drop-down-select>
+	      </div>
 	    </div>
 	    <div>
 	      <ul class="status-filter-button-row">

@@ -14,9 +14,14 @@ function hasClass(node, className) {
  * Valid ids return true, invalid (the things parseInt turns into NaN) return false
  */
 function isValidID(id) {
-  let intValue = parseInt(id);
+  let numberValue = Number(id)
 
-  if(isNaN(intValue) || intValue < 1) {
+  // Use number constructor, as parseInt silently truncates decimal numbers
+  if(!Number.isInteger(numberValue)) {
+    return false;
+  }
+
+  if(isNaN(numberValue) || numberValue < 1) {
     return false;
   }
 

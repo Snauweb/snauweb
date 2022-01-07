@@ -98,13 +98,16 @@ class ToggleButton extends HTMLElement {
 
   // Create DOM representation based on internal state
   render(){
+
     let curState = Number.parseInt(this.getAttribute('state'));
+    
     // If a DOM state is allready rendered, it must be removed
     if(this.prevState !== null) {
       this.wrapperElem.removeChild(this.DOMstates[this.prevState]);
     }
     
     this.wrapperElem.appendChild(this.DOMstates[curState]);
+    this.prevState = curState;
   } 
 
 
@@ -138,23 +141,9 @@ class ToggleButton extends HTMLElement {
     if(this.isStateValid(newState) == false) {
       newState = 0;
     }
-    
-    this.setAttribute('state', newState);
 
-    const toggleEvent = new CustomEvent("stateChange", {
-      detail: {
-	element: this,
-	newState: {
-	  index: newState,
-	  name: this.DOMstateNames[newState]
-	},
-	oldState: {
-	  index: curState,
-	  name: this.DOMstateNames[curState]
-	}
-      }
-    });
-    this.dispatchEvent(toggleEvent);
+    // Setting the attribute trigers the stateChange event
+    this.setAttribute('state', newState);
   }
 
   // Utils
@@ -173,6 +162,7 @@ class ToggleButton extends HTMLElement {
     return true;
 
   }
+
   
   // Built-ins
   // Returns a list of names of attributes
@@ -184,6 +174,8 @@ class ToggleButton extends HTMLElement {
   disconnectedCallback() {}
   adoptedCallback() {}
   // This calls render, so that any attribute change is imidiatly reflected in DOM
+  // oldValue does not seem to allways work when attrib is edited from web inspector
+  // In general, if you want to maintain DOM state values, buffer it internaly
   attributeChangedCallback(name, oldValue, newValue) {
     if(oldValue !== newValue) {
       if(name === 'state') {
@@ -191,8 +183,26 @@ class ToggleButton extends HTMLElement {
 	  this.setAttribute('state', '0');
 	}
 	else {
-	  this.setAttribute('state', newValue); // Hang on does this line make sense?
-	  this.prevState = oldValue;
+
+	  // Old value does not work if attrib is changed from inspector
+	  // This is a fix for that
+	  oldValue = this.prevState;
+	  
+	  const toggleEvent = new CustomEvent("stateChange", {
+	    detail: {
+	      element: this,
+	      newState: {
+		index: newValue,
+		name: this.DOMstateNames[newValue]
+	      },
+	      oldState: {
+		index: oldValue,
+		name: this.DOMstateNames[oldValue]
+	      }
+	    }
+	      });
+	  this.dispatchEvent(toggleEvent);
+
 	}
       }
       this.render();

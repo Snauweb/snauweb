@@ -15,7 +15,10 @@ class CustomComponent extends HTMLElement { // Might extend other components as 
 
   // Replace these with the attributes you wish to give the element
   static attributeNames = ['attribute1', 'attribute2'];
-  
+
+  // The constructor runs before the element is created and inserted into the DOM
+  // Use it for setup
+  // NB: super() MUST be called before anything else in the constructor
   constructor() {
     super();
   }

@@ -80,13 +80,18 @@ class ReactionElem extends FetchElem {
   setupListeners() {
     // If the button is pressed, a new 
     this.toggleButton.addEventListener('stateChange', (e) => {
+
+      let oldState = this.isReacted;
       
       // By the way we've set it up in forslag/index.html 0 is selected, 1 is unselected
       this.isReacted =
 	this.toggleButton.getAttribute('state') === '0' ?
 	this.isReacted = true : this.isReacted = false
-      
-      if(this.payloadIsValid === true) {
+
+
+      // This state change might mean that a new reaction must be sent.
+      // Only update if the state actually changed as a result
+      if(oldState !== this.isReacted && this.payloadIsValid === true) {
 	this.react() // use loadData to send a POST request
       }
     });

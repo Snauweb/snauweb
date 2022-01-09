@@ -96,7 +96,7 @@ class ReactionElem extends FetchElem {
       }
     });
 
-    this.addEventListener('stateChange', (e) => {      
+    this.addEventListener('stateChange', (e) => {
       if(this.data !== null) {
 	
 	this.curCount = this.data.numReaksjoner;
@@ -181,6 +181,7 @@ class ReactionElem extends FetchElem {
 	}
       }
     }
+    this.render()
   }
   
 }

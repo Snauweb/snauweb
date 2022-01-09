@@ -33,6 +33,7 @@ class ForslagFilterList extends FetchElem {
 
   // We must listen for when data is loaded
   setupListeners() {
+
     this.addEventListener('stateChange', (e) => {
       console.log("New data just arrived", this.data)
       this.filterData = this.data; // Might need to do something more here

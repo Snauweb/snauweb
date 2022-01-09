@@ -93,7 +93,7 @@ function sendInnForslag(event) {
     }).then((response) => {
       response.json()
     }).then((data) => {
-      forslagsliste.update(); // not implemented, will make the page bug out
+      forslagsliste.fetchNewData();
     }).catch((error) => {
       console.error('apiFetch error:', error);
     });

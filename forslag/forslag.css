@@ -417,6 +417,11 @@ textarea {
 }
 
 
+/* By default, hide these controlls */
+.innlegg-wrap .innlegg-footer forslag-status-selection {
+    display: none;
+}
+
 .innlegg-wrap .innlegg-footer .reaksjon-liste {
     flex-grow: 1;
     display: flex;

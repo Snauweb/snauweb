@@ -164,6 +164,17 @@
 				   hidden src="/forslag" method="DELETE" params="">
 		      <button class="innlegg-slett">Slett forslag</button>
 		    </action-button>
+		    <forslag-status-selection class="status-selection">
+		      <input type="radio" name="forslag-status"
+			     value="Ny" id="forslag-status-selection-new">
+		      <label for="forslag-status-selection-new">Ny</label>
+		      <input type="radio" name="forslag-status"
+			     value="Jobbes med" id="forslag-status-selection-working">
+		      <label for="forslag-status-selection-working">Jobbes med</label>
+		      <input type="radio" name="forslag-status"
+			     value="Ferdig" id="forslag-status-selection-finished">
+		      <label for="forslag-status-selection-finished">Ferdig</label>
+		    </forslag-status-selection>
 		    <ul class="reaksjon-liste">
 		      <li>
 			<reaction-elem reaksjonstypeid="1" style="display: none">

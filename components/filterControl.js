@@ -33,7 +33,6 @@ class FilterControl extends HTMLElement {
     for(let i = 0; i < this.controlElems.length; i++) {
       let curElem = this.controlElems[i];
       let curElemName = curElem.tagName.toLowerCase();
-      console.log(curElemName)
 
       let filterName = this.controlElems[i].getAttribute('filterName');
       if(filterName === null || filterName === "") {
@@ -59,9 +58,6 @@ class FilterControl extends HTMLElement {
 	elemStateName: elemStateName
       }
     }
-
-    console.log("Initial filter state after setup", this.filterState)
-    
   }
 
   // Listen to state change of all .filter-elem children
@@ -72,7 +68,6 @@ class FilterControl extends HTMLElement {
 	let elementName = e.detail.element.tagName.toLowerCase();
 	
 	if(elementName === "toggle-button") {
-	  console.log(e.detail)
 	  this.filterState[elemIndex].elemState = e.detail.newState.index;
 	  this.filterState[elemIndex].elemStateName = e.detail.newState.name;
 	}

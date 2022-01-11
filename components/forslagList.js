@@ -18,7 +18,7 @@ class ForslagList extends DataList {
   render(){
      // Copy old top level element (non-recursive, no children are included)
     let newListWrapper = this.listWrapperElem.cloneNode();
-    
+
     // iterate over all displayData, fill templates where class and key match
     for(let forslag of this.displayData) {
       
@@ -60,9 +60,10 @@ class ForslagList extends DataList {
 	  curReactionElemHandle.setAttribute('forslagid', forslag[key]);
 	}
 
-	// Set visual state of reaction counter
+	// Set visual state of reaction counter. Also, make it visible
 	if(key === "num_reaksjoner") {
 	  let curReactionElemHandle = curListItem.querySelector('reaction-elem');
+	  curReactionElemHandle.style.display = "flex";
 	  curReactionElemHandle.setCount(forslag[key]);
 	}
 
@@ -72,12 +73,20 @@ class ForslagList extends DataList {
 	}
 
 
-	// Setup action button and show it if 
+	// Setup action button and show it if the current user has delete rights
 	if(key === "cur_user_deleter") {
 	  let curActionButton = curListItem.querySelector('action-button.delete-forslag')
-	  console.log("cur user is deleter?", forslag[key])
 	  if(forslag[key] === true) {
 	    curActionButton.setAttribute("params", "id="+forslag["forslagid"])
+	    curActionButton.addEventListener("actionClick", (e)=>{
+	      const stateChangeEvent = new CustomEvent("stateChange", {
+		detail: {
+		  action: "delete forslag",
+		  id: forslag["forslagid"]
+		}
+	      });
+	      this.dispatchEvent(stateChangeEvent);
+	    });
 	    curActionButton.removeAttribute('hidden');
 	  }
 	  else {

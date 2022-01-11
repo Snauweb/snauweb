@@ -72,7 +72,7 @@ class ReactionElem extends FetchElem {
   }
   
   setupDOM(){
-    this.reactionCounter = this.querySelector('.reactionCounter');
+    this.reactionCounter = this.querySelector('.reaction-counter');
     this.toggleButton = this.querySelector('toggle-button');
   }
 
@@ -101,9 +101,6 @@ class ReactionElem extends FetchElem {
 	
 	this.curCount = this.data.numReaksjoner;
 	this.render();
-      }
-      else {
-	console.log("this.data is null!")
       }
     });
 

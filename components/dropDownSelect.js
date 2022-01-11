@@ -26,7 +26,6 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
     // Ensure that the stateIndex is consistent.
     // If it is set to a value, the attribute changed callback will ensure consistency
     if(!this.hasAttribute("state")) {
-      console.log("setting option index to 0")
       this.setAttribute("state", "0") // Default value 0
     }
   }

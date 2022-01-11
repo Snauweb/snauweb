@@ -29,28 +29,53 @@ class ForslagFilterList extends FetchElem {
     this.fetchParams = ""; // The parameters passed to the get-request
     this.filterData = null; // The data for the list
     this.queryParams = ""; // Easisest to generate new in full every request
+
+    this.loadMessageData = [{tittel: "Laster forslag..."}];
+    this.noDataMessageData =
+      [{tittel: "Fant ingen forslag som passet søkekriteriene"}];
+
+    // When loads are stacked, do not display result before all are done
+    this.waitingLoads = 0;
   }
 
   // We must listen for when data is loaded
   setupListeners() {
 
     this.addEventListener('stateChange', (e) => {
-      console.log("New data just arrived", this.data)
-      this.filterData = this.data; // Might need to do something more here
-      this.render() //When data has arrived, render it
+      this.waitingLoads -= 1;
+      // Only render if this is the final waiting load
+      if(this.waitingLoads == 0) {
+	this.filterData = this.data;
+	this.render() //When data has arrived, render it
+      }
+    });
+
+    // Show loading message while waiting
+    this.addEventListener('loadStart', (e) => {
+      this.waitingLoads += 1;
+      this.forslagListElem.setAttribute('data', JSON.stringify(this.loadMessageData));
     })
 
     this.filterControlElem.addEventListener('stateChange', (e) => {
-      console.log("new filter state", e.detail.newState)
       this.filterState = e.detail.newState;
       this.updateQueryParams();
       this.updateFetchParams();
       this.fetchNewData();
-    })
+    });
+
+    this.forslagListElem.addEventListener('stateChange', (e) => {
+      this.fetchNewData();
+    });
   }
   
   // Main job is to pass new data to forslag-list
   render(){
+    // No data should show a "no data"-message
+    if(this.filterData.length === 0) {
+      this.forslagListElem.setAttribute("data", JSON.stringify(this.noDataMessageData));
+      return;
+    }
+    
     // Remember that the data object must be stringified
     this.forslagListElem.setAttribute("data", JSON.stringify(this.filterData));
   } 
@@ -71,11 +96,8 @@ class ForslagFilterList extends FetchElem {
       let curFilter = this.filterState[i];
       let curFilterName = curFilter.filterName;
 
-      console.log(curFilter)
-
       if(curFilterName === "tekstsøk") {
 	let searchString = curFilter.elemState;
-	console.log("new search string", searchString)
 	// Search string might be empty. In which case, we don't use it
 	if(searchString !== null && searchString !== "") {
 	  newQueryParams += ("sok=" + searchString + "&")
@@ -133,7 +155,6 @@ class ForslagFilterList extends FetchElem {
   // Use the src attribute + this.fetchParams to fetch new data
   // using the superclass method loadData()
   fetchNewData() {
-    console.log("Fetching new data with following parameters", this.getAttribute('params'))
     this.loadData() // loads into data based on src, params and method
   }
 

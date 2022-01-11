@@ -26,12 +26,14 @@ class ActionButton extends FetchElem {
   // in this method, to make it easier to see what variables exist at a glance
   setupState() {
     this.buttonChild = this.querySelector('button');
-    console.log("setting up action-button with button", this.buttonChild);
   }
 
   setupListerners() {
     this.buttonChild.addEventListener('click', (e) => {
       this.loadData();
+
+      const clickEvent = new CustomEvent("actionClick")
+      this.dispatchEvent(clickEvent); 
     });
   }
   

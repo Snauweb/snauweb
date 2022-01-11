@@ -7,12 +7,14 @@ export { FetchElem }
  * Be used as base class for other data driven components 
  * Only performs data load, no visuals.
  * Object properties:
- * state = init | loading | loaded | error
+ * status = init | loading | loaded | error
  * data = null | {...}
  *
  * src is relative to api base address defined for apiFetch
  * state and data is accessed by getter functions
  * fetchState() returns state (loading, error etc), fetchData returns data
+ * 
+ * emits a loadStart event when loading begins, and a stateChange event when data is loaded
  */
 class FetchElem extends HTMLElement {
 
@@ -32,6 +34,10 @@ class FetchElem extends HTMLElement {
   // Get fetchData from endpoint specified in attribute
   loadData() {
     this.status = "loading"
+    // Signal to any listeners that load has started
+    const fetchDataLoadingEvent = new CustomEvent("loadStart");
+    this.dispatchEvent(fetchDataLoadingEvent);
+    
     let src = this.getAttribute("src");
     if(src === null) {
       src = ""; // null is interpreted as ""
@@ -55,8 +61,6 @@ class FetchElem extends HTMLElement {
       payload = "{}"; // null is interpreted as {} for the payload
       this.setAttribute("payload", "{}");
     }
-
-    console.log("Performing fetch from", src, "with method", method, "params", params)
 
     let apiFetchParams = {};
     if(method === "GET") {

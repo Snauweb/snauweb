@@ -13,7 +13,7 @@ class ForslagFilterList extends FetchElem {
     this.setupDOM();
     this.setupListeners();
     this.setupState();
-    this.fetchNewData();
+    //this.fetchNewData(); no data fetch before filters are set up
   }
 
   // **** SETUP ****

@@ -70,6 +70,20 @@ class ForslagList extends DataList {
 	  let curReactionElemHandle = curListItem.querySelector('reaction-elem');
 	  curReactionElemHandle.setToggle(Boolean(forslag[key]))
 	}
+
+
+	// Setup action button and show it if 
+	if(key === "cur_user_deleter") {
+	  let curActionButton = curListItem.querySelector('action-button.delete-forslag')
+	  console.log("cur user is deleter?", forslag[key])
+	  if(forslag[key] === true) {
+	    curActionButton.setAttribute("params", "id="+forslag["forslagid"])
+	    curActionButton.removeAttribute('hidden');
+	  }
+	  else {
+	    curActionButton.setAttribute('hidden', true);
+	  }
+	}
       }
       
       newListWrapper.appendChild(curListItem);

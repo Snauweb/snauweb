@@ -21,6 +21,7 @@ class FilterControl extends HTMLElement {
     super();
     this.setupState();
     this.setupCallbacks();
+    this.broadcastStateUpdate();
   }
 
   // Common patterns

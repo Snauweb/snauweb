@@ -16,6 +16,7 @@
   <script type="module" src="../components/reactionElem.js"></script>
   <script type="module" src="../components/dropDownSelect.js"></script>
   <script type="module" src="../components/filterControl.js"></script>
+  <script type="module" src="../components/actionButton.js"></script>
 
   <script type="module" src="forslag.js"></script>
 </head>
@@ -68,7 +69,7 @@
 	      <div>
 		<drop-down-select
 		  class="filter-elem" filterName="sorterEtter"
-		  state="1">
+		  state="0">
 		  <span>Sorter etter</span>
 		  <select>
 		    <option value="dato">dato</option>
@@ -121,7 +122,8 @@
 		<li>
 		  <toggle-button debounce="250"
 				 class="filter-elem"
-				 filterName="toggleFinished">
+				 filterName="toggleFinished"
+				 state="1">
 		    <template>
 		      <div stateName="checked" class="toggle finished">
 			<span>Ferdig</span><span class="checkbox">&#10003</span>
@@ -158,6 +160,10 @@
 		    <p class="forslag"></p>
 		  </div>
 		  <div class="innlegg-footer">
+		    <action-button class="delete-forslag"
+				   hidden src="/forslag" method="DELETE" params="">
+		      <button class="innlegg-slett">Slett forslag</button>
+		    </action-button>
 		    <ul class="reaksjon-liste">
 		      <li>
 			<reaction-elem reaksjonstypeid="1">

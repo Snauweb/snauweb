@@ -56,6 +56,8 @@ class FetchElem extends HTMLElement {
       this.setAttribute("payload", "{}");
     }
 
+    console.log("Performing fetch from", src, "with method", method, "params", params)
+
     let apiFetchParams = {};
     if(method === "GET") {
       apiFetchParams = {method: "GET", credentials: 'include'}
@@ -66,6 +68,9 @@ class FetchElem extends HTMLElement {
 	credentials: 'include',
 	body: payload
       }
+    }
+    else if(method === "DELETE")  {
+      apiFetchParams = {method: "DELETE", credentials: 'include'}
     }
     
     apiFetch(src+"?"+params, apiFetchParams)

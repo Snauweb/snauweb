@@ -17,6 +17,7 @@
   <script type="module" src="../components/dropDownSelect.js"></script>
   <script type="module" src="../components/filterControl.js"></script>
   <script type="module" src="../components/actionButton.js"></script>
+  <script type="module" src="../components/forslagStatusSelection.js"></script>
 
   <script type="module" src="forslag.js"></script>
 </head>
@@ -164,14 +165,18 @@
 				   hidden src="/forslag" method="DELETE" params="">
 		      <button class="innlegg-slett">Slett forslag</button>
 		    </action-button>
+		    <!-- 
+			 note that the radio buttons are not linked by the property "name". 
+			 Linking them makes it hard to controll a default state
+		      -->
 		    <forslag-status-selection class="status-selection">
-		      <input type="radio" name="forslag-status"
+		      <input type="radio" 
 			     value="Ny" id="forslag-status-selection-new">
 		      <label for="forslag-status-selection-new">Ny</label>
-		      <input type="radio" name="forslag-status"
+		      <input type="radio" 
 			     value="Jobbes med" id="forslag-status-selection-working">
 		      <label for="forslag-status-selection-working">Jobbes med</label>
-		      <input type="radio" name="forslag-status"
+		      <input type="radio" 
 			     value="Ferdig" id="forslag-status-selection-finished">
 		      <label for="forslag-status-selection-finished">Ferdig</label>
 		    </forslag-status-selection>

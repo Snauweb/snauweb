@@ -56,6 +56,7 @@ class ForslagFilterList extends FetchElem {
       this.forslagListElem.setAttribute('data', JSON.stringify(this.loadMessageData));
     })
 
+    // Update query and do new fetch when the filter controll element changes
     this.filterControlElem.addEventListener('stateChange', (e) => {
       this.filterState = e.detail.newState;
       this.updateQueryParams();
@@ -63,6 +64,8 @@ class ForslagFilterList extends FetchElem {
       this.fetchNewData();
     });
 
+    // If the list element reports some change, like a deletion or status change,
+    // perform a new fetch
     this.forslagListElem.addEventListener('stateChange', (e) => {
       this.fetchNewData();
     });

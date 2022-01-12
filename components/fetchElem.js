@@ -74,7 +74,18 @@ class FetchElem extends HTMLElement {
       }
     }
     else if(method === "DELETE")  {
-      apiFetchParams = {method: "DELETE", credentials: 'include'}
+      apiFetchParams = {method: "DELETE", credentials: 'include'};
+    }
+    else if(method === "PATCH") {
+      apiFetchParams = {
+	method: "PATCH",
+	credentials: 'include',
+	body: payload,
+	headers: {
+	  'Content-Length': payload.length,
+	  'Content-Type': 'application/json'
+	}
+      };
     }
     
     apiFetch(src+"?"+params, apiFetchParams)

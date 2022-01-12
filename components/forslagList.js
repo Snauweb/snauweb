@@ -93,6 +93,39 @@ class ForslagList extends DataList {
 	    curActionButton.setAttribute('hidden', true);
 	  }
 	}
+
+	// Set up and display the forslag status radio buttons,
+	// if the current user has the right
+	if(key === "cur_user_editor") {
+	  let forslagStatusSelect =
+	    curListItem.querySelector('forslag-status-selection');
+
+	  if(forslag["cur_user_editor"] === true) {
+	    let curForslagStatus = forslag["statusid"];
+	    forslagStatusSelect.setAttribute('state', curForslagStatus-1);
+	    forslagStatusSelect.setAttribute('forslagid', forslag["forslagid"])
+
+	    // Listen for when the menu does something
+	    forslagStatusSelect.addEventListener("actionClick", (e)=>{
+	      const stateChangeEvent = new CustomEvent("stateChange", {
+		detail: {
+		  action: "update forslag state",
+		  state: e.detail.newState
+		}
+	      });
+	      console.log("the forslag status edit was clicked")
+	      this.dispatchEvent(stateChangeEvent);
+	    });
+	    
+	    // Reveal element
+	    forslagStatusSelect.style.display = "inline";
+	  }
+
+	  else {
+	    // Hide element
+	    forslagStatusSelect.style.display = "none";
+	  }
+	}
       }
       
       newListWrapper.appendChild(curListItem);

@@ -113,7 +113,6 @@ class ForslagList extends DataList {
 		  state: e.detail.newState
 		}
 	      });
-	      console.log("the forslag status edit was clicked")
 	      this.dispatchEvent(stateChangeEvent);
 	    });
 	    

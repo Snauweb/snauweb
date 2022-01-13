@@ -47,7 +47,7 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
       let buttonElem = this.radioButtons[i];
       buttonElem.addEventListener('click', (e)=> {
 	this.setAttribute('state', i);
-	const actionEvent = new CustomEvent("actionClick", (e)=>{
+	const actionEvent = new CustomEvent("actionClick", {
 	  detail: {
 	    newState: i
 	  }
@@ -85,8 +85,6 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
       // Update visual state
       this.radioButtons[newValue].checked = true;
       this.radioButtons[oldValue].checked = false;
-
-      console.log(oldValue, newValue)
 
       let curForslagID = this.getAttribute('forslagid')
       // -1 means that the element is not set up yet,

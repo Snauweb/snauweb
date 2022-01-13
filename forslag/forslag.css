@@ -398,6 +398,7 @@ textarea {
 
 .innlegg-wrap .innlegg-info .innlegg-timestamp {
     min-width: 10em;
+    align-self: flex-start;
 }
 
 .innlegg-wrap .innlegg-forslag {

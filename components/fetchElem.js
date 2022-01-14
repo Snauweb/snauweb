@@ -76,9 +76,9 @@ class FetchElem extends HTMLElement {
     else if(method === "DELETE")  {
       apiFetchParams = {method: "DELETE", credentials: 'include'};
     }
-    else if(method === "PATCH") {
+    else if(method === "PUT") {
       apiFetchParams = {
-	method: "PATCH",
+	method: "PUT",
 	credentials: 'include',
 	body: payload,
 	headers: {

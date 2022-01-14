@@ -99,7 +99,7 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
       };
       console.log("the payload is", patchPayload)
       this.setAttribute('src', '/forslag');
-      this.setAttribute('method', 'PATCH');
+      this.setAttribute('method', 'PUT');
       this.setAttribute('payload', JSON.stringify(patchPayload));
       this.loadData();
       

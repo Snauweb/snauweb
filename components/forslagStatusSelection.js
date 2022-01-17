@@ -55,6 +55,15 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
 	this.dispatchEvent(actionEvent);
       })
     }
+
+    this.addEventListener("dataLoad", (e)=> {
+      const stateChangeEvent = new CustomEvent('stateChange', {
+	detail: {
+	  newState: this.getAttribute('state')
+	}
+      });
+      this.dispatchEvent(stateChangeEvent)
+    });
   }
   
   // Create DOM representation based on internal state
@@ -101,16 +110,7 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
       this.setAttribute('src', '/forslag');
       this.setAttribute('method', 'PUT');
       this.setAttribute('payload', JSON.stringify(patchPayload));
-      this.loadData();
-      
-      let newValueInt = parseInt(newValue);
-      
-      const stateChangeEvent = new CustomEvent('stateChange', {
-	detail: {
-	  newState: newValueInt
-	}
-      });
-      this.dispatchEvent(stateChangeEvent)
+      this.loadData(); // Wait for PUT to complete before notifying parent
     }
 
     if(name === "forslagid") {

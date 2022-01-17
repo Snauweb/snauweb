@@ -41,7 +41,7 @@ class ForslagFilterList extends FetchElem {
   // We must listen for when data is loaded
   setupListeners() {
 
-    this.addEventListener('stateChange', (e) => {
+    this.addEventListener('dataLoad', (e) => {
       this.waitingLoads -= 1;
       // Only render if this is the final waiting load
       if(this.waitingLoads == 0) {
@@ -64,11 +64,15 @@ class ForslagFilterList extends FetchElem {
       this.fetchNewData();
     });
 
-    // If the list element reports some change, like a deletion or status change,
-    // perform a new fetch
+    // If the list element reports some change, update.
+    // Both dataLoad and stateChange signal this
+    this.forslagListElem.addEventListener('dataLoad', (e) => {
+      this.fetchNewData();
+    });
     this.forslagListElem.addEventListener('stateChange', (e) => {
       this.fetchNewData();
     });
+
   }
   
   // Main job is to pass new data to forslag-list

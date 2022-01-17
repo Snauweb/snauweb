@@ -14,7 +14,7 @@ export { FetchElem }
  * state and data is accessed by getter functions
  * fetchState() returns state (loading, error etc), fetchData returns data
  * 
- * emits a loadStart event when loading begins, and a stateChange event when data is loaded
+ * emits a loadStart event when loading begins, and a dataLoad event when data is loaded
  */
 class FetchElem extends HTMLElement {
 
@@ -103,7 +103,7 @@ class FetchElem extends HTMLElement {
 	this.data = data;
 	// Emit a stateChange event. Listening objects now know
 	// that the data loading is complete
-	const fetchDataLoadedEvent = new CustomEvent("stateChange", {
+	const fetchDataLoadedEvent = new CustomEvent("dataLoad", {
 	  detail: {
 	    fetchStatus: this.status,
 	    method: this.getAttribute('method')

@@ -78,7 +78,7 @@ class ReactionElem extends FetchElem {
 
   // Must listen for the toggle button
   setupListeners() {
-    // If the button is pressed, a new 
+
     this.toggleButton.addEventListener('stateChange', (e) => {
 
       let oldState = this.isReacted;
@@ -96,7 +96,7 @@ class ReactionElem extends FetchElem {
       }
     });
 
-    this.addEventListener('stateChange', (e) => {
+    this.addEventListener('dataLoad', (e) => {
       if(this.data !== null) {
 	
 	this.curCount = this.data.numReaksjoner;

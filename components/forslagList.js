@@ -106,7 +106,7 @@ class ForslagList extends DataList {
 	    forslagStatusSelect.setAttribute('forslagid', forslag["forslagid"])
 
 	    // Listen for when the menu does something
-	    forslagStatusSelect.addEventListener("actionClick", (e)=>{
+	    forslagStatusSelect.addEventListener("stateChange", (e)=>{
 	      const stateChangeEvent = new CustomEvent("stateChange", {
 		detail: {
 		  action: "update forslag state",

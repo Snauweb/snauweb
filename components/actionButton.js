@@ -31,7 +31,13 @@ class ActionButton extends FetchElem {
   setupListerners() {
     this.buttonChild.addEventListener('click', (e) => {
       this.loadData();
+    });
 
+    // Do not send event before the parent fetchElem emits a dataLoad, indicating
+    // a response from the database. This is, after all, some of the point of the
+    // action-button element. It should trigger on completed action rather than
+    // just a press
+    this.addEventListener('dataLoad', (e)=> {
       const clickEvent = new CustomEvent("actionClick")
       this.dispatchEvent(clickEvent); 
     });

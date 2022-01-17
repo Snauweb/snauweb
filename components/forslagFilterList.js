@@ -64,12 +64,9 @@ class ForslagFilterList extends FetchElem {
       this.fetchNewData();
     });
 
-    // If the list element reports some change, update.
-    // Both dataLoad and stateChange signal this
-    this.forslagListElem.addEventListener('dataLoad', (e) => {
-      this.fetchNewData();
-    });
+    // If the list element reports some change, update  
     this.forslagListElem.addEventListener('stateChange', (e) => {
+      console.log("got the following stateChange event: ", e.detail);
       this.fetchNewData();
     });
 

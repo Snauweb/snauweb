@@ -46,16 +46,11 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
     for(let i=0; i < this.radioButtons.length; i++) {
       let buttonElem = this.radioButtons[i];
       buttonElem.addEventListener('click', (e)=> {
-	this.setAttribute('state', i);
-	const actionEvent = new CustomEvent("actionClick", {
-	  detail: {
-	    newState: i
-	  }
-	});
-	this.dispatchEvent(actionEvent);
+	this.setAttribute('state', i); // <- attribute handling fixes fetch setup
       })
     }
 
+    // Here the actual event goes through
     this.addEventListener("dataLoad", (e)=> {
       const stateChangeEvent = new CustomEvent('stateChange', {
 	detail: {

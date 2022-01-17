@@ -356,22 +356,6 @@ textarea {
     display: flex;
 }
 
-.innlegg-wrap {
-
-}
-
-/*
-.innlegg-wrap .statusbeskrivelse {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-right: 1rem;
-    font-weight: bold;
-    font-size: 1.1rem;
-    width: 50px;
-    min-width: 50px;
-}*/
 
 .innlegg-wrap .side-bar {
     min-width: 10px;
@@ -380,7 +364,6 @@ textarea {
 
 /* info */
 .innlegg-wrap .innlegg-info {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
@@ -388,6 +371,7 @@ textarea {
 
 .innlegg-wrap .innlegg-info .innlegg-overskrift h3{
     display: inline;
+    word-break: break-all;
 }
 
 .innlegg-wrap .innlegg-info .innlegg-kategori {
@@ -409,6 +393,7 @@ textarea {
 .innlegg-wrap .innlegg-tekst p {
     margin-left: 20px;
     margin-bottom: 10px;
+    word-break: break-all;
 }
 
 /* innlegg-footer */

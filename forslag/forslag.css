@@ -4,6 +4,10 @@
     --light-bg: #eeeeee;
     --small-font: 12pt;
     --large-font: 14pt;
+
+    --new-color: #FF8989;
+    --working-color: #707EEA;
+    --finished-color: #aacc70;
     
     font-size: 12pt;
 }
@@ -23,6 +27,8 @@ main{
     margin-left: auto;
     margin-right: auto;
     flex-grow: 1;
+
+    padding-bottom: 30px;
 }
 
 body {
@@ -49,24 +55,20 @@ h3 {
 
     .innsending-boks {
 	display: flex;
-	height: 80vh;
     }
     
     .send-inn{
 	width: 40%;
 	margin-right: 20px;
 	height: 100%;
-    }
-    .innsendt{
-	width: calc(60% - 20px);
-	height: 60vh;
+	padding-bottom: 20px;
     }
 
-    .forslagsliste {
-	height: 100%;
-	overflow: auto;
-	display: block;
+    .innsendt{
+	width: calc(60% - 20px);
+	height: 80vh;
     }
+
 }
 
 
@@ -76,6 +78,10 @@ h3 {
     .send-inn{
 	width: 100%;
 	margin-bottom: 40px;
+    }
+
+    .innsendt {
+	margin-bottom: 30px;
     }
 }
 
@@ -103,7 +109,6 @@ h3 {
 /* Bred skjerm */
 @media(min-width: 1000px) {
     .overskrift{
-	margin-left: 9vw;
 	margin-top: 2vh;
 	margin-bottom: 40px;
     }
@@ -113,7 +118,7 @@ h3 {
     }
 }
 
-/* Innsendingsskjema */
+/*** Innsendingsskjema ***/
 .send-inn h2 {
     margin-bottom: 30px;
 }
@@ -179,6 +184,10 @@ textarea {
 	align-items: center;
     }
 
+     .innspill-skjema .overskrift-boks input {
+	 width: 70%;
+     }
+
     .innspill-skjema .tekst-boks {
 	display: flex;
 	justify-content: center;
@@ -208,70 +217,229 @@ textarea {
     }
 }
 
-/* Innsendtliste */
-/** Lasteskjerm **/
-.load-screen-wrap {
-/*    height: 100%;*/
-    display: block;
-    background-color: var(--light-bg) 
-}
-
-/** Liste **/
-/*** Bakgrunn ***/
-.list-background {
-    display: block;
-}
-
-/*** Listeelementer ***/
-.innsendt h2{
+/*** NY FORSLAGSLISTE (gå i git for gammel versjon)***/
+.innsendt h2 {
     text-align: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    max-height: 20%;
 }
 
-.forslag-wrap .info-linje {
+
+.innsendt .forslagsliste {
     display: flex;
+    flex-direction: column;
+}
+
+/* smal skjerm */
+@media (min-width: 999px) {
+    .innsendt .forslagsliste {
+	height: 100%;
+    }
+}
+
+.innsendt hr {
+    width: calc(100% - 40px - 4px);
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-width: 2px;
+    height: 0px;
+}
+
+/*** Filtreringspanel ***/
+.forslagsliste {
+    background-color: var(--light-bg);
+}
+
+.forslagsliste filter-control {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.forslag-wrap .info-linje .tittel {
-    width: 60%;
-}
-
-.forslag-wrap .forslag {
-    margin-left: 10px;
-}
-
-.light {
-    background-color: var(--light-bg);
-}
-
-.medium {
     background-color: var(--medium-bg);
+    padding: 0px 20px 20px 20px;
 }
 
-.forslag-wrap {
-    padding: 20px 20px 40px 20px;
-}
-
-/* Anna hver med litt ulik farge */
-.forslag-wrap:nth-of-type(2n+1) {
-    background-color: var(--light-bg);
-}
-
-
-.forslag-wrap:nth-of-type(2n) {
-    background-color: var(--medium-bg);
+.forslagsliste .filter-row-top {
+    display:flex;
+    justify-content: space-between;
+    padding: 20px 0px 20px 0px;
+    height: calc(50% - 400px);
 }
 
 
-
-/* siste elementet har litt ekstra bunnpadding */
-.forslag-wrap:last-of-type {
-    padding-bottom: 70px;
+.filter-row-top toggle-button .checkbox {
+    width: 1em;
+    height: 1em;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
 }
 
-.forslag-wrap h3 {
+.filter-row-top toggle-button {
+    display: inline-block;
+}
+
+.filter-row-top toggle-button .toggle {
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px;
+    height: 1em;
+    width: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.status-filter-button-row {
+    display:flex;
+    height: 50%;
+}
+
+.status-filter-button-row li {
+    flex-grow: 1;
+}
+
+.status-filter-button-row toggle-button .toggle{
+   width: calc(100% - 40px);
+   text-align: center;
+   padding: 10px 20px 10px 20px;
+
+   color: white;
+   font-size: 1.2em;
+
+   display: flex;
+   justify-content: space-between;
+
+   cursor: pointer;
+   user-select: none;
+}
+
+.status-filter-button-row toggle-button .toggle.new {
+    background-color: var(--new-color);
+}
+.status-filter-button-row toggle-button .toggle.working {
+    background-color: var(--working-color);
+}
+.status-filter-button-row toggle-button .toggle.finished {
+    background-color: var(--finished-color);
+}
+
+.status-filter-button-row span.checkbox {
+    border-style: solid;
+    border-width: 2px;
+    font-weight: bold;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+}
+
+/*** Innleggsliste ***/
+.forslagsliste-innhold {
+    width: 90%;
+    margin: 20px 10px 0px 20px;
+    padding: 0px 30px 50px 0px;
+}
+
+
+/* Smal skjerm */
+@media(min-width: 1000px) {
+    .forslagsliste-innhold {
+	height: 100%;
+	overflow: auto;
+	display: block;
+    }
+}
+
+
+.innlegg-wrap {
+    margin-bottom: 30px;
+    display: flex;
+}
+
+
+.innlegg-wrap .side-bar {
+    min-width: 10px;
+    margin-right: 20px;
+}
+
+/* info */
+.innlegg-wrap .innlegg-info {
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.innlegg-wrap .innlegg-info .innlegg-overskrift h3{
+    display: inline;
+    word-break: break-all;
+}
+
+.innlegg-wrap .innlegg-info .innlegg-kategori {
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: inline;
+}
+
+.innlegg-wrap .innlegg-info .innlegg-timestamp {
+    min-width: 10em;
+    align-self: flex-start;
+}
+
+.innlegg-wrap .innlegg-forslag {
+    width: 100%;
+}
+
+/* tekst */
+.innlegg-wrap .innlegg-tekst p {
+    margin-left: 20px;
     margin-bottom: 10px;
+    word-break: break-all;
 }
+
+/* innlegg-footer */
+.innlegg-wrap .innlegg-footer {
+    display: flex;
+    height: 20px;
+}
+
+
+/* By default, hide these controlls */
+.innlegg-wrap .innlegg-footer forslag-status-selection {
+    display: none;
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste li reaction-elem {
+    display: flex;
+    align-items: center;
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste img{
+    height: 20px;
+}
+
+.innlegg-wrap .innlegg-footer .reaksjon-liste reaksjon.reaksjon-bra {
+
+}
+
+
+/* sidebar-farger */
+.innlegg-wrap.status-new .side-bar {
+    background-color: var(--new-color);
+}
+
+.innlegg-wrap.status-working .side-bar {
+    background-color: var(--working-color);
+}
+
+.innlegg-wrap.status-finished .side-bar {
+    background-color: var(--finished-color);
+}
+
+

@@ -8,6 +8,17 @@
   <link rel="stylesheet" href="../styles/footer_styles.css">
   
   <script type="module" src="../components/fetchList.js"></script>
+  <script type="module" src="../components/toggleButton.js"></script>
+  <script type="module" src="../components/forslagFilterList.js"></script>
+  <script type="module" src="../components/textSearch.js"></script>
+  <script type="module" src="../components/fetchElem.js"></script>
+  <script type="module" src="../components/forslagList.js"></script>
+  <script type="module" src="../components/reactionElem.js"></script>
+  <script type="module" src="../components/dropDownSelect.js"></script>
+  <script type="module" src="../components/filterControl.js"></script>
+  <script type="module" src="../components/actionButton.js"></script>
+  <script type="module" src="../components/forslagStatusSelection.js"></script>
+
   <script type="module" src="forslag.js"></script>
 </head>
 
@@ -18,11 +29,11 @@
     </a>
   </header>
   <main>
-    <h1 class="overskrift">
-      Forslag til snau-web
-    </h1>
     <div class="innsending-boks">
       <div class="send-inn">
+	<h1 class="overskrift">
+	 Forslag til snau-web
+       </h1>
 	<p class="ingress">
 	  Vi bygger nye nettsider til Snauweb, og ønsker innspill fra nettopp DEG til hva siden kan inneholde! Har du funnet en feil? Eller savner du en funksjon i nye eller gamle nettsider? Send det inn til oss på denne sia, så vi i snauwebkomiteen veit hva vi burde fokusere på</p>
 	      
@@ -46,31 +57,148 @@
       <div class="innsendt">
 	
 	<h2> Innsendte forslag </h2>
-
-	<fetch-list src="/forslag" class="forslagsliste">
-	  <template class="list-item">
-	    <li class="forslag-wrap">
-	      <div class="info-linje">
-		<h3 class="tittel"> Overskrft </h3>
-		<span class="lagt_til"> dato </span>
+	
+	<forslag-filter-list src="/forslag" class="forslagsliste">
+	  <filter-control class="filter-list-controll">
+	    <div class="filter-row-top">
+	      <text-search class="søkefelt filter-elem" eager="false" filtername="tekstsøk">
+		<span>Søk i lista: </span>
+		<input type="text" class="search-field"></input>
+		<input type="button" class="search-submit" value="søk"></input>
+	      </text-search>
+	      <div>
+		<drop-down-select
+		  class="filter-elem" filterName="sorterEtter"
+		  state="0">
+		  <span>Sorter etter</span>
+		  <select>
+		    <option value="dato">dato</option>
+		    <option value="stemmer">stemmer</option>
+		    <option value="kategori">kategori</option>
+		  </select>
+		</drop-down-select>
+		<toggle-button
+		  state="1" debounce="250"
+		  class="filter-elem" filterName="sortOrder"
+		  >
+		  <template>
+		    <span stateName="asc"   class="toggle button-up">&#129045</span>
+		    <span stateName="desc" class="toggle button-down">&#129047</span>
+		  </template>
+		</toggle-button>
 	      </div>
-	      <p class="forslag">
-		Brødtekst
-	      </p>
-	    </li>
-	  </template>
-	  <template class="load-screen">
-	    <div class="load-screen-wrap">
-	      <p> Laster inn innsendte forslag... </p>
 	    </div>
-	  </template>
-
-	  <template class="background">
-	    <div class="list-background">
-	      
+	    <div>
+	      <ul class="status-filter-button-row">
+		<li>
+		  <toggle-button
+		    debounce="250"
+		    class="filter-elem"
+		    filterName="toggleNew">
+		    <template>
+		      <div stateName="checked" class="toggle new">
+			<span>Ny</span><span class="checkbox">&#10003</span>
+		      </div>
+		      <div stateName="unchecked" class="toggle new">
+			<span>Ny</span><span class="checkbox"></span>
+		      </div>	      
+		    </template>
+		  </toggle-button>
+		</li>
+		<li>
+		  <toggle-button debounce="250"
+				 class="filter-elem"
+				 filterName="toggleWorking">
+		    <template>
+		      <div stateName="checked" class="toggle working">
+			<span>Jobbes med</span><span class="checkbox">&#10003</span>
+		      </div>
+		      <div stateName="unchecked" class="toggle working">
+			<span>Jobbes med</span><span class="checkbox"></span>
+		      </div>	      
+		    </template>
+		  </toggle-button>
+		</li>
+		<li>
+		  <toggle-button debounce="250"
+				 class="filter-elem"
+				 filterName="toggleFinished"
+				 state="1">
+		    <template>
+		      <div stateName="checked" class="toggle finished">
+			<span>Ferdig</span><span class="checkbox">&#10003</span>
+		      </div>
+		      <div stateName="unchecked" class="toggle finished">
+			<span>Ferdig</span><span class="checkbox"></span>
+		      </div>	      
+		    </template>
+		  </toggle-button>
+		</li>
+	      </ul>
 	    </div>
-	  </template>
-	</fetch-list>
+	  </filter-control>
+	  
+	  <forslag-list
+	    class="forslagsliste-innhold filter-list-content"
+	    data='[{
+		  "tittel": "Laster inn innlegg...", 
+		  "forslag" : "laster..."
+		  }]'
+	    >
+	    <template class="dataListElem">
+	      <li class="innlegg-wrap">
+		<aside class="side-bar"></aside>
+		<div class="innlegg-forslag">
+		  <div class="innlegg-info">
+		    <span class="innlegg-timestamp lagt_til"></span>
+		    <div class="innlegg-overskrift">
+		      <span class="innlegg-kategori statusbeskrivelse"></span>
+		      <h3 class="tittel"></h3>
+		    </div>
+		  </div>
+		  <div class="innlegg-tekst">
+		    <p class="forslag"></p>
+		  </div>
+		  <div class="innlegg-footer">
+		    <action-button class="delete-forslag"
+				   hidden src="/forslag" method="DELETE" params="">
+		      <button class="innlegg-slett">Slett forslag</button>
+		    </action-button>
+		    <!-- 
+			 note that the radio buttons are not linked by the property "name". 
+			 Linking them makes it hard to controll a default state
+		      -->
+		    <forslag-status-selection class="status-selection">
+		      <input type="radio" 
+			     value="Ny" id="forslag-status-selection-new">
+		      <label for="forslag-status-selection-new">Ny</label>
+		      <input type="radio" 
+			     value="Jobbes med" id="forslag-status-selection-working">
+		      <label for="forslag-status-selection-working">Jobbes med</label>
+		      <input type="radio" 
+			     value="Ferdig" id="forslag-status-selection-finished">
+		      <label for="forslag-status-selection-finished">Ferdig</label>
+		    </forslag-status-selection>
+		    <ul class="reaksjon-liste">
+		      <li>
+			<reaction-elem reaksjonstypeid="1" style="display: none">
+			  <toggle-button debounce="500">
+			    <template>
+			      <img stateName="selected"
+				   src="../assets/reaksjon/bra_markert.png"></img>
+			      <img stateName="unselected"
+				   src="../assets/reaksjon/bra_umarkert.png"></img>
+			    </template>
+			  </toggle-button>
+			  <span class="reaction-counter"></span>
+			</reaction-elem>
+		      <li>
+		    </ul>
+		  </div>
+		</div>
+	      </li>
+	    </template>
+	  </forslag-list>
       </div>
     </div>
   </main>

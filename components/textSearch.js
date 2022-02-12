@@ -6,7 +6,8 @@ export { TextSearch }
  * [Optional] a button child of class .search-submit for the search field text submit button
  *
  * If the attribute eager is set to true, stateChange events are emitted on value change
- * of the .search-field 
+ * of the .search-field. Otherwise, stateChange events are only emitted
+ * when the .search-submit button is pressed
  */
 
 class TextSearch extends HTMLElement {
@@ -40,8 +41,7 @@ class TextSearch extends HTMLElement {
   }
 
   // Listen both to input and submit, use this.isEager to determine response
-  // We use () => () syntax for the listener functions, they "this" they capture
-  // is the objcet this.
+  // We use () => () syntax for the listener functions, to capture the objcet this.
   setupListeners() {
     // Search field brodcasts on any input event if the attribute "eager" is set to true
     this.searchField.addEventListener('input', (e) => {

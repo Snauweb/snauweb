@@ -1,3 +1,44 @@
-h1 {
-    color:red;
+
+main {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+laat-filter-list {
+    display: block;
+    margin-top: 20px;
+}
+
+laat-list-filters {
+    display: flex;
+}
+
+laat-list-filters text-search {
+    display: block;
+}
+
+
+laat-list-display {
+    display: block;
+    margin-top: 20px;
+}
+
+
+laat-list-display .laat-info {
+    margin-bottom: 1em;
+}
+
+
+laat-list-display colgroup .name {
+    width: 20%;
+}
+
+laat-list-display colgroup .description {
+    width: 70%;
+}
+
+laat-list-display colgroup .genere {
+    width: 10%;
 }

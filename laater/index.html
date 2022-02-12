@@ -2,6 +2,8 @@
   <link rel="stylesheet" href="../styles/meyer_reset.css"></link>
   <link rel="stylesheet" href="./laater.css">
   <link rel="stylesheet" href="../styles/base_page_styles.css"></link>
+
+  <script type="module" src="../components/textSearch.js"></script>
   
   <meta charset="utf-8"></meta>
 </head>
@@ -14,7 +16,44 @@
   </header>
 
   <main>
-    <h1> Låter! </h1>
+    <laat-filter-list>
+      <laat-list-filters>
+	<text-search class="søkefelt filter-elem" eager="false" filtername="låtsøk">
+	  <h2>Søk etter låt: </h2>
+	  <input type="text" class="search-field"></input>
+	  <input type="button" class="search-submit" value="søk"></input>
+	</text-search>
+      </laat-list-filters>
+      <laat-list-display>
+	<table>
+	  <colgroup>
+	    <col class="name">
+	    <col class="description">
+	    <col class="genere">
+	  </colgroup>
+	  <tr class="laat-info-header">
+	    <th class="header"> Låtnavn </th>
+	    <th class="description"> Låtbeskrivelse </th>
+	    <th class="genere"> Sjanger </th>
+	  </tr>
+	  <tr class="laat-info">
+	    <td class="header">
+	      <h3> Slarkpolsen hass Gunnar </h3>
+	    </td>
+	    <td class="description"> Denne låta lært æ tå bæssfar min</td>
+	    <td class="genere"> Pols </td>
+	  </tr>
+	  <tr class="laat-info">
+	    <td class="header">
+	      <h3> Kake Baltø på nye eventyr </h3>
+	    </td>
+	    <td class="description"> Nettsida lider av en akutt mangel på klarinett. Bare det at jeg skriver "klarinett" her nå øker klarinettfaktoren noe hinsides. Hadde det ikke vært for klarinettrekka hadde trekkspillene tatt fullstendig overhånd, og blokkfløytistene ville aldri skinne som det de gjør i dag. Klarinett er kommet for å bli, og mangelen på klarinett i dagens nettside er ikke representativ eller akseptabel for verken klarinettister eller de som jevnlig omgås slike </td>
+	    <td class="genere"> Klarinett </td>
+	  </tr>
+
+	</table>
+      </laat-list-display>
+    </laat-filter-list>
   </main>
 
   <footer></footer>

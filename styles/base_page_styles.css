@@ -34,6 +34,11 @@ body {
     height: 50px;
 }
 
+.snauweb-header .page-title {
+    margin-left: 10px;
+}
+
+
 /* MAIN */
 main {
     min-height: calc(100vh - var(--header-height) - var(--footer-height));

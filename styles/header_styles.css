@@ -21,3 +21,7 @@
 .snauweb-header .home-page-link img {
     height: 50px;
 }
+
+.snauweb-header .page-title {
+    margin-left: 10px;
+}

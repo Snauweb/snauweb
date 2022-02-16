@@ -1,0 +1,125 @@
+main {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.back-link {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+/* --- Small screen ---*/
+/* Single column layout, sheet music at the bottom */
+
+@media(max-width: 999px) {
+    .col-2 {
+	height: 100vh;
+    }
+}
+
+/* --- Wide screen design ---*/
+/* Two column, with sheet music in the right column */
+
+@media(min-width: 1000px) {
+    main {
+	display: flex;
+    }
+
+    .col-1 {
+	width: calc(50% - 20px);
+	margin-left: 20px;
+    }
+
+    .col-2 {
+	width: 50%;
+    }
+}
+
+/* --- other names section --- */
+.other-names {
+    margin-bottom: 20px;
+}
+
+.other-names .description {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.other-names ul {
+    display: flex;
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.other-names li {
+    margin-left: 10px;
+    display: list-item;
+    font-size: 1.2rem;
+}
+
+/* --- description section ---  */
+.laat-description {
+    margin-bottom: 20px;
+}
+
+.laat-description .content {
+    margin-left: 20px;
+}
+
+.laat-description .header{
+    margin-bottom: 10px;
+}
+
+.laat-description .genere{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* --- recordings section --- */
+.laat-recordings {
+    margin-bottom: 20px;
+}
+
+.laat-recordings .recording-list {
+    margin-top: 10px;
+}
+
+.laat-recordings .recording {
+    width: calc(100%-20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.laat-recordings .recording .description-download {
+    margin-bottom: 0.5rem;
+}
+
+
+/* --- sheet music section --- */
+.laat-sheet-music {
+    margin-bottom: 20px;
+}
+
+.laat-sheet-music .pdf-viewer {
+    width: 100%;
+}
+
+/* small screen */
+@media(max-width: 999px) {
+    .laat-sheet-music .pdf-viewer {
+	height: 80%;
+    }
+}
+
+/* wide screen */
+@media(min-width: 1000px) {
+    .laat-sheet-music .pdf-viewer {
+	height: 60vh;
+    }
+}
+

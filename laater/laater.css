@@ -30,18 +30,26 @@ laat-list-display {
 
 
 .laat-info {
-    margin-bottom: 1em;
     display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-left: 20px;
 }
 
-.laat-info .select {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-right: 2px;
-    padding-top: 2px;
+.laat-info:nth-of-type(2n) {
+    background-color: #eeeeee;
 }
 
-.laat-info .name {
-    width: 70%;
+.laat-info:nth-of-type(2n + 1) {
+    background-color: #dddddd;
+}
+
+.laat-info .header {
+    
+}
+
+.laat-info .genere {
+    margin-left: 10px;
+    font-size: 1.5rem;
 }

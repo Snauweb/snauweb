@@ -2,8 +2,9 @@ export { DataList }
 
 /*
  * Component that displays data in list format.
+ * Expects a <template> of class .dataListItem as child
  * Attributes:
- *     data: a string representation of the currently rendered data
+ *     data: a string representation of the currently rendered data (JSON)
  *          (if this is too much of a performance hit, make this an internal field)
  * 
  * Object fields:

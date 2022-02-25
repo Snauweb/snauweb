@@ -51,9 +51,6 @@ class LaatListDisplay extends DataList {
   connectedCallback() {}
   disconnectedCallback() {}
   adoptedCallback() {}
-
-  // This method is triggered when an attribute in the list attributeNames is updated
-  attributeChangedCallback(name, oldValue, newValue) {}
   
 }
 

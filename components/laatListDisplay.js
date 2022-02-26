@@ -10,6 +10,11 @@ class LaatListDisplay extends DataList {
 
   // Overwrite DataList implementation
   render() {
+    // No data is a legal state. In this case, render nothing
+    if(this.displayData === null) {
+      return;
+    }
+    
     // Copy old top level element (non-recursive, no children are included)
     let newListWrapper = this.listWrapperElem.cloneNode();
     
@@ -23,7 +28,7 @@ class LaatListDisplay extends DataList {
       let titleElem = curListItem.querySelector(".navn");
       let laatLinkElem = document.createElement("a");
 
-      laatLinkElem.setAttribute("href", dataObj["URL"]);
+      laatLinkElem.setAttribute("href", `./laat/?id=${dataObj["id"]}`);
       laatLinkElem.textContent = dataObj["navn"];
       
       titleElem.appendChild(laatLinkElem);

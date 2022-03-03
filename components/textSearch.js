@@ -50,10 +50,12 @@ class TextSearch extends HTMLElement {
       }
     });
 
-    // The submit button allways broadcasts an event
-    this.searchSubmit.addEventListener('click', (e) => {
+    // The submit button allways broadcasts an event, if it exists
+    if(this.searchSubmit !== null) {
+      this.searchSubmit.addEventListener('click', (e) => {
 	this.broadcastStateChange()
-    });
+      });
+    }
   }
 
   broadcastStateChange() {

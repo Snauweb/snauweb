@@ -53,8 +53,11 @@ class CustomComponent extends HTMLElement { // Might extend other components as 
   adoptedCallback() {}
 
   // This method is triggered when an attribute in the list attributeNames is updated
-  attributeChangedCallback(name, oldValue, newValue) {}
-  
+  attributeChangedCallback(name, oldValue, newValue) {
+     if(oldValue === newValue) {
+       return;
+     }
+  }
 }
 
 

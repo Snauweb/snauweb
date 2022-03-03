@@ -1,114 +1,152 @@
-<head>
-  <title>Låtdetaljer</title>
-  <meta charset="utf-8"></meta>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Låtdetaljer</title>
+    <meta charset="utf-8"></meta>
 
-  <link rel="stylesheet" href="../../styles/meyer_reset.css"></link>
-  <link rel="stylesheet" href="../../styles/base_page_styles.css"></link>
-  <link rel="stylesheet" href="./laat.css">
-  
-</head>
+    <link rel="stylesheet" href="../../styles/meyer_reset.css"></link>
+    <link rel="stylesheet" href="../../styles/base_page_styles.css"></link>
+    <link rel="stylesheet" href="./laat.css">
 
-<body>
-  <header class="snauweb-header">
-    <a class="home-page-link" href="../">
-      <img src="../../assets/snaustrinda_logo.png"></img>
-    </a>
-    <h1 class="page-title">Slarkpolsen</h1>
-  </header>
+    <script type="module" src="../../components/laatView.js"></script>
+    <script type="module" src="../../components/laatInfo.js"></script>
+    
+  </head>
 
-  <a class="back-link" href="../">&lt- tilbake til låtlista</a>
-  
-  <main>
-    <div class="col-1">
-      <div class="other-names">
-	<p class="description"> Også kjent som:</p>
-	<ul>
-	  <li> Sommerslarken </li>
-	  <li> Titusenpolskaen </li>
-	</ul>
-      </div>
+  <body>
+    <header class="snauweb-header">
+      <a class="home-page-link" href="../">
+	<img src="../../assets/snaustrinda_logo.png"></img>
+      </a>
+      <h1 class="page-title">Slarkpolsen</h1>
+    </header>
 
-      <div class="laat-description">
-	<h2 class="header"> Låtbeskrivelse </h2>
-	<div class="content">
-	  <p class="genere"> Sjanger: <strong>Pols</strong> </p> 
-	  <p class="description">
-	    Herre låten lært æ ta bestefaren min. Den blei skreve til ære for ei avdød katte.
-	  </p>
+    <a class="back-link" href="../">&lt- tilbake til låtlista</a>
+    
+    <main>
+      <laat-view id='url'>
+	<div class="col-1">
+	  <laat-info set-title="page-title">
+	    <div class="other-names">
+	      <p class="description"> Også kjent som:</p>
+	      <ul class="laat-andre-navn"></ul>
+	    </div>
+	    
+	    <div class="laat-description">
+	      <h2 class="laat-navn header"> Låtbeskrivelse </h2>
+	      <div class="content">
+		<p class="laat-sjanger genere"> Sjanger: <strong>Pols</strong> </p> 
+		<p class="description">
+		  Herre låten lært æ ta bestefaren min. Den blei skreve til ære for ei avdød katte.
+		</p>
+	      </div>
+	    </div>
+	  </laat-info>
+	
+	  <recording-list>
+	  </recording-list>
+	</div>
+
+	<div class="col-2">
+	  <sheet-music-select>
+	    <sheet-music-select-controller>
+	    </sheet-music-select-controller>
+	    <sheet-music-view>
+	    </sheet-music-view>
+	  </sheet-music-select>
+	</div>
+      </laat-view>
+      <!--<div class="col-1">
+	<div class="other-names">
+	  <p class="description"> Også kjent som:</p>
+	  <ul class="laat-andre-navn">
+	    <li> Sommerslarken </li>
+	    <li> Titusenpolskaen </li>
+	  </ul>
+	</div>
+
+	<div class="laat-description">
+	  <h2 class="laat-navn header"> Låtbeskrivelse </h2>
+	  <div class="content">
+	    <p class="laat-sjanger genere"> Sjanger: <strong>Pols</strong> </p> 
+	    <p class="description">
+	      Herre låten lært æ ta bestefaren min. Den blei skreve til ære for ei avdød katte.
+	    </p>
+	  </div>
+	</div>
+
+	<div class="laat-recordings">
+	  <h2> Opptak </h2>
+	  <ul class="recording-list">
+	    <li class="recording">
+	      <div class="description-download">
+		<span class="description"> Holm spiller Kaffestuggu </span>
+		<span class="download">
+		  <a download
+		     href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
+		    Last ned
+		  </a>
+		</span>
+	      </div>
+	      <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
+	    </li>
+	    
+	    <li class="recording">
+	      <div class="description-download">
+		<span class="description"> Orignalinnspilling fra 1958 </span>
+		<span class="download">
+		  <a download
+		     href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
+		    Last ned
+		  </a>
+		</span>
+	      </div>
+	      <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
+	    </li>
+
+	    <li class="recording">
+	      <div class="description-download">
+		<span class="description"> Andrestemme </span>
+		<span class="download">
+		  <a download
+		     href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
+		    Last ned
+		  </a>
+		</span>
+	      </div>
+	      <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
+	    </li>
+	  </ul>
 	</div>
       </div>
 
-      <div class="laat-recordings">
-	<h2> Opptak </h2>
-	<ul class="recording-list">
-	  <li class="recording">
-	    <div class="description-download">
-	      <span class="description"> Holm spiller Kaffestuggu </span>
-	      <span class="download">
-		<a download
-		   href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
-		  Last ned
-		</a>
-	      </span>
-	    </div>
-	    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
-	  </li>
-	  
-	  <li class="recording">
-	    <div class="description-download">
-	      <span class="description"> Orignalinnspilling fra 1958 </span>
-	      <span class="download">
-		<a download
-		   href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
-		  Last ned
-		</a>
-	      </span>
-	    </div>
-	    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
-	  </li>
-
-	  <li class="recording">
-	    <div class="description-download">
-	      <span class="description"> Andrestemme </span>
-	      <span class="download">
-		<a download
-		   href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
-		  Last ned
-		</a>
-	      </span>
-	    </div>
-	    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
-	  </li>
-	</ul>
-      </div>
-    </div>
-
-    <div class="col-2">
-      <div class="laat-sheet-music">
-	<h2> Noter </h2>
-	<div class="navigation">
-	  <span>Viser noter for:</span>
-	  <select>
-	    <option>Grautpolskaen</option>
-	    <option>Testuggu</option>
-	    <option>Vals etter Andres Flaten</option>
-	  </select>
+      <div class="col-2">
+	<div class="laat-sheet-music">
+	  <h2> Noter </h2>
+	  <div class="navigation">
+	    <span>Viser noter for:</span>
+	    <select>
+	      <option>Grautpolskaen</option>
+	      <option>Testuggu</option>
+	      <option>Vals etter Andres Flaten</option>
+	    </select>
+	  </div>
+	  <iframe
+	    class="pdf-viewer"
+	    src="../../assets/dokumenter/Eklundapolska_nr_3.pdf"></iframe>
 	</div>
-	<iframe
-	  class="pdf-viewer"
-	  src="../../assets/dokumenter/Eklundapolska_nr_3.pdf"></iframe>
-      </div>
-    </div>
-    	<!--<p>
+      </div>-->
+
+      <!--<p>
 	  Standard js-pdf-viser om man ska gjør det i teksten:
 	  <a href="https://github.com/mozilla/pdf.js/">PDF.js</a>
-	</p>
-	<p>
-	  ABC-rendering og redigering rett i sida. Mulig at iaff redigering ska vær sin egen underside?
-	  <a href="https://www.abcjs.net/">abcjs</a>
-	</p>-->
-
-  </main>
+      </p>
+      <p>
+	ABC-rendering og redigering rett i sida. Mulig at iaff redigering ska vær sin egen underside?
+	<a href="https://www.abcjs.net/">abcjs</a>
+      </p>-->
+    </main>
     
-  <footer></footer>
-</body>
+    <footer></footer>
+  </body>
+</html>

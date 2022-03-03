@@ -93,6 +93,13 @@ class LaatFilterList extends FetchElem {
       newDisplayData.push(dataItem)
     }
 
+    // If no data is to be shown, we send null to the
+    // display list component to indicate no results
+    if(newDisplayData.length === 0) {
+      newDisplayData = null;
+    }
+
+      
     // transfer to displayData
     this.displayData = newDisplayData;
     this.render();

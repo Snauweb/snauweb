@@ -19,11 +19,11 @@ main {
     }
 }
 
-/* --- Wide screen design ---*/
+/* --- Wide screen layout ---*/
 /* Two column, with sheet music in the right column */
 
 @media(min-width: 1000px) {
-    main {
+    laat-view {
 	display: flex;
     }
 

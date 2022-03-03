@@ -10,7 +10,12 @@ export { DataList }
  * Object fields:
  *     displayData: contains parsed data to be displayed in the list elements.
  *                  Allways a list, even if it only contains a single object
- *     dataListStatus: "empty" | "filled" | "error".  
+ *     dataListStatus: "empty" | "filled" | "error".
+ *
+ * Dispatches renderEmpty(), renderContent() or renderError() respectivly
+ * on call to render(), depending on dataListStatus
+ *
+ * Emits a stateChange event on state change
  */
 
 class DataList extends HTMLElement {
@@ -21,6 +26,7 @@ class DataList extends HTMLElement {
     super();
     this.setupState();
     this.setupDOM();
+    this.render();
   }
 
   // **** SETUP ****
@@ -51,6 +57,11 @@ class DataList extends HTMLElement {
     this.appendChild(this.listWrapperElem);
   }
 
+  dispatchStateChangeEvent() {
+    const stateChangeEvent = new CustomEvent('stateChange', {detail: this.displayData});
+    this.dispatchEvent(stateChangeEvent);
+  }
+  
   // Create DOM representation based on internal state
   // In this component, calling render() should fill the list with data rendered in the
   // provided .dataListElem element, as long as the status is not "error" or "empty"
@@ -67,10 +78,10 @@ class DataList extends HTMLElement {
   }
 
   renderError() {
-  
+    this.listWrapperElem.textContent = "Noe gikk galt, prøv igjen!"
   }
   renderEmpty() {
-
+    this.listWrapperElem.textContent = "Ingenting å vise"
   }
   renderContent() {
     // Copy old top level element (non-recursive, no children are included)
@@ -106,7 +117,7 @@ class DataList extends HTMLElement {
 
   // Parse the data attribute as json and put in this.displayData
   // If the parsing does not work, set this.displayData to null and set
-  // this.listState to "error"
+  // this.dataListStatus to "error"
   parseDataAttrib() {
     let parseResult = null;
     try {
@@ -117,9 +128,17 @@ class DataList extends HTMLElement {
       this.displayData = null;
       return;
     }
-    
+
+    if(parseResult === null) {
+      this.dataListStatus = "empty";
+    }
+    else {
+      this.dataListStatus = "filled";
+    }
+
     this.displayData = parseResult;
-    this.dataListStatus = "filled";
+
+    this.dispatchStateChangeEvent();
   }
 
   // Returns a list of names of attributes

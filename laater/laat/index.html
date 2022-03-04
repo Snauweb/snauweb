@@ -18,25 +18,28 @@
       <a class="home-page-link" href="../">
 	<img src="../../assets/snaustrinda_logo.png"></img>
       </a>
-      <h1 class="page-title">Ingen tittel?</h1>
+      <h1 class="page-title">Låtdetaljer</h1>
     </header>
 
     <a class="back-link" href="../">&lt- tilbake til låtlista</a>
     
     <main>
-      <laat-view id='url' set-title="page-title">
+      <laat-view id="url" set-title>
 	<div class="col-1">
 	  <laat-info>
 	    <template>
+	      <h1 class="main-header"> Laster... </h1>
 	      <div class="other-names">
 		<p class="description"> Også kjent som:</p>
 		<ul class="laat-andre-navn"></ul>
 	      </div>
 	      
 	      <div class="laat-description">
-		<h2 class="laat-navn header"> Låtbeskrivelse </h2>
+		<h2 class="header"> Låtbeskrivelse </h2>
 		<div class="content">
-		  <p class="laat-sjanger genere"> Sjanger: <strong>Pols</strong> </p> 
+		  <p class="genere">
+		    Sjanger: <strong class="laat-sjanger">Pols</strong>
+		  </p> 
 		  <p class="description">
 		    Herre låten lært æ ta bestefaren min. Den blei skreve til ære for ei avdød katte.
 		  </p>
@@ -44,7 +47,7 @@
 	      </div>
 	    </template>
 	  </laat-info>
-	
+	  
 	  <recording-list>
 	  </recording-list>
 	</div>

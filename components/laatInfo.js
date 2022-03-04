@@ -17,6 +17,8 @@ class LaatInfo extends FetchElem {
 
   constructor() {
     super();
+
+    console.log("laat info constructor run")
     this.setupState();
     this.setupDOM();
     this.setupListeners();
@@ -36,16 +38,6 @@ class LaatInfo extends FetchElem {
   }
 
   setupDOM(){
-    if(this.hasAttribute('set-title')) {
-      // Construct selector query based on attribute
-      this.titleElem =
-	document.querySelector('header .' + this.getAttribute('set-title'));
-    }
-    else {
-      // No title element is a valid state
-      this.titleElem = null;
-    }
-
     // Deep copy template contents
     let templateContent =
       this.querySelector('template').content.cloneNode(true);
@@ -68,6 +60,7 @@ class LaatInfo extends FetchElem {
     this.setAttribute('params', `id=${this.getAttribute('id')}`);
   }
 
+  // Dispatch correct render method based on value of this.status
   render(){
     if(this.status === 'error'){
       this.renderError();
@@ -86,18 +79,41 @@ class LaatInfo extends FetchElem {
     let templateCopy = this.contentTreeBase.cloneNode(true);
     
     // Now we look for the children to render text into
+    let headerElem = templateCopy.querySelector('.main-header');
+    let nameListDesc = templateCopy.querySelector('.other-names .description');
     let nameList = templateCopy.querySelector('ul.laat-andre-navn');
     let genereElem = templateCopy.querySelector('.content .laat-sjanger');
-    let desctiptionElem = templateCopy.querySelector('.content .description');
+    let descElem = templateCopy.querySelector('.content .description');
 
 
     // First all the names
-    for (let name of this.data.navn) {
+    // Note that i starts at 1 and not 0. This is
+    // because the first name is set as header, and does not need to be
+    // repeated
+
+    // First name found goes in header
+    let firstName = this.data.navn[0];
+
+    if (firstName === undefined) {
+      headerElem.textContent = "Uten navn";
+    }
+    else {
+      headerElem.textContent = firstName;
+    }
+    
+    
+    for (let i = 1; i < this.data.navn.length; i++) {
       let newListElem = document.createElement('li');
-      newListElem.textContent = name;
+      let curName = this.data.navn[i];
+      newListElem.textContent = curName;
       nameList.appendChild(newListElem);
     }
 
+    // If there is only one (or no) names, there is no point in an
+    // "også kjent som" header
+    if(this.data.navn.length <= 1) {
+      nameListDesc.textContent = "";
+    }
 
     let descriptionText = "";
     // Then the (maybe multiple) descriptions
@@ -105,7 +121,8 @@ class LaatInfo extends FetchElem {
       descriptionText += description + "\n";
     }
 
-    
+    // Inner text to make the line breaks work
+    descElem.innerText = descriptionText; 
     
     // Then the genere
     genereElem.textContent = this.data.sjanger;

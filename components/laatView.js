@@ -36,7 +36,6 @@ class LaatView extends HTMLElement {
     super();
     this.setupState();
     this.setupDOM();
-    this.setupListeners();
   }
 
 
@@ -47,13 +46,8 @@ class LaatView extends HTMLElement {
   setupDOM(){
     this.laatInfoElem = this.querySelector('laat-info');
     this.laatInfoElem.setAttribute('id', this.getAttribute('id'));
-//    this.laatNamesElem = this.querySelector('laat-names');
- //   this.laatNamesElem = this.querySelector('laat-names');
   }
 
-  setupListeners() {
-    
-  }
   
   validateIdParameter() {
     // First, read id of laat to display from URL if requested
@@ -95,6 +89,7 @@ class LaatView extends HTMLElement {
       this.setAttribute('id', idParamValue);
     }
   }
+
   
   // Inform children of a new laat
   notifyChildren(){

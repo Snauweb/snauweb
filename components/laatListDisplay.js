@@ -7,7 +7,6 @@ class LaatListDisplay extends DataList {
     super();
     this.hasLoadedFirstTime = false;
     this.addEventListener('stateChange', (e) => {
-      console.log("someone added data to the list!")
       this.hasLoadedFirstTime = true;
     });
   }
@@ -16,7 +15,6 @@ class LaatListDisplay extends DataList {
   // Empty list before any data load has happened means we are loading
   // Empty list after inital load means there is no data to show
   renderEmpty() {
-    console.log(this.hasLoadedFirstTime)
     if(this.hasLoadedFirstTime === false || this.hasLoadedFirstTime === undefined) {
       this.listWrapperElem.textContent = "Laster..."
     }

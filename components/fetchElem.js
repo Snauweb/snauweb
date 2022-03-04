@@ -5,14 +5,12 @@ export { FetchElem }
 /*
  * Wrapper for component that needs to fetch data from the web
  * Be used as base class for other data driven components 
- * Only performs data load, no visuals.
+ * Only performs data load, no visual functionality.
  * Object properties:
  * status = init | loading | loaded | error
  * data = null | {...}
  *
  * src is relative to api base address defined for apiFetch
- * state and data is accessed by getter functions
- * fetchState() returns state (loading, error etc), fetchData returns data
  * 
  * emits a loadStart event when loading begins, and a dataLoad event when data is loaded
  */
@@ -101,6 +99,11 @@ class FetchElem extends HTMLElement {
       })
       .then(data => {
 	this.data = data;
+
+	// The errorMsg property indicates an error
+	if(data.hasOwnProperty('errorMsg')) {
+	  this.status="error";
+	}
 	// Emit a stateChange event. Listening objects now know
 	// that the data loading is complete
 	const fetchDataLoadedEvent = new CustomEvent("dataLoad", {

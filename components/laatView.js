@@ -17,7 +17,11 @@ export { LaatView }
  * Attributes:
  *     id: the ID of the song to display info about, 
  *         or 'url' if the url parameter 'id' should be used
- * 
+ *    
+ *     set-title: if set (at all), the component tries to set the textContent
+ *               of a DOM node within the <header> element with a matching
+ *               class name to be equal to the name of the current laat
+ *               (first in alphabetical order)
  * Expects children:
  * <laat-info>, <recording-list>, <sheet-music-select>
  */
@@ -31,6 +35,8 @@ class LaatView extends HTMLElement {
   constructor() {
     super();
     this.setupState();
+    this.setupDOM();
+    this.setupListeners();
   }
 
 
@@ -40,10 +46,14 @@ class LaatView extends HTMLElement {
 
   setupDOM(){
     this.laatInfoElem = this.querySelector('laat-info');
+    this.laatInfoElem.setAttribute('id', this.getAttribute('id'));
 //    this.laatNamesElem = this.querySelector('laat-names');
  //   this.laatNamesElem = this.querySelector('laat-names');
   }
 
+  setupListeners() {
+    
+  }
   
   validateIdParameter() {
     // First, read id of laat to display from URL if requested
@@ -87,7 +97,9 @@ class LaatView extends HTMLElement {
   }
   
   // Inform children of a new laat
-  notifyChildren(){}
+  notifyChildren(){
+    
+  }
 
   // **** BUILT-INS ****
 

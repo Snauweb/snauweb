@@ -7,9 +7,6 @@ import { FetchElem } from "./fetchElem.js"
  *
  * Attributes:
  *    id: the id of the laat to be shown
- *    set-title: if set (at all), the component tries to set the textContent
- *               of a DOM node within the <header> element with a matching
- *               class name
  *
  * Expects children ul.laat-navn, .laat-sjanger and .laat-andre-navn 
  */
@@ -22,6 +19,9 @@ class LaatInfo extends FetchElem {
     super();
     this.setupState();
     this.setupDOM();
+    this.setupListeners();
+    this.setupFetchParams();
+    this.loadData();
   }
 
   setupState() {
@@ -46,22 +46,84 @@ class LaatInfo extends FetchElem {
       this.titleElem = null;
     }
 
-    // Now we look for the children to render text into
-    this.nameElem = this.querySelector('.laat-navn');
-    this.nameList = this.querySelector('ul.laat-andre-navn');
-    this.genereElem = this.querySelector('.laat-sjanger');
+    // Deep copy template contents
+    let templateContent =
+      this.querySelector('template').content.cloneNode(true);
+
+    this.contentTreeBase = document.createElement('div');
+    this.contentTreeBase.appendChild(templateContent);
+
+    // Nothing to display yet
+    this.displayTree = null;
   }
 
   setupListeners() {
     this.addEventListener('dataLoad', (e) => {
-      
+      this.render();
     });
   }
-  
-  render(){
-    
+
+  setupFetchParams() {
+    this.setAttribute('src', '/laater/info');
+    this.setAttribute('params', `id=${this.getAttribute('id')}`);
   }
 
+  render(){
+    if(this.status === 'error'){
+      this.renderError();
+    }
+    else {
+      this.renderContent();
+    }
+  }
+
+  renderError() {
+    this.textContent = 'En feil oppstod i låtinfoelementet: ' + this.data.errorMsg;
+  }
+
+  renderContent() {
+
+    let templateCopy = this.contentTreeBase.cloneNode(true);
+    
+    // Now we look for the children to render text into
+    let nameList = templateCopy.querySelector('ul.laat-andre-navn');
+    let genereElem = templateCopy.querySelector('.content .laat-sjanger');
+    let desctiptionElem = templateCopy.querySelector('.content .description');
+
+
+    // First all the names
+    for (let name of this.data.navn) {
+      let newListElem = document.createElement('li');
+      newListElem.textContent = name;
+      nameList.appendChild(newListElem);
+    }
+
+
+    let descriptionText = "";
+    // Then the (maybe multiple) descriptions
+    for (let description of this.data.beskrivelser) {
+      descriptionText += description + "\n";
+    }
+
+    
+    
+    // Then the genere
+    genereElem.textContent = this.data.sjanger;
+
+    
+    
+    // If nothing is rendered, append new display tree
+    // If a rendered tree is already present, replace it
+    if (this.displayTree === null) {
+      this.displayTree = templateCopy;
+      this.appendChild(this.displayTree);
+    }
+    else {
+      this.replaceChild(templateCopy, this.displayTree);
+      this.displayTree = templateCopy;
+    }
+  }
+  
   update(){}
 
   // **** BUILT-INS ****
@@ -77,9 +139,14 @@ class LaatInfo extends FetchElem {
 
   // This method is triggered when an attribute in the list attributeNames is updated
   attributeChangedCallback(name, oldValue, newValue) {
-     if(oldValue === newValue) {
-       return;
-     }
+    if(oldValue === newValue) {
+      return;
+    }
+    
+    if(name === 'id') {
+      this.setupFetchParams();
+      this.loadData();
+    }
   }
 }
 

@@ -81,8 +81,16 @@ class LaatFilterList extends FetchElem {
       // To match in a case insensitive way, we translate to lower case
       let searchRegEx = new RegExp(this.filterState.searchValue.toLowerCase());
 
-      let nameMatch = searchRegEx.test(dataItem.navn.toLowerCase());
-      let genereMatch = searchRegEx.test(dataItem.sjanger.toLowerCase());
+      let nameMatch = false;
+      let genereMatch = false;
+
+      if(dataItem.navn !== null && dataItem.navn !== undefined) {
+	nameMatch = searchRegEx.test(dataItem.navn.toLowerCase());
+      }
+
+      if(dataItem.sjanger !== null && dataItem.navn !== undefined) {
+	genereMatch = searchRegEx.test(dataItem.sjanger.toLowerCase());
+      }
 
       // No match means we try the next one
       if(nameMatch === false && genereMatch === false) {

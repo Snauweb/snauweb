@@ -10,6 +10,7 @@
 
     <script type="module" src="../../components/laatView.js"></script>
     <script type="module" src="../../components/laatInfo.js"></script>
+    <script type="module" src="../../components/recordingList.js"></script>
     
   </head>
 
@@ -38,18 +39,38 @@
 		<h2 class="header"> Låtbeskrivelse </h2>
 		<div class="content">
 		  <p class="genere">
-		    Sjanger: <strong class="laat-sjanger">Pols</strong>
+		    Sjanger: <strong class="laat-sjanger"></strong>
 		  </p> 
 		  <p class="description">
-		    Herre låten lært æ ta bestefaren min. Den blei skreve til ære for ei avdød katte.
 		  </p>
 		</div>
 	      </div>
 	    </template>
 	  </laat-info>
-	  
-	  <recording-list>
-	  </recording-list>
+
+	  <div class="laat-recordings">
+	    <recording-list
+	      rec-dir="/assets/lydklipp"
+	      src="/laater/recordings"
+	      class="recording-list">
+	      <template class="list-element">
+		<li class="recording">
+		  <div class="description-download-wrap">
+		    <span class="description"> Holm spiller Kaffestuggu </span>
+		    <span class="download">
+		      <a download
+			 href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
+			Last ned
+		      </a>
+		    </span>
+		  </div>
+		  <div class="audio-wrap">
+		    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
+		  </div>
+		</li>
+	      </template>
+	    </recording-list>
+	  </div>
 	</div>
 
 	<div class="col-2">

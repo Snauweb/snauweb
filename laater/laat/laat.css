@@ -87,16 +87,15 @@ main {
     margin-top: 10px;
 }
 
-.laat-recordings .recording {
+.laat-recordings .description-download-wrap {
     width: calc(100%-20px);
     margin-right: 20px;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.laat-recordings .recording .description-download {
-    margin-bottom: 0.5rem;
+.laat-recordings .recording {
+    margin-bottom: 1.0rem;
 }
 
 

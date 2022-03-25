@@ -31,6 +31,8 @@ class FetchElem extends HTMLElement {
   
   // Get fetchData from endpoint specified in attribute
   loadData() {
+    console.log("fetch elem loading data from", this.getAttribute('src'));
+
     this.status = "loading"
     // Signal to any listeners that load has started
     const fetchDataLoadingEvent = new CustomEvent("loadStart");

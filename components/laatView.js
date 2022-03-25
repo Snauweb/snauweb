@@ -5,23 +5,19 @@ export { LaatView }
  * Displays names, descriptions, recordings and sheet music for a laat in
  * the database. Offloads work to child components rather than generating the full
  * page itself. This is to try to make the functionality of this component
- * is modular and reusable.
+ * modular and reusable.
  *
  * What this component does, however, is to examine the url for id when the id attribute
  * is either unspecified, or set to 'url'. This makes it possible to link to a laat page
  *
  * As with many of the other components in this project, is is mainly concerned
- * with content and interaction. The layout and structure of the document is
+ * with data and interaction. The layout and structure of the document is
  * managed through HTML and CSS.
  *
  * Attributes:
  *     id: the ID of the song to display info about, 
  *         or 'url' if the url parameter 'id' should be used
  *    
- *     set-title: if set (at all), the component tries to set the textContent
- *               of a DOM node within the <header> element with a matching
- *               class name to be equal to the name of the current laat
- *               (first in alphabetical order)
  * Expects children:
  * <laat-info>, <recording-list>, <sheet-music-select>
  */
@@ -46,6 +42,9 @@ class LaatView extends HTMLElement {
   setupDOM(){
     this.laatInfoElem = this.querySelector('laat-info');
     this.laatInfoElem.setAttribute('id', this.getAttribute('id'));
+
+    this.laatRecListElem = this.querySelector('recording-list');
+    this.laatRecListElem.setAttribute('id', this.getAttribute('id'));
   }
 
   

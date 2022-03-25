@@ -10,9 +10,9 @@ export { DataList }
  * Object fields:
  *     displayData: contains parsed data to be displayed in the list elements.
  *                  Allways a list, even if it only contains a single object
- *     dataListStatus: "empty" | "filled" | "error".
+ *     dataListStatus: "initial" | "empty" | "filled" | "error".
  *
- * Dispatches renderEmpty(), renderContent() or renderError() respectivly
+ * Dispatches renderInitial(), renderEmpty(), renderContent() or renderError() respectivly
  * on call to render(), depending on dataListStatus
  *
  * Emits a stateChange event on state change
@@ -33,7 +33,7 @@ class DataList extends HTMLElement {
   // Setup correct inital state (can also be used for reset) 
   setupState() {
     this.displayData = null;
-    this.dataListStatus = "empty"
+    this.dataListStatus = "initial"
 
     // reads data attribute (if it exists)
     this.parseDataAttrib();
@@ -64,19 +64,27 @@ class DataList extends HTMLElement {
   
   // Create DOM representation based on internal state
   // In this component, calling render() should fill the list with data rendered in the
-  // provided .dataListElem element, as long as the status is not "error" or "empty"
+  // provided .dataListElem element, if the state is "filled"
   render(){
-    if(this.dataListStatus === "error") {
+    console.log("rendering dataList with status", this.dataListStatus)
+
+    if (this.dataListStatus === "error") {
       this.renderError();
     }
-    else if(this.dataListStatus === "empty") {
-     this.renderEmpty(); 
+    else if (this.dataListStatus === "empty") {
+      this.renderEmpty(); 
+    }
+    else if (this.dataListStatus === "initial") {
+      this.renderInitial();
     }
     else {
       this.renderContent();
     }
   }
 
+  renderInitial() {
+    this.renderEmpty();
+  }
   renderError() {
     this.listWrapperElem.textContent = "Noe gikk galt, prøv igjen!"
   }
@@ -113,6 +121,7 @@ class DataList extends HTMLElement {
   // object.
   update(){
     this.parseDataAttrib();
+    console.log("The data list now has the data", this.displayData)
   }
 
   // Parse the data attribute as json and put in this.displayData
@@ -130,7 +139,9 @@ class DataList extends HTMLElement {
     }
 
     if(parseResult === null) {
-      this.dataListStatus = "empty";
+      if(this.dataListStatus !== "initial") {
+	this.dataListStatus = "empty";
+      }
     }
     else {
       this.dataListStatus = "filled";

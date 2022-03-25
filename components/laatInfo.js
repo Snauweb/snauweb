@@ -13,12 +13,11 @@ import { FetchElem } from "./fetchElem.js"
 
 class LaatInfo extends FetchElem {
 
-  static attributeNames = ['id', 'set-title'];
+  static attributeNames = ['id'];
 
   constructor() {
     super();
 
-    console.log("laat info constructor run")
     this.setupState();
     this.setupDOM();
     this.setupListeners();

@@ -1,7 +1,6 @@
 export { RecordingList }
 import { FetchElem } from './fetchElem.js'
 import { isValidID } from '../modules/utils.js'
-import { assetConfig } from '../config/assetConfig.js'
 
 /*
  * List of recordings associated with a given melody id
@@ -10,14 +9,14 @@ import { assetConfig } from '../config/assetConfig.js'
  * Attributes:
  *    id: the id of the melody to show recordings for. Defults to 1
  *    src: api endpoint
- *
+ *    asset-dir: directory containing recordings relative to web root
  * Has a "state" field. This has one of three values: "loading" | "loaded" | "error"
  * Expects a <template> of class .listElement
  */
 
 class RecordingList extends HTMLElement { 
 
-  static attributeNames = ['id', 'src']
+  static attributeNames = ['id', 'src', 'asset-dir']
   
   constructor() {
     super();
@@ -28,7 +27,6 @@ class RecordingList extends HTMLElement {
   }
 
   setupState() {
-    this.loadConfigSettings();
     this.validateAttributes();
     this.recordingData = null;
     this.status = "loading";
@@ -36,38 +34,38 @@ class RecordingList extends HTMLElement {
     this.errorMsg = ""; 
   }
 
-  loadConfigSettings() {
-    this.recordingsDir = assetConfig.recordingsDir;
-  }
-  
   validateAttributes() {
-    const default_id = '1';
-    const default_src = '/laater/recordings';
+    const DEFAULT_ID = '1';
+    const DEFAULT_SRC = '/laater/recordings';
+    const DEFAULT_DIR = '/assets/'
     
     // The id attribute must exist and it must be a valid id number
     if (!this.hasAttribute('id')) {
-      this.setAttribute('id', default_id);
+      this.setAttribute('id', DEFAULT_ID);
     }
     else if (!isValidID(this.getAttribute('id'))) {
-      this.setAttribute('id', default_id);
+      this.setAttribute('id', DEFAULT_ID);
     }
 
     // The src attribute must exist, but it beeing a valid url is the users
     // responsebility
     if (!this.hasAttribute('src')) {
-      this.setAttribute('src', default_src);
+      this.setAttribute('src', DEFAULT_SRC);
+    }
+
+    if (!this.hasAttribute('asset-dir')) {
+      this.setAttribute('asset-dir', DEFAULT_DIR);
     }
   }
 
   
   // Initialise DOM elements needed for rendering
   setupDOM(){
-
+    
     // fetch-elem to perform the fetching for us
     this.fetcherElem = document.createElement('fetch-elem');
-    this.fetcherElem.setAttribute('src', this.getAttribute('src'));
-    this.fetcherElem.setAttribute('params', 'id=' + this.getAttribute('id'));
 
+    this.configureFetcherElem();
     // Get the provided template and store the document fragment within
     let template = this.querySelector('template.list-element');
     this.listFragment = template.content; // the document fragment
@@ -77,7 +75,12 @@ class RecordingList extends HTMLElement {
     this.appendChild(this.contentWrapper);
   }
 
+  configureFetcherElem() {
+    this.fetcherElem.setAttribute('src', this.getAttribute('src'));
+    this.fetcherElem.setAttribute('params', 'id=' + this.getAttribute('id'));
+  }
 
+  
   setupListeners() {
     this.fetcherElem.addEventListener('dataLoad', (e) => {
       this.recordingData = this.fetcherElem.data;
@@ -98,12 +101,13 @@ class RecordingList extends HTMLElement {
 	this.status = 'error';
 	this.errorMsg = 'there was an error during data fetch'
       }
-      
+
       this.render();
     });
   }
 
   loadData() {
+    this.configureFetcherElem();
     this.fetcherElem.loadData();
   }
   
@@ -111,7 +115,6 @@ class RecordingList extends HTMLElement {
 
   // Dispatches correct rendering method based this.status
   render() {
-    console.log("rendering with status", this.status)
     
     // Wipe current rendered content, by replacing all children with nothing
     this.contentWrapper.replaceChildren();
@@ -138,14 +141,17 @@ class RecordingList extends HTMLElement {
   }
 
   renderLoaded() {
-    let outerListElement = document.createElement('ul');
     let recordingsList = this.recordingData.recordings;
+
+    if(recordingsList.length === 0) {
+      this.contentWrapper.textContent = 'Denne låta har ingen opptak';
+      return;
+    }
+
+    let outerListElement = document.createElement('ul');
     
     for (let recordingData of recordingsList) {
-      let recordingDirRoot = assetConfig.recordingsDir;
-      console.log('recording dir root', recordingDirRoot);
-      console.log('filename', recordingData.filnavn);
-      
+      let recordingDirRoot = this.getAttribute('asset-dir');      
       let recordingFileLocation = recordingDirRoot + '/' + recordingData.filnavn;
       
       let curWorkingFragment = this.listFragment.cloneNode(true);
@@ -188,6 +194,9 @@ class RecordingList extends HTMLElement {
     if(oldValue === newValue) {
        return;
     }
+
+    this.validateAttributes();
+    this.loadData();
   }
 }
 

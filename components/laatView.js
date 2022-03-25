@@ -1,5 +1,7 @@
 export { LaatView }
 
+import { assetConfig } from '../config/assetConfig.js'
+
 /*
  * Main component of the laat info page
  * Displays names, descriptions, recordings and sheet music for a laat in
@@ -8,7 +10,8 @@ export { LaatView }
  * modular and reusable.
  *
  * What this component does, however, is to examine the url for id when the id attribute
- * is either unspecified, or set to 'url'. This makes it possible to link to a laat page
+ * is either unspecified, or set to 'url'. This makes it possible to link to a laat page.
+ * It also passes on information found in the assetConfig.js file
  *
  * As with many of the other components in this project, is is mainly concerned
  * with data and interaction. The layout and structure of the document is
@@ -17,6 +20,7 @@ export { LaatView }
  * Attributes:
  *     id: the ID of the song to display info about, 
  *         or 'url' if the url parameter 'id' should be used
+ *         If not set, defaults to 'url'
  *    
  * Expects children:
  * <laat-info>, <recording-list>, <sheet-music-select>
@@ -42,9 +46,11 @@ class LaatView extends HTMLElement {
   setupDOM(){
     this.laatInfoElem = this.querySelector('laat-info');
     this.laatInfoElem.setAttribute('id', this.getAttribute('id'));
+    this.laatInfoElem.setAttribute('asset-dir', assetConfig.recordingsDir);
 
     this.laatRecListElem = this.querySelector('recording-list');
     this.laatRecListElem.setAttribute('id', this.getAttribute('id'));
+    this.laatRecListElem.setAttribute('asset-dir', assetConfig.recordingsDir);
   }
 
   

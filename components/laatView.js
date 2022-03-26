@@ -44,13 +44,21 @@ class LaatView extends HTMLElement {
   }
 
   setupDOM(){
+    
     this.laatInfoElem = this.querySelector('laat-info');
     this.laatInfoElem.setAttribute('id', this.getAttribute('id'));
+    this.laatInfoElem.setAttribute('src', '/laater/info');
     this.laatInfoElem.setAttribute('asset-dir', assetConfig.recordingsDir);
 
     this.laatRecListElem = this.querySelector('recording-list');
     this.laatRecListElem.setAttribute('id', this.getAttribute('id'));
+    this.laatRecListElem.setAttribute('src', '/laater/recordings');
     this.laatRecListElem.setAttribute('asset-dir', assetConfig.recordingsDir);
+
+    this.laatSheetsElem = this.querySelector('sheet-music-select');
+    this.laatSheetsElem.setAttribute('id', this.getAttribute('id'));
+    this.laatSheetsElem.setAttribute('src', '/laater/sheetmusic');
+    this.laatSheetsElem.setAttribute('asset-dir', assetConfig.sheetmusicDir);
   }
 
   

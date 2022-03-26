@@ -12,6 +12,7 @@
     <script type="module" src="../../components/laatInfo.js"></script>
     <script type="module" src="../../components/recordingList.js"></script>
     <script type="module" src="../../components/sheetMusicSelect.js"></script>
+    <script type="module" src="../../components/sheetMusicView.js"></script>
     
   </head>
 
@@ -74,10 +75,27 @@
 	</div>
 
 	<div class="col-2">
-	  <sheet-music-select>
+	  <sheet-music-select class="laat-sheet-music">
 	    <sheet-music-select-controller>
+	      <template>
+		 <h2> Noter </h2>
+		 <div class="navigation">
+		   <span>Viser noter for:</span>
+		   <select>
+		     <option>Grautpolskaen</option>
+		     <option>Testuggu</option>
+		     <option>Vals etter Andres Flaten</option>
+		   </select>
+		 </div>
+	      </template>
 	    </sheet-music-select-controller>
 	    <sheet-music-view>
+	      <template>
+		<iframe
+		  class="pdf-viewer"
+		  src="../../assets/dokumenter/Eklundapolska_nr_3.pdf">
+		</iframe>
+	      </template>
 	    </sheet-music-view>
 	  </sheet-music-select>
 	</div>

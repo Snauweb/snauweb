@@ -13,7 +13,7 @@ import { FetchElem } from "./fetchElem.js"
 
 class LaatInfo extends FetchElem {
 
-  static attributeNames = ['id'];
+  static attributeNames = ['id', 'src'];
 
   constructor() {
     super();
@@ -26,14 +26,22 @@ class LaatInfo extends FetchElem {
   }
 
   setupState() {
+    const DEFAULT_ID = '1';
+    const DEFAULT_SRC = '/laater/info';
+
     // If ID is not specified or is invalid, set to 1
-    if(!this.hasAttribute('id')) {
-      this.setAttribute('id', '1');
+    if (!this.hasAttribute('id')) {
+      this.setAttribute('id', DEFAULT_ID);
     }
 
-    if(this.hasAttribute('id') && !isValidID(this.getAttribute('id'))) {
-      this.setAttribute('id', '1');
+    if (this.hasAttribute('id') && !isValidID(this.getAttribute('id'))) {
+      this.setAttribute('id', DEFAULT_ID);
     }
+
+    if (!this.hasAttribute('src')) {
+      this.setAttribute('src', DEFAULT_SRC);
+    }
+
   }
 
   setupDOM(){
@@ -55,7 +63,7 @@ class LaatInfo extends FetchElem {
   }
 
   setupFetchParams() {
-    this.setAttribute('src', '/laater/info');
+    this.setAttribute('src', this.getAttribute('src'));
     this.setAttribute('params', `id=${this.getAttribute('id')}`);
   }
 
@@ -159,10 +167,9 @@ class LaatInfo extends FetchElem {
       return;
     }
     
-    if(name === 'id') {
-      this.setupFetchParams();
-      this.loadData();
-    }
+    this.setupFetchParams();
+    this.loadData();
+   
   }
 }
 

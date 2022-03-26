@@ -3,12 +3,15 @@ export { FetchElem }
 
 
 /*
- * Wrapper for component that needs to fetch data from the web
- * Be used as base class for other data driven components 
+ * Wrapper for component that fetches data from the web
+ * Can be used as base class for other data driven components, or as sub-element
  * Only performs data load, no visual functionality.
  * Object properties:
  * status = init | loading | loaded | error
  * data = null | {...}
+ * errorMsg = <String>
+ *
+ * loadData() triggers data load with current settings
  *
  * src is relative to api base address defined for apiFetch
  * 
@@ -27,6 +30,7 @@ class FetchElem extends HTMLElement {
   setupFetchElemState() {
     this.data = null;
     this.status = "init";
+    this.errorMsg = "";
   } 
   
   // Get fetchData from endpoint specified in attribute
@@ -104,7 +108,8 @@ class FetchElem extends HTMLElement {
 
 	// The errorMsg property indicates an error
 	if(data.hasOwnProperty('errorMsg')) {
-	  this.status="error";
+	  this.status = "error";
+	  this.errorMsg = data.errorMsg;
 	}
 	// Emit a stateChange event. Listening objects now know
 	// that the data loading is complete
@@ -145,7 +150,7 @@ class FetchElem extends HTMLElement {
   adoptedCallback() {}
 
   // No automatic data reload for change in src, use explict call to loadData
-    attributeChangedCallback(name, oldValue, newValue) {}
+  attributeChangedCallback(name, oldValue, newValue) {}
   
 }
 

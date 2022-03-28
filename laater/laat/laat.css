@@ -108,6 +108,11 @@ main {
     width: 100%;
 }
 
+.laat-sheet-music .description-wrap {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 /* small screen */
 @media(max-width: 999px) {
     .laat-sheet-music .pdf-viewer {

@@ -77,14 +77,14 @@ class SheetMusicSelect extends HTMLElement {
     this.contentTree = document.createElement('div');
     this.contentTree.appendChild(contentFragment)
 
-    
     this.contentWrapper = document.createElement('div');
     this.appendChild(this.contentWrapper);
 
-    
     this.filterElem = this.contentTree.querySelector('filter-control');
     this.viewElem = this.contentTree.querySelector('sheet-music-view');
+    this.descElem = this.contentTree.querySelector('.sheet-description');
     this.fetchElem = document.createElement('fetch-elem');
+
 
     // Clear drop-down
     let internalSelectElem = this.filterElem.querySelector('select');
@@ -146,7 +146,7 @@ class SheetMusicSelect extends HTMLElement {
     
     this.curDisplayFormat = selectedSheetData.format; // Hard coded for now
     this.curFileName = selectedSheetData.filnavn;
-    this.curFileDescription = selectedSheetData.beskrivelse;
+    this.curSheetDescription = selectedSheetData.beskrivelse;
   }
 
   clampIndex(index, min, numItems) {    
@@ -214,6 +214,9 @@ class SheetMusicSelect extends HTMLElement {
     let fullURL =
       this.getAttribute('asset-dir') + '/' + this.curFileName;
     this.viewElem.setAttribute('url', fullURL);
+
+    // Update description
+    this.descElem.textContent = this.curSheetDescription;
   }
   
   // **** BUILT-INS ****

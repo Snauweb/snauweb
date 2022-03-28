@@ -5,9 +5,8 @@ export { DropDownSelect }
  * Can be preset to a given state by the "stateIndex" attribute
  */
 
-class DropDownSelect extends HTMLElement { // Might extend other components as well
+class DropDownSelect extends HTMLElement {
 
-  // Replace these with the attributes you wish to listen to changes for
   static attributeNames = ["state"];
   
   constructor() {
@@ -37,14 +36,27 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
   setupListeners() {
     this.selectMenu.addEventListener('change', (e) => {
       let selectedValue = this.selectMenu.value;
-      let selectedOption =
-	this.selectMenu.querySelector("option[value=" + selectedValue + "]");
-      let selectedIndex = this.findIndex(this.options, selectedOption);
+      let selectedOptionIndex = this.searchForValueInOptions(selectedValue)
 
-      this.setAttribute("state", selectedIndex)
+      // Handles if the value was not found and selectedOptionIndex is -1
+      this.setAttribute("state", selectedOptionIndex)
     })
   }
 
+  // Linear search for value to avoid the use of css selectors.
+  // Allows for values containing things like '.', avoiding
+  // the quite strict requirements for css queries
+  // Returns index, or -1 if not found
+  searchForValueInOptions(value) {
+    for (let curIndex = 0; curIndex < this.options.length; curIndex++) {
+      if (value === this.options[curIndex].getAttribute('value')) {
+	return curIndex;
+      }
+    }
+
+    return -1;
+  }
+  
 
   reflectElemValue() {
     this.setAttribute('elemvalue',
@@ -57,8 +69,7 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
 	element: this,
 	index: this.getAttribute('state'),
 	value: this.getAttribute('elemvalue')
-	
-      }
+	      }
     })
 
     this.dispatchEvent(toggleEvent);

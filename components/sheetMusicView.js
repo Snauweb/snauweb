@@ -91,9 +91,7 @@ class SheetMusicView extends HTMLElement {
     if(oldValue === newValue) {
       return;
     }
-
-    console.log("In sheetMusicView: attribute", name, "set to", newValue);
-
+    
     this.validateAttributes();
     this.render();
   }

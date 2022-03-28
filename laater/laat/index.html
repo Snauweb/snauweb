@@ -13,12 +13,14 @@
     <script type="module" src="../../components/recordingList.js"></script>
     <script type="module" src="../../components/sheetMusicSelect.js"></script>
     <script type="module" src="../../components/sheetMusicView.js"></script>
+    <script type="module" src="../../components/dropDownSelect.js"></script>
+    <script type="module" src="../../components/filterControl.js"></script>
     
   </head>
 
   <body>
     <header class="snauweb-header">
-      <a class="home-page-link" href="../">
+      <a class="home-page-link" href="../../">
 	<img src="../../assets/snaustrinda_logo.png"></img>
       </a>
       <h1 class="page-title">Låtdetaljer</h1>
@@ -76,27 +78,21 @@
 
 	<div class="col-2">
 	  <sheet-music-select class="laat-sheet-music">
-	    <sheet-music-select-controller>
-	      <template>
-		 <h2> Noter </h2>
-		 <div class="navigation">
-		   <span>Viser noter for:</span>
-		   <select>
-		     <option>Grautpolskaen</option>
-		     <option>Testuggu</option>
-		     <option>Vals etter Andres Flaten</option>
-		   </select>
-		 </div>
-	      </template>
-	    </sheet-music-select-controller>
-	    <sheet-music-view>
-	      <template>
-		<iframe
-		  class="pdf-viewer"
-		  src="../../assets/dokumenter/Eklundapolska_nr_3.pdf">
-		</iframe>
-	      </template>
-	    </sheet-music-view>
+	    <template>
+	      <h2> Noter </h2>
+	      <span>Viser noter for:</span><span class="sheetname"></span>
+	      <filter-control class="navigation">
+		<drop-down-select class="filter-elem" filtername="notevalg">
+		  <select></select>
+		</drop-down-select>
+	      </filter-control>
+	      <sheet-music-view>
+		<template>
+		  <iframe class="pdf-viewer">
+		  </iframe>
+		</template>
+	      </sheet-music-view>
+	    </template>
 	  </sheet-music-select>
 	</div>
       </laat-view>

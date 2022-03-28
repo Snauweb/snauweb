@@ -18,10 +18,6 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
   }
 
   
-  // **** COMMON PATTERNS ****
-  // Setup correct inital state (can also be used for reset)
-  // It is recomended to declare any object variables (this.<variableName>)
-  // in this method, to make it easier to see what variables exist at a glance
   setupState() {
     // Ensure that the stateIndex is consistent.
     // If it is set to a value, the attribute changed callback will ensure consistency
@@ -40,10 +36,14 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
   // To obeserve changes in the select element, we must listen for it
   setupListeners() {
     this.selectMenu.addEventListener('change', (e) => {
+      console.log("The select element just pressed", this.selectMenu)
       let selectedValue = this.selectMenu.value;
       let selectedOption =
 	this.selectMenu.querySelector("option[value=" + selectedValue + "]");
       let selectedIndex = this.findIndex(this.options, selectedOption);
+
+      console.log(selectedValue, selectedOption, selectedIndex);
+
       this.setAttribute("state", selectedIndex)
     })
   }
@@ -54,8 +54,8 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
 		      this.getOptionValue(parseInt(this.getAttribute('state'))));
   }
 
-  broadcastStateChange() {
-    const toggleEvent = new CustomEvent("stateChange", {
+  broadcastStateChange() {    
+    const toggleEvent = new CustomEvent('stateChange', {
       detail: {
 	element: this,
 	index: this.getAttribute('state'),
@@ -122,6 +122,8 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
 
     if(name === 'state') {
       let newValueNumber = Number(newValue)
+      console.log("the drop down received the new state", newValueNumber)
+      
       // If an illegal stateIndex is input, set to 0
       if(isNaN(newValueNumber) ||
 	 newValueNumber < 0 || newValueNumber >= this.numOptions) {

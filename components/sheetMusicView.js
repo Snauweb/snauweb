@@ -17,7 +17,6 @@ class SheetMusicView extends HTMLElement {
 
   constructor() {
     super();
-    console.log("hello from sheet music view!")
     this.setupState();
     this.setupDOM();
     this.render();
@@ -28,14 +27,7 @@ class SheetMusicView extends HTMLElement {
     this.validateAttributes();
   }
 
-  validateAttributes() {
-    console.log(
-      "in sheet music view, validating format attribute:",
-      this.getAttribute('format'),
-      "and attribute url:",
-      this.getAttribute('url')
-    );
-    
+  validateAttributes() {    
     const DEFAULT_FORMAT = 'pdf';
     const DEFAULT_URL = 'assets/sheetmusic/laatsheet/default.pdf';
 

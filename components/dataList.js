@@ -66,7 +66,6 @@ class DataList extends HTMLElement {
   // In this component, calling render() should fill the list with data rendered in the
   // provided .dataListElem element, if the state is "filled"
   render(){
-    console.log("rendering dataList with status", this.dataListStatus)
 
     if (this.dataListStatus === "error") {
       this.renderError();
@@ -121,7 +120,6 @@ class DataList extends HTMLElement {
   // object.
   update(){
     this.parseDataAttrib();
-    console.log("The data list now has the data", this.displayData)
   }
 
   // Parse the data attribute as json and put in this.displayData

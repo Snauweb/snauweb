@@ -81,7 +81,6 @@ class SheetMusicSelect extends HTMLElement {
     this.contentWrapper = document.createElement('div');
     this.appendChild(this.contentWrapper);
 
-    console.log("the content tree after transplantation", this.contentTree)
     
     this.filterElem = this.contentTree.querySelector('filter-control');
     this.viewElem = this.contentTree.querySelector('sheet-music-view');
@@ -95,8 +94,6 @@ class SheetMusicSelect extends HTMLElement {
 
   setupListeners() {
     this.fetchElem.addEventListener('dataLoad', (e) => {
-      console.log("The sheet music select just loaded the data",
-		  this.fetchElem.data)
       this.displayData = this.fetchElem.data;
 
       this.selectItem(0); // After loading, select first piece of sheet music
@@ -115,15 +112,12 @@ class SheetMusicSelect extends HTMLElement {
 
     this.filterElem.addEventListener('stateChange', (e) => {
       let filters = e.detail.newState;
-      console.log(filters)
       
       for (let filter of filters) {
-	console.log("Filter:", filter)
 	// If the sheet selector changed, update
 	if(filter.filterName === 'notevalg') {
 	  let newOptionIndex = filter.elemState;
 	  this.selectItem(newOptionIndex);
-	  console.log("selected", newOptionIndex);
 	}
       }
 
@@ -131,8 +125,6 @@ class SheetMusicSelect extends HTMLElement {
       this.render();
       
     });
-
-    console.log("the filter element:", this.filterElem)
   }
   
   // Select the item in the select list at index itemIndex
@@ -240,8 +232,6 @@ class SheetMusicSelect extends HTMLElement {
     if(oldValue === newValue) {
       return;
     }
-
-    console.log("new attrib in sheet music select!:", name, "=", newValue);
     
     this.validateAttributes();
   }

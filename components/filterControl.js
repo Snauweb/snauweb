@@ -78,8 +78,6 @@ class FilterControl extends HTMLElement {
 	}
 
 	else if(elementName === "drop-down-select") {
-	  console.log("Drop down select", e.target, "pressed, these are the details:", e.detail)
-	  
 	  this.filterState[elemIndex].elemState = e.detail.index;
 	  this.filterState[elemIndex].elemStateName = e.detail.value;
 	}
@@ -94,7 +92,6 @@ class FilterControl extends HTMLElement {
   
   // Notify any stateChange listeners
   broadcastStateUpdate() {
-    console.log("filter control broadcasting!");
     const updateEvent = new CustomEvent('stateChange', {
       detail: {
 	element: this,

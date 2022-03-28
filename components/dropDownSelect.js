@@ -36,13 +36,10 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
   // To obeserve changes in the select element, we must listen for it
   setupListeners() {
     this.selectMenu.addEventListener('change', (e) => {
-      console.log("The select element just pressed", this.selectMenu)
       let selectedValue = this.selectMenu.value;
       let selectedOption =
 	this.selectMenu.querySelector("option[value=" + selectedValue + "]");
       let selectedIndex = this.findIndex(this.options, selectedOption);
-
-      console.log(selectedValue, selectedOption, selectedIndex);
 
       this.setAttribute("state", selectedIndex)
     })
@@ -121,13 +118,12 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
     }
 
     if(name === 'state') {
-      let newValueNumber = Number(newValue)
-      console.log("the drop down received the new state", newValueNumber)
+      let newValueNumber = Number(newValue);
       
       // If an illegal stateIndex is input, set to 0
       if(isNaN(newValueNumber) ||
 	 newValueNumber < 0 || newValueNumber >= this.numOptions) {
-	this.setAttribute("state", "0")
+	this.setAttribute("state", "0");
 	return;
       }
 
@@ -135,7 +131,7 @@ class DropDownSelect extends HTMLElement { // Might extend other components as w
       // the select
 
       // The number must be translated to an option value atribute
-      let newOptionValue = this.options[newValueNumber].value
+      let newOptionValue = this.options[newValueNumber].value;
       this.selectMenu.value = newOptionValue;
 
       // Now that the new option index, the option value must be reflected to an attribute

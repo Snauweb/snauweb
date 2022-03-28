@@ -111,7 +111,7 @@ main {
 /* small screen */
 @media(max-width: 999px) {
     .laat-sheet-music .pdf-viewer {
-	height: 80%;
+	height: 80vh;
     }
 }
 

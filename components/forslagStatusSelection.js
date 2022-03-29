@@ -57,7 +57,7 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
 	  newState: this.getAttribute('state')
 	}
       });
-      this.dispatchEvent(stateChangeEvent)
+      this.dispatchEvent(stateChangeEvent);
     });
   }
   

@@ -64,6 +64,19 @@ class ForslagFilterList extends FetchElem {
       this.updateFetchParams();
       this.fetchNewData();
     });
+
+    // Listen for state change events
+    this.forslagListElem.addEventListener('stateChange', (e) => {
+      let isCategoryChange = (e.detail.action === "update forslag state");
+      if(isCategoryChange) {
+	this.fetchNewData();
+      }
+      
+      let isDeleteClick = (e.detail.action === "delete forslag");
+      if (isDeleteClick) {
+	this.fetchNewData();
+      }
+    });
   }
   
   // Main job is to pass new data to forslag-list

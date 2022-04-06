@@ -1,5 +1,10 @@
+/* variabler */
 :root {
-    font-size: 12pt;
+    --neutral-blue: #707EEA;
+    --neutral-blue-hover: #9090EE;
+
+    --action-green: #AACC70;
+    --action-green-hover: #BBCC80;
 }
 
 body {
@@ -14,6 +19,71 @@ main {
     margin: 20px auto 20px auto;
 }
 
-h1 {
-    font-size: 3rem;
+
+/* Controller */
+.controller-wrap {
+    margin-bottom: 20px;
+}
+
+.edit-button {
+
+    width: 200px;
+    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+    color: white;
+    
+    display: inline-block;
+}
+
+.edit-button[state="0"] {
+    background-color: var(--neutral-blue);
+}
+
+.edit-button[state="0"]:hover {
+    background-color: var(--neutral-blue-hover);
+}
+
+.edit-button[state="1"] {
+    background-color: var(--action-green);
+}
+
+.edit-button[state="1"]:hover {
+    background-color: var(--action-green-hover);
+}
+
+.user-info-message-wrap {
+    height: 20px;
+}
+
+
+/* Display */
+.user-info-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.user-info-row .key {
+    font-weight: bold;
+}
+
+.user-info-row .value {
+    font-size: 1.2rem;
+}
+
+/* Edit */
+.user-info-edit .user-info-edit-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.user-info-edit .string {
+    width: 200px;
+}
+
+.user-info-edit .text {
+    width: 500px;
 }

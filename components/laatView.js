@@ -1,6 +1,8 @@
 export { LaatView }
 
-import { assetConfig } from '../config/assetConfig.js'
+import { assetConfig } from '../config/assetConfig.js';
+import { getSingleURLParameter } from '../modules/utils.js';
+
 
 /*
  * Main component of the laat info page
@@ -73,31 +75,14 @@ class LaatView extends HTMLElement {
     }
 
     if(shouldReadURL) {
-      let params = window.location.search;
-
-      let idParamLocation = params.search('id');
-
-      // If 'id' is not present in the URL, stop trying to read and print a warning
-      if(idParamLocation === -1) {
+      let idParamValue = getSingleURLParameter('id');
+      if(idParamValue === null) {
 	console.error(
 	  "The laat-info component was asked to look for an " +
 	  "id parameter in the url that does not exist"
 	)
 	return;
       }
-
-      let separatorOffset = params.slice(idParamLocation).search('&');
-      let equalsSignOffset = params.slice(idParamLocation).search('=');
-      
-      // No separator after the id parameter means it is the last parameter.
-      // The end of the parameter value is thus at 1 index beyond the end
-      // of the string
-      if(separatorOffset === -1) {
-	separatorOffset = params.length - idParamLocation;
-      }
-
-      let idParamValue = params.slice(idParamLocation + equalsSignOffset + 1,
-				      idParamLocation + separatorOffset);
 
       this.setAttribute('id', idParamValue);
     }

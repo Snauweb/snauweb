@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
   <title>Bruker</title>
   <meta charset="utf-8"></meta>
@@ -6,6 +8,7 @@
   <link rel="stylesheet" href="bruker.css">
   
   <script type="module" src="../components/toggleButton.js"></script>
+  <script type="module" src="../components/brukerInfo.js"></script>
   <script type="text/javascript" src="bruker.js"></script>
 
 </head>
@@ -23,9 +26,18 @@
     </h1>
     
     <div class="user-info-message-wrap">
+      Noe gikk galt da du prøvde å oppdatere
     </div>
 
     <div class="render-node">
+      <bruker-info id="1">
+	<template class="list-element">
+	  <div class="user-info-row">
+	    <span class="key"></span>
+	    <span class="value"></span>
+	  </div>
+	</template>
+      </bruker-info>
       <div class="user-info-display">
 	<ul class="user-info-display-list">
 	  <li class="user-info-row">
@@ -94,3 +106,4 @@
   </main>
   <footer></footer>
 </body>
+</html>

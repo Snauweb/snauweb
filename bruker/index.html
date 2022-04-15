@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="bruker.css">
   
   <script type="module" src="../components/toggleButton.js"></script>
+  <script type="module" src="../components/brukerInfoList.js"></script>
   <script type="module" src="../components/brukerInfo.js"></script>
-  <script type="text/javascript" src="bruker.js"></script>
 
 </head>
 
@@ -18,26 +18,45 @@
     <a class="home-page-link" href="../">
       <img src="../assets/snaustrinda_logo.png"></img>
     </a>
+    <h1 class="page-title"> Bruker </h1>
   </header>
 
   <main>
-    <h1 class="view-header">
-      Brukerinfo for <span class="page-title kerbname">johanpålåfte</span>
-    </h1>
-    
-    <div class="user-info-message-wrap">
-      Noe gikk galt da du prøvde å oppdatere
-    </div>
+    <bruker-info>
+      <template class="header">
+	<h1 class="view-header">
+	  Brukerinfo for <span class="page-title">johanpålåfte</span>
+	</h1>
+      </template>
 
-    <div class="render-node">
-      <bruker-info id="1">
-	<template class="list-element">
-	  <div class="user-info-row">
-	    <span class="key"></span>
-	    <span class="value"></span>
-	  </div>
-	</template>
-      </bruker-info>
+      <template class="list-view">
+	<bruker-info-list>
+	  <template class="list-element">
+	    <div class="user-info-row">
+	      <span class="key"></span>
+	      <span class="value"></span>
+	    </div>
+	  </template>
+	</bruker-info-list>
+      </template>
+
+      <template class="list-edit">
+	<bruker-info-edit>
+	</bruker-info-edit>
+      </template>
+
+      <template class="control">
+	<div class="controller-wrap">
+	  <toggle-button class="edit-button" debounce=500>
+	    <template>
+	      <span stateName="view">Rediger brukerinfo</span>
+	      <span stateName="edit">Avbryt redigering</span>
+	    </template>
+	  </toggle-button>
+	</div>
+      </template>
+    </bruker-info>
+      <!--
       <div class="user-info-display">
 	<ul class="user-info-display-list">
 	  <li class="user-info-row">
@@ -91,17 +110,7 @@
 	</form>
       </div>
     </div>
-    
-    
-    <div class="controller-wrap">
-      <toggle-button class="edit-button" debounce=500>
-	<template>
-	  <span stateName="view">Rediger brukerinfo</span>
-	  <span stateName="edit">Lagre brukerinfo</span>
-	</template>
-      </toggle-button>
-    </div>
-
+    -->
     
   </main>
   <footer></footer>

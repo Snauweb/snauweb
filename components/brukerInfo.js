@@ -1,14 +1,25 @@
-export { CustomComponent }
+export { BrukerInfo }
+import { FetchElem } from "./fetchElem.js";
 
 /*
- * Element fetching and showing all information for a user
+ * Element combining an list view and an edit view of a user
+ * Expects
+ *     One <template> child of class '.list-view' containing a <bruker-info-list>
+ *     One <template> child of class '.list-edit' containing a <bruker-info-edit>
  *
- * Expects a <template> child of class .list-element that dictates the layout of
- * a given key-value pair found in the user data.
- * The key-value pair is shown in all children of class .key and .value resp.
+ * Accepts
+ *     One <template> child of class '.header' containing a child of class '.page-title'
+ *     the text content of the 
  *
  * Attributes:
- *     id: the id of the user to show info for. Defaults to "1"
+ *     id: 'url' | <id>. Default '1'
+ *         'url' means the component looks for an url parameter 'id=<id>'
+ *         if no id is shown in url, find info for the currently logged on user
+ *         'id' is an explicit id to show info for
+ *
+ * Properties:
+ *     renderState = 'list' | 'edit'. Default 'list'
+ *
  */
 
 class BrukerInfo extends FetchElem {
@@ -17,35 +28,113 @@ class BrukerInfo extends FetchElem {
 
   constructor() {
     super();
-    console.log("hello from the brukerInfo list!")
     this.setupState();
     this.setupDOM();
     this.setupListeners();
-    this.configureFetch();
-    this.loadData();
-    //this.render();
+    //this.configureFetch();
+    //this.loadData();
+    this.updateChildren();
+    this.render();
   }
 
-  setupState() {}
+  setupState() {
+    this.renderState = 'list'; 
+    
+    // Mock data 'till I get of the train unblock aws sj you cowards
+    this.status = 'loaded';
+    this.data = {
+      id: 1,
+      curUserEditor: true
+    }
+  }
 
   setupDOM(){
-    let listElementTemplate = this.querySelector('template.list-element');
-    this.listElementFragment = listElementTemplate.content.cloneNode(true);
+    let brukerInfoFragment = this.querySelector('template.list-view').content;
+    let brukerEditFragment = this.querySelector('template.list-edit').content;
+    let headerFragment = this.querySelector('template.header').content;
+    let controlFragment = this.querySelector('template.control').content;
+
+    this.brukerInfoWrapper = document.createElement('div');
+    this.brukerEditWrapper = document.createElement('div');
+    
+    this.headerWrapper = document.createElement('div');
+    this.messageElementWrapper = document.createElement('div');
+    this.controlWrapper = document.createElement('div');
 
     this.renderNode = document.createElement('div');
-    this.appendChild(renderNode);
+
+    this.brukerInfoWrapper.appendChild(brukerInfoFragment);
+    this.brukerEditWrapper.appendChild(brukerEditFragment);
+    this.headerWrapper.appendChild(headerFragment);
+    this.controlWrapper.appendChild(controlFragment);
+
+    this.infoListElementHandle = this.brukerInfoWrapper.querySelector('bruker-info-list');
+    this.infoEditElementHandle = this.brukerEditWrapper.querySelector('bruker-info-edit');
+    this.toggleButtonElementHandle = this.controlWrapper.querySelector('toggle-button');
+
+    this.appendChild(this.headerWrapper);
+    this.appendChild(this.messageElementWrapper);
+    this.appendChild(this.renderNode);
+    this.appendChild(this.controlWrapper);
   }
 
   setupListeners() {
-
+    
   }
   
   configureFetch() {
+    //TODO
+  }
 
+  // If id changes, the id used in the info list and info edit must be updated
+  updateChildren() {
+    this.infoListElementHandle.setAttribute('id', this.getAttribute('id'));
+    this.infoEditElementHandle.setAttribute('id', this.getAttribute('id'));
+  }
+
+
+  // *** Rendering ***
+  render(){
+
+    // Clear render node
+    this.renderNode.replaceChildren();
+    
+    if (this.status === 'loading' || this.status === 'init') {
+      this.renderLoading();
+    }
+
+    else if (this.status === 'loaded') {
+      this.renderLoaded();
+    }
+
+    else {
+      this.renderError();
+    }
+  }
+
+  renderLoading() {
+    this.renderNode.innerText = 'Sjekker autorisasjon...';
+  }
+
+  renderLoaded() {
+    if (this.renderState === 'list') {
+      this.renderNode.appendChild(this.brukerInfoWrapper);
+    }
+
+    else if (this.renderState === 'edit') {
+      this.renderNode.appendChild(this.brukerEditWrapper);
+    }
+
+    else {
+      this.renderNode.innerText = 'Ugyldig renderState ' + this.renderState;
+    }
+  }
+
+  renderError() {
+    this.renderNode.innerText = 'Feil under lasting:' + this.errorMsg; 
   }
   
-  render(){}
-
+  
   // **** BUILT-INS ****
 
   // Returns a list of names of attributes

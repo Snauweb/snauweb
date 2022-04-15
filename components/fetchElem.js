@@ -6,10 +6,17 @@ export { FetchElem }
  * Wrapper for component that fetches data from the web
  * Can be used as base class for other data driven components, or as sub-element
  * Only performs data load, no visual functionality.
+ *
+ * Attributes:
+ *     src: set path to resource within api configured for apiFetch
+ *     params: query parameters (the stuff after '?' in the url). Default <empty string>
+ *     method: 'GET' | 'POST' | 'PUT' | 'DELETE'. Default 'GET'
+ *     payload: <JSON string>. Default "{}"
+ *
  * Object properties:
- * status = init | loading | loaded | error
- * data = null | {...}
- * errorMsg = <String>
+ *     status = 'init' | 'loading' | 'loaded' | 'error'. Default 'init'
+ *     data = null | {...}. Default null
+ *     errorMsg = <String>. Default <empty string>
  *
  * loadData() triggers data load with current settings
  *

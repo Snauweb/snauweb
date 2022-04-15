@@ -5,6 +5,9 @@
 
     --action-green: #AACC70;
     --action-green-hover: #BBCC80;
+
+    --warning-red: #cc5050;
+    --warning-red-hover: #ee8080;
 }
 
 body {
@@ -46,11 +49,11 @@ main {
 }
 
 .edit-button[state="1"] {
-    background-color: var(--action-green);
+    background-color: var(--warning-red);
 }
 
 .edit-button[state="1"]:hover {
-    background-color: var(--action-green-hover);
+    background-color: var(--warning-red-hover);
 }
 
 .user-info-message-wrap {

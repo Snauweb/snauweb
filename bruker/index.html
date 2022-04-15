@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="bruker.css">
   
   <script type="module" src="../components/toggleButton.js"></script>
+  <script type="text/javascript" src="bruker.js"></script>
 
 </head>
 
@@ -24,55 +25,62 @@
     <div class="user-info-message-wrap">
     </div>
 
-    <div class="user-info-display">
-      <ul class="user-info-display-list">
-	<li class="user-info-row">
-	  <span class="key"> Internt brukernavn (på gamle snauweb): </span>
-	  <span class="username value">johalaf</span>
-	</li>
-	<li class="user-info-row">
-	  <span class="key"> Fornavn: </span>
-	  <span class="firstname value">Johan</span>
-	</li>
-	<li class="user-info-row">
-	  <span class="key"> Etternavn: </span>
-	  <span class="lastname value">Låfte</span>
-	</li>
-	<li class="user-info-row">
-	  <span class="key"> Fornavn: </span>
-	  <span class="lastname value">Låfte</span>
-	</li>
-	<li class="user-info-row">
-	  <span class="key"> Fornavn: </span>
-	  <span class="lastname value">Låfte</span>
-	</li>
-      </ul>
-    </div>
-    
-    <div class="user-info-edit">
-      <form onsubmit="return false;">
-	<ul class="user-info-edit-list">
-	  <li class="user-info-edit-row string">
-            <label>Fornavn:</label>
-            <input type="text" name="fornavn"></input>
+    <div class="render-node">
+      <div class="user-info-display">
+	<ul class="user-info-display-list">
+	  <li class="user-info-row">
+	    <span class="key"> Internt brukernavn (på gamle snauweb): </span>
+	    <span class="username value">johalaf</span>
 	  </li>
-	  <li class="user-info-edit-row string">
-            <label>Etternavn:</label>
-            <input type="text" name="etternavn"></input>
+	  <li class="user-info-row">
+	    <span class="key"> Fornavn: </span>
+	    <span class="firstname value">Johan</span>
 	  </li>
-	  <li class="user-info-edit-row string">
-            <label>Epost:</label>
-            <input type="text" name="epost"></input>
+	  <li class="user-info-row">
+	    <span class="key"> Etternavn: </span>
+	    <span class="lastname value">Låfte</span>
 	  </li>
-
-	  <li class="user-info-edit-row text">
-	    <label>Kommentar:</label>
-            <textarea name="kommentar"></textarea>
+	  <li class="user-info-row">
+	    <span class="key"> Epost: </span>
+	    <span class="lastname value">johala@samfundet.no</span>
+	  </li>
+	  <li class="user-info-row">
+	    <span class="key"> Kommentar: </span>
+	    <span class="lastname value">Akta dej!</span>
 	  </li>
 	</ul>
-      </form>
-    </div>
+      </div>
+      
+      <div class="user-info-edit">
+	<form onsubmit="return false;">
+	  <ul class="user-info-edit-list">
+	    <li class="user-info-row">
+	      <span class="key"> Internt brukernavn (på gamle snauweb): </span>
+	      <span class="username value">johalaf</span>
+	    </li>
+	    <li class="user-info-edit-row string">
+              <label>Fornavn:</label>
+              <input type="text" name="fornavn" placeholder="Johan"></input>
+	    </li>
+	    <li class="user-info-edit-row string">
+              <label>Etternavn:</label>
+              <input type="text" name="etternavn" placeholder="Låfte"></input>
+	    </li>
+	    <li class="user-info-edit-row string">
+              <label>Epost:</label>
+              <input type="text" name="epost" placeholder="johala@samfundet.no"></input>
+	    </li>
 
+	    <li class="user-info-edit-row text">
+	      <label>Kommentar:</label>
+              <textarea name="kommentar" placeholder="Akta dej!"></textarea>
+	    </li>
+	  </ul>
+	</form>
+      </div>
+    </div>
+    
+    
     <div class="controller-wrap">
       <toggle-button class="edit-button" debounce=500>
 	<template>

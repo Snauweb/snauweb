@@ -1,12 +1,15 @@
 /*
- * Element that can be toggeled between multiple states
- * The toggelable states are included in a template. Each top-level element
- * are considered to be a state, and they are 0-indexed top to bottom 
+ * Element that can be toggeled between multiple states by click or attribute change
+ * The toggelable states are included in a template. Each top-level in the template element
+ * is considered to be a state. The states are 0-indexed in document order (top to bottom) 
  *
  * On a toggle, the element emits an event of type 'stateChange'
  *
  * Attributes:
- * state=<stateIndex>. Default: "0". On illegal index: treated as "0"
+ * state=<stateIndex>. Default: "0". On illegal index: set to "0"
+ * debounce=<time in millis>. Default "0". 
+ * Deactivates the button for set number of milliseconds after click. Used to avoid
+ * spam clicking
  * 
  * State DOM nodes can include the attribute stateName, which will be emitted
  * along with the state id on a toggle event

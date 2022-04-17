@@ -10,7 +10,7 @@ import { BrukerInfo } from "./brukerInfo.js";
  * The key-value pair is shown in all children of class .key and .value resp.
  *
  * Attributes:
- *     id: "current" | <id>. If set to "current", fetches info for current user,
+ *     id: 'cur' | <id>. If set to 'cur', fetches info for current user,
  *         otheriwse, it fetches for the given id
  */
 
@@ -22,31 +22,23 @@ class BrukerInfoList extends FetchElem {
     super();
     this.setupState();
     this.setupDOM();
-    //this.setupListeners();
-    //this.configureFetch();
-    //this.loadData();
+    this.setupListeners();
+    this.configureFetch();
+    this.loadData();
     this.render();
   }
 
   setupState() {
-    // Mock data 'till I get of the train unblock aws sj you cowards
-    this.status = 'loaded';
-    this.data = {
-      id: {
-	verdi: 1,
-	type: 'tall'
-      },
+    
+  }
 
-      brukernavn: {
-	verdi: 'johala',
-	type: 'tekst'
-      },
+  validateAttributes() {
+    const defaultID = '1';
+    
+    let curIdAttrib = this.getAttribute('id');
 
-      epost: {
-	verdi: 'johan@låfte.no',
-	makslengde: 50,
-	type: 'tekst'
-      }
+    if (curIdAttrib === null) {
+      this.setAttribute('id', defaultID);
     }
   }
 
@@ -63,12 +55,23 @@ class BrukerInfoList extends FetchElem {
 
   setupListeners() {
     this.addEventListener('dataLoad', (e) => {
-      console.log("Got data:", this.data)
+      this.render();
     });
   }
   
   configureFetch() {
-    //TODO
+    this.setAttribute('src', '/bruker');
+
+    let curIdAttrib = this.getAttribute('id');
+
+    if (curIdAttrib !== 'cur') {
+      this.setAttribute('params', `id=${this.getAttribute('id')}`);
+    }
+    else {
+      // Setting the parameters string to empty.
+      // This makes the api serve info about the currently loggen on user
+      this.setAttribute('params', ''); 
+    }
   }
 
 
@@ -96,8 +99,13 @@ class BrukerInfoList extends FetchElem {
   }
 
   renderLoaded() {
-    const includeKeys =
-      ['brukernavn', 'epost']
+    // What field should be shown?
+    const includeKeys = [
+      'brukernavn', 'epost', 'fornavn', 'etternavn', 'født', 'telefon',
+      'telefon', 'adresse', 'studie', 'aktiv', 'altadresse', 'startet',
+      'sluttet', 'kommentar', 'gammelsnau', 'ekstrainfo', 'ikkekontakt',
+      'postnummer', 'poststed', 'land', 'bekrefta', 'pang'
+    ];
     
     let newList = this.generateKeyValList(includeKeys);
     this.renderNode.appendChild(newList);
@@ -131,6 +139,18 @@ class BrukerInfoList extends FetchElem {
 	}
 
 	if(valNode !== null) {
+	  if(val === null) {
+	    val = 'Ikke oppgitt'
+	  }
+
+	  if(val === true) {
+	    val = 'ja';
+	  }
+
+	   if(val === false) {
+	    val = 'nei';
+	   }
+	  
 	  valNode.textContent = val;
 	}
 

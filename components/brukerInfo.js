@@ -1,5 +1,9 @@
 export { BrukerInfo }
 import { FetchElem } from "./fetchElem.js";
+import {
+  isValidID,
+  getSingleURLParameter
+} from "../modules/utils.js";
 
 /*
  * Element combining an list view and an edit view of a user
@@ -12,9 +16,10 @@ import { FetchElem } from "./fetchElem.js";
  *     the text content of the 
  *
  * Attributes:
- *     id: 'url' | <id>. Default '1'
+ *     id: 'url' | 'cur' | <id>. Default '1'
  *         'url' means the component looks for an url parameter 'id=<id>'
- *         if no id is shown in url, find info for the currently logged on user
+ *         If no parameter is found in the url, set to 'cur'
+ *         'cur' finds info for the current user.
  *         'id' is an explicit id to show info for
  *
  * Properties:
@@ -38,13 +43,35 @@ class BrukerInfo extends FetchElem {
   }
 
   setupState() {
-    this.renderState = 'list'; 
+    this.renderState = 'list';
     
     // Mock data 'till I get of the train unblock aws sj you cowards
     this.status = 'loaded';
     this.data = {
       id: 1,
       curUserEditor: true
+    }
+
+    this.validateParameters();
+  }
+
+  validateParameters() {
+    const defaultID = '1';
+    
+    let idParamVal = this.getAttribute('id');
+
+    if(idParamVal === 'url') {
+      let IDInURL = getSingleURLParameter('id')
+      if (isValidID(IDInURL)) {
+	this.setAttribute('id', IDInURL)
+      }
+      else {
+	this.setAttribute('id', 'cur');
+      }
+    }
+    
+    else if(idParamVal === null || !isValidID(idParamVal)) {
+      this.setAttribute('id', defaultID);
     }
   }
 

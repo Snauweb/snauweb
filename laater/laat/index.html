@@ -1,114 +1,106 @@
-<head>
-  <title>Låtdetaljer</title>
-  <meta charset="utf-8"></meta>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Låtdetaljer</title>
+    <meta charset="utf-8"></meta>
 
-  <link rel="stylesheet" href="../../styles/meyer_reset.css"></link>
-  <link rel="stylesheet" href="../../styles/base_page_styles.css"></link>
-  <link rel="stylesheet" href="./laat.css">
-  
-</head>
+    <link rel="stylesheet" href="../../styles/meyer_reset.css"></link>
+    <link rel="stylesheet" href="../../styles/base_page_styles.css"></link>
+    <link rel="stylesheet" href="./laat.css">
 
-<body>
-  <header class="snauweb-header">
-    <a class="home-page-link" href="../">
-      <img src="../../assets/snaustrinda_logo.png"></img>
-    </a>
-    <h1 class="page-title">Slarkpolsen</h1>
-  </header>
-
-  <a class="back-link" href="../">&lt- tilbake til låtlista</a>
-  
-  <main>
-    <div class="col-1">
-      <div class="other-names">
-	<p class="description"> Også kjent som:</p>
-	<ul>
-	  <li> Sommerslarken </li>
-	  <li> Titusenpolskaen </li>
-	</ul>
-      </div>
-
-      <div class="laat-description">
-	<h2 class="header"> Låtbeskrivelse </h2>
-	<div class="content">
-	  <p class="genere"> Sjanger: <strong>Pols</strong> </p> 
-	  <p class="description">
-	    Herre låten lært æ ta bestefaren min. Den blei skreve til ære for ei avdød katte.
-	  </p>
-	</div>
-      </div>
-
-      <div class="laat-recordings">
-	<h2> Opptak </h2>
-	<ul class="recording-list">
-	  <li class="recording">
-	    <div class="description-download">
-	      <span class="description"> Holm spiller Kaffestuggu </span>
-	      <span class="download">
-		<a download
-		   href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
-		  Last ned
-		</a>
-	      </span>
-	    </div>
-	    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
-	  </li>
-	  
-	  <li class="recording">
-	    <div class="description-download">
-	      <span class="description"> Orignalinnspilling fra 1958 </span>
-	      <span class="download">
-		<a download
-		   href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
-		  Last ned
-		</a>
-	      </span>
-	    </div>
-	    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
-	  </li>
-
-	  <li class="recording">
-	    <div class="description-download">
-	      <span class="description"> Andrestemme </span>
-	      <span class="download">
-		<a download
-		   href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
-		  Last ned
-		</a>
-	      </span>
-	    </div>
-	    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
-	  </li>
-	</ul>
-      </div>
-    </div>
-
-    <div class="col-2">
-      <div class="laat-sheet-music">
-	<h2> Noter </h2>
-	<div class="navigation">
-	  <span>Viser noter for:</span>
-	  <select>
-	    <option>Grautpolskaen</option>
-	    <option>Testuggu</option>
-	    <option>Vals etter Andres Flaten</option>
-	  </select>
-	</div>
-	<iframe
-	  class="pdf-viewer"
-	  src="../../assets/dokumenter/Eklundapolska_nr_3.pdf"></iframe>
-      </div>
-    </div>
-    	<!--<p>
-	  Standard js-pdf-viser om man ska gjør det i teksten:
-	  <a href="https://github.com/mozilla/pdf.js/">PDF.js</a>
-	</p>
-	<p>
-	  ABC-rendering og redigering rett i sida. Mulig at iaff redigering ska vær sin egen underside?
-	  <a href="https://www.abcjs.net/">abcjs</a>
-	</p>-->
-
-  </main>
+    <script type="module" src="../../components/laatView.js"></script>
+    <script type="module" src="../../components/laatInfo.js"></script>
+    <script type="module" src="../../components/recordingList.js"></script>
+    <script type="module" src="../../components/sheetMusicSelect.js"></script>
+    <script type="module" src="../../components/sheetMusicView.js"></script>
+    <script type="module" src="../../components/dropDownSelect.js"></script>
+    <script type="module" src="../../components/filterControl.js"></script>
     
-  <footer></footer>
-</body>
+  </head>
+
+  <body>
+    <header class="snauweb-header">
+      <a class="home-page-link" href="../../">
+	<img src="../../assets/snaustrinda_logo.png"></img>
+      </a>
+      <h1 class="page-title">Låtdetaljer</h1>
+    </header>
+
+    <a class="back-link" href="../">&lt- tilbake til låtlista</a>
+    
+    <main>
+      <laat-view id="url" set-title>
+	<div class="col-1">
+	  <laat-info>
+	    <template>
+	      <h1 class="main-header"> Laster... </h1>
+	      <div class="other-names">
+		<p class="description"> Også kjent som:</p>
+		<ul class="laat-andre-navn"></ul>
+	      </div>
+	      
+	      <div class="laat-description">
+		<h2 class="header"> Låtbeskrivelse </h2>
+		<div class="content">
+		  <p class="genere">
+		    Sjanger: <strong class="laat-sjanger"></strong>
+		  </p> 
+		  <p class="description">
+		  </p>
+		</div>
+	      </div>
+	    </template>
+	  </laat-info>
+
+	  <div class="laat-recordings">
+	    <recording-list
+	      src="/laater/recordings"
+	      class="recording-list">
+	      <template class="list-element">
+		<li class="recording">
+		  <div class="description-download-wrap">
+		    <span class="description"> Holm spiller Kaffestuggu </span>
+		    <span class="download">
+		      <a download
+			 href="../../assets/lydklipp/kaffestuggu_holm_2018.mp3">
+			Last ned
+		      </a>
+		    </span>
+		  </div>
+		  <div class="audio-wrap">
+		    <audio controls src="../../assets/lydklipp/kaffestuggu_holm_2018.mp3"></audio>
+		  </div>
+		</li>
+	      </template>
+	    </recording-list>
+	  </div>
+	</div>
+
+	<div class="col-2">
+	  <sheet-music-select class="laat-sheet-music">
+	    <template>
+	      <h2> Noter </h2>
+	      <span>Viser noter for:</span><span class="sheetname"></span>
+	      <filter-control class="navigation">
+		<drop-down-select class="filter-elem" filtername="notevalg">
+		  <select></select>
+		</drop-down-select>
+	      </filter-control>
+	      <div class="description-wrap">
+		<span class="sheet-description"></span>
+	      </div>
+	      <sheet-music-view>
+		<template>
+		  <iframe class="pdf-viewer">
+		  </iframe>
+		</template>
+	      </sheet-music-view>
+	    </template>
+	  </sheet-music-select>
+	</div>
+      </laat-view>
+    </main>
+    
+    <footer></footer>
+  </body>
+</html>

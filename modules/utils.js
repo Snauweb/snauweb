@@ -1,5 +1,30 @@
-export { isValidID, hasClass }
+export {
+  isValidID,
+  hasClass,
+  pruneFileExtension
+}
 
+
+function pruneFileExtension(filename) {
+  
+  // First, find the last '.'
+  let dotLocation = -1;
+  for (let i = filename.length-1; i >= 0; i--) {
+    let curChar = filename[i];
+    if(curChar === '.') {
+      dotLocation = i;
+      break;
+    }
+  }
+
+  // No dot found, we leave the string as is
+  if(dotLocation === -1) {
+    return filename;
+  }
+
+  // If a dot was found, slice the dot and trailing characters
+  return filename.slice(0, dotLocation);
+}
 
 /* Check if a node has a class */
 function hasClass(node, className) {

@@ -57,7 +57,7 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
 	  newState: this.getAttribute('state')
 	}
       });
-      this.dispatchEvent(stateChangeEvent)
+      this.dispatchEvent(stateChangeEvent);
     });
   }
   
@@ -101,7 +101,7 @@ class ForslagStatusSelection extends FetchElem { // Might extend other component
 	"forslagid": this.getAttribute('forslagid'),
 	"statusid": parseInt(newValue)+1
       };
-      console.log("the payload is", patchPayload)
+      
       this.setAttribute('src', '/forslag');
       this.setAttribute('method', 'PUT');
       this.setAttribute('payload', JSON.stringify(patchPayload));

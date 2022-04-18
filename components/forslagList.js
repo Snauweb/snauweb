@@ -15,7 +15,7 @@ class ForslagList extends DataList {
   // Overwrite normal rendering logic of DataList
   // This is needed for custom styles and such based on data.
   // Base DataList does only provide text content
-  render(){
+  renderContent(){
      // Copy old top level element (non-recursive, no children are included)
     let newListWrapper = this.listWrapperElem.cloneNode();
 

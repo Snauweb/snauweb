@@ -1,6 +1,11 @@
 export { FilterControl }
 
 /*
+ * Generic filter controller element
+ * Assumes children emits 'stateChange' events on state change
+ *
+ * Supports <toggle-button>, <text-search>, <drop-down-select>
+ *
  * Supervises the state of all children of class ".filter-elem"
  * Labels the filters with the attribute "filterName" if set, otherwise
  * by "filterElem<number>" where <number> is the index of the element
@@ -8,14 +13,11 @@ export { FilterControl }
  * Listens to state change. On change, update own state and notify
  * any listeners to 'stateChange' events.
  *
- * For the inital configuration, all filter-elems MUST provide default state names
- * in form of the "statevalue" attribute. These values need not be writable,
- * but must be readable
  */
 
 class FilterControl extends HTMLElement {
 
-  static attributeNames = [''];
+  static attributeNames = [];
   
   constructor() {
     super();
@@ -24,11 +26,10 @@ class FilterControl extends HTMLElement {
     this.broadcastStateUpdate();
   }
 
-  // Common patterns
   setupState() {
     this.controlElems = this.querySelectorAll('.filter-elem');
     this.filterState = [];
-
+    
     // Initalise filter state objects
     for(let i = 0; i < this.controlElems.length; i++) {
       let curElem = this.controlElems[i];
@@ -48,7 +49,7 @@ class FilterControl extends HTMLElement {
       catch (error) {} // We don't care about the error
 
       if(curElemName === "drop-down-select") {
-	elemStateName = curElem.getAttribute('elemvalue')
+	elemStateName = curElem.getAttribute('elemvalue');
       }
       
       this.filterState[i] = {
@@ -91,14 +92,14 @@ class FilterControl extends HTMLElement {
   
   // Notify any stateChange listeners
   broadcastStateUpdate() {
-    const updateEvent = new CustomEvent("stateChange", {
+    const updateEvent = new CustomEvent('stateChange', {
       detail: {
 	element: this,
 	newState: this.filterState
       }
     });
     
-    this.dispatchEvent(updateEvent);    
+    this.dispatchEvent(updateEvent);
   } 
 
   // Built-ins

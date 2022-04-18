@@ -1,75 +1,49 @@
-<head>
-  <link rel="stylesheet" href="../styles/meyer_reset.css"></link>
-  <link rel="stylesheet" href="../styles/base_page_styles.css"></link>
-  <link rel="stylesheet" href="./laater.css">
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/meyer_reset.css"></link>
+    <link rel="stylesheet" href="../styles/base_page_styles.css"></link>
+    <link rel="stylesheet" href="./laater.css">
 
-  <script type="module" src="../components/textSearch.js"></script>
-  
-  <meta charset="utf-8"></meta>
-</head>
-
-<body>
-  <header class="snauweb-header">
-    <a class="home-page-link" href="../">
-      <img src="../assets/snaustrinda_logo.png"></img>
-    </a>
-    <h1 class="page-title"> Låtlista </h1>
-  </header>
-
-  <main>
-    <p class="page-description">
-      På denne sia er det mulig å søke etter låter i Snaustrindas låtarkiv. Det er også mulig å se på spillelister, lage nye spillelister og legge til låter i en allerede eksisterende spilleliste. Klikk på en låttittel for å se mer informasjon
-    </p>
+    <script type="module" src="../components/textSearch.js"></script>
+    <script type="module" src="../components/laatListDisplay.js"></script>
+    <script type="module" src="../components/laatFilterList.js"></script>
+    <script type="module" src="../components/laatListFilters.js"></script>
     
-    <laat-filter-list>
-      <laat-list-filters>
-	<text-search class="søkefelt filter-elem" eager="false" filtername="låtsøk">
-	  <h2>Søk etter låt: </h2>
-	  <input type="text" class="search-field"></input>
-	  <input type="button" class="search-submit" value="søk"></input>
-	</text-search>
-      </laat-list-filters>
-      <laat-list-display>
-	<ol>
-	  <li class="laat-info">
-	    <h3 class="header">
-	      <a href="./laat?id=1"> Slarkpolsen hass Gunnar </a>
-	    </h3>
-	    <div class="genere">
-	      <strong>(Pols)</strong>
-	    </div>
-	  </li>
-	  
-	  <li class="laat-info">
-	    <h3 class="header">
-	      <a href="./laat?id=2"> Sommerosten </a>
-	    </h3>
-	    <div class="genere">
-	      <strong>(Pols)</strong>
-	    </div>
-	  </li>
+    <meta charset="utf-8"></meta>
+  </head>
 
-	  <li class="laat-info">
-	    <h3 class="header">
-	      <a href="./laat?id=3"> På smale veier </a>
-	    </h3>
-	    <div class="genere">
-	      <strong>(Pols)</strong>
-	    </div>
-	  </li>
+  <body>
+    <header class="snauweb-header">
+      <a class="home-page-link" href="../">
+	<img src="../assets/snaustrinda_logo.png"></img>
+      </a>
+      <h1 class="page-title"> Låtlista </h1>
+    </header>
 
-	  <li class="laat-info">
-	     <h3 class="header">
-	       <a href="./laat?id=4"> Gamal tretur frå Fana </a>
-	     </h3>
-	     <div class="genere">
-	       <strong>(Pols)</strong>
-	    </div>
-	  </li>
-	</ol>
-      </laat-list-display>
-    </laat-filter-list>
-  </main>
+    <main>
+      <p class="page-description">
+	På denne sia er det mulig å søke etter låter i Snaustrindas låtarkiv. Klikk på en låttittel for å se mer informasjon
+      </p>
+      
+      <laat-filter-list>
+	<laat-list-filters>
+	  <text-search class="søkefelt filter-elem" eager="true" filtername="låtsøk">
+	    <h2>Søk etter låt: </h2>
+	    <input type="text" class="search-field"></input>
+	  </text-search>
+	</laat-list-filters>
+	<laat-list-display>
+	  <template class="dataListElem">
+	    <li class="laat-info">
+	      <h3 class="navn"></h3>
+	      <span class="sjanger"></span>
+	    </li>
+	  </template>
+	</laat-list-display>
+      </laat-filter-list>
+    </main>
 
-  <footer></footer>
-</body>
+    <footer></footer>
+  </body>
+</html>

@@ -3,16 +3,17 @@ export { FetchElem }
 
 
 /*
- * Wrapper for component that needs to fetch data from the web
- * Be used as base class for other data driven components 
- * Only performs data load, no visuals.
+ * Wrapper for component that fetches data from the web
+ * Can be used as base class for other data driven components, or as sub-element
+ * Only performs data load, no visual functionality.
  * Object properties:
  * status = init | loading | loaded | error
  * data = null | {...}
+ * errorMsg = <String>
+ *
+ * loadData() triggers data load with current settings
  *
  * src is relative to api base address defined for apiFetch
- * state and data is accessed by getter functions
- * fetchState() returns state (loading, error etc), fetchData returns data
  * 
  * emits a loadStart event when loading begins, and a dataLoad event when data is loaded
  */
@@ -29,10 +30,12 @@ class FetchElem extends HTMLElement {
   setupFetchElemState() {
     this.data = null;
     this.status = "init";
+    this.errorMsg = "";
   } 
   
   // Get fetchData from endpoint specified in attribute
   loadData() {
+
     this.status = "loading"
     // Signal to any listeners that load has started
     const fetchDataLoadingEvent = new CustomEvent("loadStart");
@@ -101,6 +104,12 @@ class FetchElem extends HTMLElement {
       })
       .then(data => {
 	this.data = data;
+
+	// The errorMsg property indicates an error
+	if(data.hasOwnProperty('errorMsg')) {
+	  this.status = "error";
+	  this.errorMsg = data.errorMsg;
+	}
 	// Emit a stateChange event. Listening objects now know
 	// that the data loading is complete
 	const fetchDataLoadedEvent = new CustomEvent("dataLoad", {
@@ -140,7 +149,7 @@ class FetchElem extends HTMLElement {
   adoptedCallback() {}
 
   // No automatic data reload for change in src, use explict call to loadData
-    attributeChangedCallback(name, oldValue, newValue) {}
+  attributeChangedCallback(name, oldValue, newValue) {}
   
 }
 

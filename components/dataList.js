@@ -10,7 +10,12 @@ export { DataList }
  * Object fields:
  *     displayData: contains parsed data to be displayed in the list elements.
  *                  Allways a list, even if it only contains a single object
- *     dataListStatus: "empty" | "filled" | "error".  
+ *     dataListStatus: "initial" | "empty" | "filled" | "error".
+ *
+ * Dispatches renderInitial(), renderEmpty(), renderContent() or renderError() respectivly
+ * on call to render(), depending on dataListStatus
+ *
+ * Emits a stateChange event on state change
  */
 
 class DataList extends HTMLElement {
@@ -21,13 +26,14 @@ class DataList extends HTMLElement {
     super();
     this.setupState();
     this.setupDOM();
+    this.render();
   }
 
   // **** SETUP ****
   // Setup correct inital state (can also be used for reset) 
   setupState() {
     this.displayData = null;
-    this.dataListStatus = "empty"
+    this.dataListStatus = "initial"
 
     // reads data attribute (if it exists)
     this.parseDataAttrib();
@@ -51,26 +57,38 @@ class DataList extends HTMLElement {
     this.appendChild(this.listWrapperElem);
   }
 
+  dispatchStateChangeEvent() {
+    const stateChangeEvent = new CustomEvent('stateChange', {detail: this.displayData});
+    this.dispatchEvent(stateChangeEvent);
+  }
+  
   // Create DOM representation based on internal state
   // In this component, calling render() should fill the list with data rendered in the
-  // provided .dataListElem element, as long as the status is not "error" or "empty"
+  // provided .dataListElem element, if the state is "filled"
   render(){
-    if(this.dataListStatus === "error") {
+
+    if (this.dataListStatus === "error") {
       this.renderError();
     }
-    else if(this.dataListStatus === "empty") {
-     this.renderEmpty(); 
+    else if (this.dataListStatus === "empty") {
+      this.renderEmpty(); 
+    }
+    else if (this.dataListStatus === "initial") {
+      this.renderInitial();
     }
     else {
       this.renderContent();
     }
   }
 
+  renderInitial() {
+    this.renderEmpty();
+  }
   renderError() {
-  
+    this.listWrapperElem.textContent = "Noe gikk galt, prøv igjen!"
   }
   renderEmpty() {
-
+    this.listWrapperElem.textContent = "Ingenting å vise"
   }
   renderContent() {
     // Copy old top level element (non-recursive, no children are included)
@@ -106,7 +124,7 @@ class DataList extends HTMLElement {
 
   // Parse the data attribute as json and put in this.displayData
   // If the parsing does not work, set this.displayData to null and set
-  // this.listState to "error"
+  // this.dataListStatus to "error"
   parseDataAttrib() {
     let parseResult = null;
     try {
@@ -117,9 +135,19 @@ class DataList extends HTMLElement {
       this.displayData = null;
       return;
     }
-    
+
+    if(parseResult === null) {
+      if(this.dataListStatus !== "initial") {
+	this.dataListStatus = "empty";
+      }
+    }
+    else {
+      this.dataListStatus = "filled";
+    }
+
     this.displayData = parseResult;
-    this.dataListStatus = "filled";
+
+    this.dispatchStateChangeEvent();
   }
 
   // Returns a list of names of attributes
